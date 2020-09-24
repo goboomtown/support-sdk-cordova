@@ -1,0 +1,22 @@
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
+}
+
+repositories{
+    jcenter()
+}
+
+dependencies {
+  implementation fileTree(dir: 'libs', include: ['*.aar'])
+}
+
+android {
+    packagingOptions {
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+    }
+}

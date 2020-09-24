@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-supportsdk" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>SupportSDK</name>
+    <js-module name="SupportSDK" src="www/SupportSDK.js">
+        <clobbers target="supportsdk" />
+    </js-module>
+    <platform name="android">
+      <config-file target="config.xml" parent="/*">
+        <feature name="SupportSDK">
+          <param name="android-package"
+             value="com.goboomtown.plugin.supportsdk.SupportSDK"/>
+        </feature>
+      </config-file>
+      <config-file target="AndroidManifest.xml" parent="/manifest/application">
+        <activity android:name="com.goboomtown.plugin.supportsdk.SupportActivity" android:theme="@style/AppTheme" android:clearTaskOnLaunch="true" android:configChanges="orientation|keyboardHidden|screenSize" android:theme="@android:style/Theme.NoTitleBar.Fullscreen" android:windowSoftInputMode="stateAlwaysHidden" android:exported="false" />
+      </config-file>
+      <edit-config file="AndroidManifest.xml" target="/manifest/application/activity[@android:name='MainActivity']" mode="overwrite">
+        <activity android:name="MainActivity" android:theme="@style/AppTheme" />
+      </edit-config>
+      <config-file target="AndroidManifest.xml" parent="/manifest">
+        <uses-permission android:name="android.permission.CAMERA"/>
+        <uses-permission android:name="android.permission.FLASHLIGHT"/>
+        <uses-feature android:name="android.hardware.camera" android:required="true"/>
+      </config-file>
+      <!-- <config-file target="AndroidManifest.xml" parent="/manifest">
+        <application android:allowBackup="true" android:theme="@style/AppTheme">
+          <activity android:name="com.goboomtown.plugin.supportsdk.SupportActivity" android:clearTaskOnLaunch="true" android:configChanges="orientation|keyboardHidden|screenSize" android:theme="@android:style/Theme.NoTitleBar.Fullscreen" android:windowSoftInputMode="stateAlwaysHidden" android:exported="false" />
+        </application>
+      </config-file> -->
+      <source-file src="src/android/SupportSDK.java"
+        target-dir="src/com/goboomtown/plugin/supportsdk" />
+      <source-file src="src/android/SupportActivity.java"
+        target-dir="src/com/goboomtown/plugin/supportsdk" />
+      <resource-file src="src/android/activity_support.xml" target="res/layout/activity_support.xml" />
+      <resource-file src="src/android/layout.xml" target="res/layout/layout.xml" />
+      <resource-file src="src/android/attrs.xml" target="res/values/attrs.xml" />
+      <resource-file src="src/android/styles.xml" target="res/values/styles.xml" />
+      <framework src="src/android/supportsdk.gradle" custom="true" type="gradleReference" />
+      <lib-file src="src/android/boomtown-boomtownchat-android-debug.aar" />
+      <lib-file src="src/android/boomtown-video-android-debug.aar" />
+      <lib-file src="src/android/support-sdk-debug.aar" />
+      <framework src="com.google.android.material:material:1.1.0" />
+      <framework src="com.wefika:flowlayout:0.4.1" />
+      <framework src="com.squareup.okhttp3:okhttp:3.12.8" />
+      <framework src="org.igniterealtime.smack:smack-android-extensions:4.3.1" />
+      <framework src="org.igniterealtime.smack:smack-tcp:4.3.1" />
+      <framework src="joda-time:joda-time:2.3" />
+      <framework src="pl.droidsonroids.gif:android-gif-drawable:1.2.8" />
+      <framework src="org.apache.commons:commons-compress:1.18" />
+      <framework src="com.twilio:video-android:5.1.0" />
+      <framework src="org.conscrypt:conscrypt-android:2.4.0" />
+      <framework src="androidx.legacy:legacy-support-v4:1.0.0" />
+      <framework src="androidx.appcompat:appcompat:1.3.0-alpha02" />
+    </platform>
+    <platform name="ios">
+      <config-file target="config.xml" parent="/*">
+        <feature name="SupportSDK">
+          <param name="ios-package" value="SupportSDK" />
+        </feature>
+      </config-file>
+      <header-file src="src/ios/SupportSDK.h" />
+      <source-file src="src/ios/SupportSDK.m" />
+      <header-file src="src/ios/AppDelegate.h" />
+      <source-file src="src/ios/AppDelegate.m" />
+      <podspec>
+        <config>
+          <source url="https://github.com/CocoaPods/Specs.git"/>
+        </config>
+        <pods use-frameworks="true">
+          <pod name="SupportSDK"  spec="~> 1.2.0"/>
+          <!-- <pod name="SupportSDK" spec=":path => '/Users/larry/Documents/Development/GizmoCreative/ios/support-sdk-ios/Distribution/support-sdk-ios'" /> -->
+          <!-- <pod name="AFNetworking" spec="~> 4.0" />
+          <pod name="XMPPFramework" spec="~> 4.0" />
+          <pod name="SVProgressHUD" />
+          <pod name="TwilioVideo" spec="~> 2.8.1" />
+          <pod name="iOS-Color-Picker" />
+          <pod name="MTBBarcodeScanner" /> -->
+        </pods>
+      </podspec>
+    </platform>
+</plugin>
