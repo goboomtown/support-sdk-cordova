@@ -20,7 +20,7 @@ This plugin allows to implement the Boomtown Support SDK in your Cordova applica
 
 ## 3. Installation
 ```
-cordova plugin add cordova-plugin-boomtown-supportsdk --save
+cordova plugin add https://github.com/goboomtown/support-sdk-cordova.git
 ```
 No manual configuration required.
 
