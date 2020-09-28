@@ -200,7 +200,7 @@ private void hideActionBar() {
 
     @Override
     public void supportButtonDidFailToGetSettings() {
-
+      toast("Unable to retrieve settings");
     }
 
     @Override
