@@ -48,9 +48,9 @@
         BOOL loaded = [self.supportButton loadConfigurationJSON:json customerInfo:nil];
 
         if ( loaded ) {
-            msg = @"Configuration read successfully."
+            msg = @"Configuration read successfully.";
         } else {
-            msg = @"Unable to read configuration."
+            msg = @"Unable to read configuration.";
         }
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
                                          messageAsString:msg];
@@ -172,7 +172,7 @@
     supportButton.menuStyle = IconList;
     [supportButton click];
 }
-                                                                                             
+
 - (void)supportButton:(SupportButton *)supportButton didFailToGetSettingsWithError:(NSError *)error
 {
     [self toast:[error localizedDescription]];
