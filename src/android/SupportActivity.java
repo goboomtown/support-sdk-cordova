@@ -23,6 +23,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.ActionBar;
 
+import android.graphics.Color;
+
 import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
@@ -31,6 +33,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -84,11 +87,29 @@ public class SupportActivity extends AppCompatActivity
         // mFragmentContainer = findViewById(R.id.fragment_container);
         mFragmentContainer = findViewById(mFragmentContainerId);
 
+        // try {
+        int logoViewId = mResources.getIdentifier("logoImageView", "id", mPackageName);
+        int logoId = mResources.getIdentifier("custom_logo", "drawable", mPackageName);
+        // mSupportButton = findViewById(R.id.supportButton);
+        // if ( logoViewId!=0 && logoId!=0 ) {
+        ImageView logoView = findViewById(logoViewId);
+          if ( logoView != null ) {
+            logoView.setImageDrawable(getResources().getDrawable(logoId));
+          }
+        // }
+      // } catch (Expection e) {
+      //   e.printStackTrace();
+      //
+      // }
+
         int sb_id = mResources.getIdentifier("supportButton", "id", mPackageName);
         // mSupportButton = findViewById(R.id.supportButton);
         mSupportButton = findViewById(sb_id);
         mSupportButton.setVisibility(View.GONE);
         mSupportButton.setListener(this);
+
+        mSupportButton.appearance.setIconColor(Color.RED);
+        mSupportButton.appearance.setTextColor(Color.BLACK);
 
         String json = getIntent().getStringExtra("JSON");
 

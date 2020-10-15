@@ -24,6 +24,8 @@
 {
     self.supportButton = [[SupportButton alloc] initWithFrame:CGRectMake(0,0,50,50)];
     self.supportButton.delegate = self;
+    [Appearance setIconColor:0xff0000];
+    [Appearance setTextColor:0x000000];
 }
 
 

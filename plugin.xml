@@ -1,9 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
 <plugin id="cordova-plugin-supportsdk" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
     <name>SupportSDK</name>
+
     <js-module name="SupportSDK" src="www/SupportSDK.js">
         <clobbers target="supportsdk" />
     </js-module>
+
     <platform name="android">
       <config-file target="config.xml" parent="/*">
         <feature name="SupportSDK">
@@ -35,10 +37,11 @@
       <resource-file src="src/android/layout.xml" target="res/layout/layout.xml" />
       <resource-file src="src/android/attrs.xml" target="res/values/attrs.xml" />
       <resource-file src="src/android/styles.xml" target="res/values/styles.xml" />
+      <resource-file src="src/android/custom_logo.png" target="res/drawable/custom_logo.png" />
       <framework src="src/android/supportsdk.gradle" custom="true" type="gradleReference" />
       <lib-file src="src/android/boomtown-boomtownchat-android-debug.aar" />
       <lib-file src="src/android/boomtown-video-android-debug.aar" />
-      <lib-file src="src/android/support-sdk-debug.aar" />
+      <lib-file src="src/android/support-sdk-gplay-stage-debug.aar" />
       <framework src="com.google.android.material:material:1.1.0" />
       <framework src="com.wefika:flowlayout:0.4.1" />
       <framework src="com.squareup.okhttp3:okhttp:3.12.8" />
@@ -52,30 +55,49 @@
       <framework src="androidx.legacy:legacy-support-v4:1.0.0" />
       <framework src="androidx.appcompat:appcompat:1.3.0-alpha02" />
     </platform>
+
     <platform name="ios">
       <config-file target="config.xml" parent="/*">
         <feature name="SupportSDK">
           <param name="ios-package" value="SupportSDK" />
         </feature>
       </config-file>
+      <custom-config-file parent="NSPhotoLibraryUsageDescription" platform="ios" target="*-Info.plist">
+        <string>Access to photo library for file attachments</string>
+      </custom-config-file>
+      <custom-config-file parent="NSCameraUsageDescription" platform="ios" target="*-Info.plist">
+        <string>Access to camera for file attachments</string>
+      </custom-config-file>
       <header-file src="src/ios/SupportSDK.h" />
       <source-file src="src/ios/SupportSDK.m" />
       <header-file src="src/ios/AppDelegate.h" />
       <source-file src="src/ios/AppDelegate.m" />
-      <podspec>
-        <config>
-          <source url="https://github.com/CocoaPods/Specs.git"/>
-        </config>
-        <pods use-frameworks="true">
-          <pod name="SupportSDK"  spec="~> 1.2.0"/>
-          <!-- <pod name="SupportSDK" spec=":path => '/Users/larry/Documents/Development/GizmoCreative/ios/support-sdk-ios/Distribution/support-sdk-ios'" /> -->
-          <!-- <pod name="AFNetworking" spec="~> 4.0" />
-          <pod name="XMPPFramework" spec="~> 4.0" />
-          <pod name="SVProgressHUD" />
-          <pod name="TwilioVideo" spec="~> 2.8.1" />
-          <pod name="iOS-Color-Picker" />
-          <pod name="MTBBarcodeScanner" /> -->
-        </pods>
-      </podspec>
+
+      <source-file src="src/ios/frameworks/AFNetworking.framework" target-dir="lib" framework="true" />
+      <source-file src="src/ios/frameworks/CocoaAsyncSocket.framework" target-dir="lib" framework="true" />
+      <source-file src="src/ios/frameworks/CocoaLumberjack.framework" target-dir="lib" framework="true" />
+      <source-file src="src/ios/frameworks/CocoaLumberjackSwift.framework" target-dir="lib" framework="true" />
+      <source-file src="src/ios/frameworks/KissXML.framework" target-dir="lib" framework="true" />
+      <source-file src="src/ios/frameworks/libidn.framework" target-dir="lib" framework="true" />
+      <source-file src="src/ios/frameworks/MTBBarcodeScanner.framework" target-dir="lib" framework="true" />
+      <source-file src="src/ios/frameworks/SupportSDK.framework" target-dir="lib" framework="true" />
+      <source-file src="src/ios/frameworks/SVProgressHUD.framework" target-dir="lib" framework="true" />
+      <source-file src="src/ios/frameworks/TwilioVideo.framework" target-dir="lib" framework="true" />
+      <source-file src="src/ios/frameworks/XMPPFramework.framework" target-dir="lib" framework="true" />
+      <source-file src="src/ios/frameworks/XMPPFrameworkSwift.framework" target-dir="lib" framework="true" />
+
+      <framework src="src/ios/frameworks/AFNetworking.framework" embed="true" custom="true" />
+      <framework src="src/ios/frameworks/CocoaAsyncSocket.framework" embed="true" custom="true" />
+      <framework src="src/ios/frameworks/CocoaLumberjack.framework" embed="true" custom="true" />
+      <framework src="src/ios/frameworks/CocoaLumberjackSwift.framework" embed="true" custom="true" />
+      <framework src="src/ios/frameworks/KissXML.framework" embed="true" custom="true" />
+      <framework src="src/ios/frameworks/libidn.framework" embed="true" custom="true" />
+      <framework src="src/ios/frameworks/MTBBarcodeScanner.framework" embed="true" custom="true" />
+      <framework src="src/ios/frameworks/SupportSDK.framework" embed="true" custom="true" />
+      <framework src="src/ios/frameworks/SVProgressHUD.framework" embed="true" custom="true" />
+      <framework src="src/ios/frameworks/TwilioVideo.framework" embed="true" custom="true" />
+      <framework src="src/ios/frameworks/XMPPFramework.framework" embed="true" custom="true" />
+      <framework src="src/ios/frameworks/XMPPFrameworkSwift.framework" embed="true" custom="true" />
+
     </platform>
 </plugin>

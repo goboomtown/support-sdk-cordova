@@ -8,6 +8,9 @@
 
         <!--        <item name="buttonTheme">@style/ButtonTheme</item>-->
         <item name="colorButtonNormal">#acacac</item>
+
+        <!-- <item name="logo">boomtown_logo_color.png</item> -->
+
         <item name="buttonBarButtonStyle">@style/Widget.MyApp.ButtonBarButtonStyle</item>
     </style>
 

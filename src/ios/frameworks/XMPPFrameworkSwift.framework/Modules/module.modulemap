@@ -1,0 +1,11 @@
+framework module XMPPFrameworkSwift {
+  umbrella header "XMPPFrameworkSwift.h"
+
+  export *
+  module * { export * }
+}
+
+module XMPPFrameworkSwift.Swift {
+    header "XMPPFrameworkSwift-Swift.h"
+    requires objc
+}
