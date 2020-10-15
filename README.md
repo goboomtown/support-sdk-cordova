@@ -9,7 +9,7 @@ This plugin allows to implement the Boomtown Support SDK in your Cordova applica
 #### iOS
 
 - Xcode 10.2
-- iOS 9.0
+- iOS 11.0
 
 #### Android
 
