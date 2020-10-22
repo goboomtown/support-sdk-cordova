@@ -68,10 +68,15 @@
       <custom-config-file parent="NSCameraUsageDescription" platform="ios" target="*-Info.plist">
         <string>Access to camera for file attachments</string>
       </custom-config-file>
-      <header-file src="src/ios/SupportSDK.h" />
+      <custom-config-file parent="NSMicrophoneUsageDescription" platform="ios" target="*-Info.plist">
+        <string>The microphone is used for videoconference calls.</string>
+      </custom-config-file>
+      <source-file src="src/ios/SupportSDK.h" />
       <source-file src="src/ios/SupportSDK.m" />
       <header-file src="src/ios/AppDelegate.h" />
       <source-file src="src/ios/AppDelegate.m" />
+      <header-file src="src/ios/ViewController.h" />
+      <source-file src="src/ios/ViewController.m" />
 
       <source-file src="src/ios/frameworks/AFNetworking.framework" target-dir="lib" framework="true" />
       <source-file src="src/ios/frameworks/CocoaAsyncSocket.framework" target-dir="lib" framework="true" />

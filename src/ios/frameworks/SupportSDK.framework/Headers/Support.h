@@ -130,6 +130,8 @@ extern NSString  *const _Nonnull kUserPhone;
 @property (strong, nonatomic, nullable) NSMutableArray<BTFormModel *>       *forms;
 @property (strong, nonatomic, nonnull)  NSMutableArray<HistoryEntryModel *> *historyEntries;
 
+@property                               BOOL                isUndecorated;
+
 
 + (Support *_Nonnull)sharedInstance;
 

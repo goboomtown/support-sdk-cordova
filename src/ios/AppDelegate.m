@@ -1,11 +1,12 @@
 //
 //  AppDelegate.m
-//  
+//
 //
 //  Created by Larry Borsato on 2020-09-20.
 //
 
 #import "AppDelegate.h"
+#import "ViewController.h"
 
 @implementation AppDelegate
 
@@ -24,7 +25,7 @@
 
     // only set if not already set in subclass
     if (self.viewController == nil) {
-        self.viewController = [[CDVViewController alloc] init];
+        self.viewController = [[ViewController alloc] init];
     }
 
     // Set your app's start page by setting the <content src='foo.html' /> tag in config.xml.

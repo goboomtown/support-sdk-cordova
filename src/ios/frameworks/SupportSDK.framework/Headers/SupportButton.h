@@ -104,6 +104,9 @@ IB_DESIGNABLE
 @property                               MenuStyle  menuStyle;
 
 @property                               BOOL        showLoginPrompt;
+
+@property                               BOOL        isUndecorated;
+
 /**
  Use support view rather than popup for menu selection
  */
