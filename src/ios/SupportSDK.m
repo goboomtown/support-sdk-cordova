@@ -133,17 +133,31 @@
 - (void) supportButton:(SupportButton *)supportButton displayView:(UIView *)view
 {
   dispatch_async(dispatch_get_main_queue(), ^{
+    //
+    // for ( UIView *subview in view.subviews ) {
+    //     if ( [subview isKindOfClass:[LoginView class]] ) {
+    //         subview.hidden = YES;
+    //     }
+    //     else if ( [subview isKindOfClass:[UICollectionView class]] ) {
+    //         subview.hidden = NO;
+    //     }
+    // }
 
-    for ( UIView *subview in view.subviews ) {
-        if ( [subview isKindOfClass:[LoginView class]] ) {
-            subview.hidden = YES;
-        }
-        else if ( [subview isKindOfClass:[UICollectionView class]] ) {
-            subview.hidden = NO;
-        }
-    }
+    view.frame = self.viewController.view.frame;
+
+    // NSString *viewRect = [NSString stringWithFormat:@"view %f %f %f %f\nviewController %f %f %f %f",
+    // view.frame.origin.x,
+    // view.frame.origin.y,
+    // view.frame.size.width,
+    // view.frame.size.height,
+    // self.viewController.view.frame.origin.x,
+    // self.viewController.view.frame.origin.y,
+    // self.viewController.view.frame.size.width,
+    // self.viewController.view.frame.size.height];
+    // [self toast:viewRect];
+
     view.backgroundColor = [UIColor whiteColor];
-    view.center = self.viewController.view.center;
+    // view.center = self.viewController.view.center;
     [self.viewController.view addSubview:view];
   });
 }
