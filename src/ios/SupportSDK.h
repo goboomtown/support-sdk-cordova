@@ -4,8 +4,9 @@
 
 @interface SupportSDK : CDVPlugin <SupportButtonDelegate>
 
-- (void)loadConfiguration:(CDVInvokedUrlCommand*)command;
-- (void)loadConfigurationFromFile:(CDVInvokedUrlCommand*)command;
-- (void) loadConfigurationFromJSON:(CDVInvokedUrlCommand*)command;
+- (void)  initiateBoomtown:(CDVInvokedUrlCommand*)command;
+- (void)  loadConfiguration:(CDVInvokedUrlCommand*)command;
+- (void)  loadConfigurationFromFile:(CDVInvokedUrlCommand*)command;
+- (void)  loadConfigurationFromJSON:(CDVInvokedUrlCommand*)command;
 
 @end

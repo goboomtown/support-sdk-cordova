@@ -40,6 +40,7 @@
 
 - (void) loadConfigurationFromJSON:(CDVInvokedUrlCommand*)command
 {
+  [self.commandDelegate runInBackground:^{
     NSString *msg = @"";
     self.delegateCallbackId = command.callbackId;
     CDVPluginResult* pluginResult = nil;
@@ -60,8 +61,14 @@
 
     [self.commandDelegate sendPluginResult:pluginResult
                                 callbackId:command.callbackId];
+  }];
 }
 
+
+- (void) initiateBoomtown:(CDVInvokedUrlCommand*)command
+{
+    [self loadConfigurationFromJSON:command];
+}
 
 
 - (void)registerDelegateCallbackId:(CDVInvokedUrlCommand*)command {
@@ -125,6 +132,8 @@
 
 - (void) supportButton:(SupportButton *)supportButton displayView:(UIView *)view
 {
+  dispatch_async(dispatch_get_main_queue(), ^{
+
     for ( UIView *subview in view.subviews ) {
         if ( [subview isKindOfClass:[LoginView class]] ) {
             subview.hidden = YES;
@@ -136,11 +145,14 @@
     view.backgroundColor = [UIColor whiteColor];
     view.center = self.viewController.view.center;
     [self.viewController.view addSubview:view];
+  });
 }
 
 
 - (void) supportButton:(SupportButton *)supportButton displaySupportMenu:(UIAlertController *)alertController
 {
+  dispatch_async(dispatch_get_main_queue(), ^{
+
     if ( self.viewController.view.traitCollection.horizontalSizeClass != UIUserInterfaceSizeClassCompact )
     {
         // In this case the device is an iPad.
@@ -155,12 +167,15 @@
         // In this case the device is an iPhone/iPod Touch.
         [self.viewController.navigationController presentViewController:alertController animated:YES completion:nil];
     }
+  });
 }
 
 
 - (void) supportButton:(SupportButton *)supportButton displayViewController:(UIViewController *)viewController
 {
+  dispatch_async(dispatch_get_main_queue(), ^{
     [self.viewController.navigationController pushViewController:viewController animated:YES];
+  });
 }
 
 
