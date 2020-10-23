@@ -62,15 +62,17 @@
           <param name="ios-package" value="SupportSDK" />
         </feature>
       </config-file>
-      <custom-config-file parent="NSPhotoLibraryUsageDescription" platform="ios" target="*-Info.plist">
-        <string>Access to photo library for file attachments</string>
-      </custom-config-file>
-      <custom-config-file parent="NSCameraUsageDescription" platform="ios" target="*-Info.plist">
-        <string>Access to camera for file attachments</string>
-      </custom-config-file>
-      <custom-config-file parent="NSMicrophoneUsageDescription" platform="ios" target="*-Info.plist">
+
+      <config-file parent="NSPhotoLibraryUsageDescription" target="*-Info.plist">
+        <string>The photo library is used for file attachments.</string>
+      </config-file>
+      <config-file parent="NSCameraUsageDescription" target="*-Info.plist">
+        <string>The camera is used for video chat and for file attachments.</string>
+      </config-file>
+      <config-file parent="NSMicrophoneUsageDescription" target="*-Info.plist">
         <string>The microphone is used for videoconference calls.</string>
-      </custom-config-file>
+      </config-file>
+
       <source-file src="src/ios/SupportSDK.h" />
       <source-file src="src/ios/SupportSDK.m" />
       <header-file src="src/ios/AppDelegate.h" />

@@ -6,7 +6,6 @@
 //
 
 #import "AppDelegate.h"
-#import "ViewController.h"
 
 @implementation AppDelegate
 
@@ -24,8 +23,8 @@
     self.window.autoresizesSubviews = YES;
 
     // only set if not already set in subclass
-    if (self.viewController == nil) {
-        self.viewController = [[ViewController alloc] init];
+    if (self.btViewController == nil) {
+        self.btViewController = [[ViewController alloc] init];
     }
 
     // Set your app's start page by setting the <content src='foo.html' /> tag in config.xml.
@@ -35,7 +34,7 @@
     // NOTE: To customize the view's frame size (which defaults to full screen), override
     // [self.viewController viewWillAppear:] in your view controller.
 
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.viewController];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.btViewController];
     navigationController.navigationBarHidden = YES;
     self.window.rootViewController = navigationController;
     [self.window makeKeyAndVisible];

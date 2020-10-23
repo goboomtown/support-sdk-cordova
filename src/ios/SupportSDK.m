@@ -143,7 +143,7 @@
     //     }
     // }
 
-    view.frame = self.viewController.view.frame;
+    view.frame = self.viewController.view.bounds;
 
     // NSString *viewRect = [NSString stringWithFormat:@"view %f %f %f %f\nviewController %f %f %f %f",
     // view.frame.origin.x,
@@ -188,7 +188,7 @@
 - (void) supportButton:(SupportButton *)supportButton displayViewController:(UIViewController *)viewController
 {
   dispatch_async(dispatch_get_main_queue(), ^{
-    [self.viewController.navigationController pushViewController:viewController animated:YES];
+    [self.viewController.navigationController pushViewController:viewController animated:NO];
   });
 }
 
