@@ -5,6 +5,8 @@
 
 @property (strong, nonatomic, nonnull)  SupportButton   *supportButton;
 @property (strong)                      NSString*       delegateCallbackId;
+@property                               BOOL            isConfigured;
+@property                               BOOL            isButtonVisible;
 
 @end
 
@@ -200,8 +202,21 @@
 
 - (void)supportButtonDidGetSettings:(SupportButton *)supportButton
 {
-    supportButton.menuStyle = IconList;
-    [supportButton click];
+  self.isConfigured = YES;
+  self.isButtonVisible = YES;
+  if ( self.isButtonVisible) {
+      supportButton.menuStyle = Menu; //IconList;
+      CGFloat buttonSize = 75;
+      CGRect buttonFrame = CGRectMake((self.viewController.view.frame.size.width-buttonSize)/2,
+                                  (self.viewController.view.frame.size.height-buttonSize)/2,
+                                  buttonSize,
+                                  buttonSize);
+      supportButton.frame = buttonFrame;
+      [self.viewController.view addSubview:supportButton];
+  } else {
+      supportButton.menuStyle = IconList;
+      [supportButton click];
+  }
 }
 
 - (void)supportButton:(SupportButton *)supportButton didFailToGetSettingsWithError:(NSError *)error

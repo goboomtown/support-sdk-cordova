@@ -32,7 +32,6 @@ extern NSString *_Nonnull const kSDKV1Endpoint;
 extern NSString *_Nonnull const kStartingBoomtownVideoTitle;
 
 extern NSString *_Nonnull const BTConnectAPIBaseURL;
-extern NSString *_Nonnull const BoomtownAPIBaseURL;
 
 extern NSString *_Nonnull const kBroadcastExtensionSetupUIBundleId;
 extern NSString *_Nonnull const kBroadcastExtensionBundleId;
