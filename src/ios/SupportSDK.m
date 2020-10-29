@@ -50,15 +50,24 @@
     if (json == nil || [json length] == 0) {
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
     } else {
-        BOOL loaded = [self.supportButton loadConfigurationJSON:json customerInfo:nil];
+        NSError *error;
+        NSData *data = [json dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+        if ( jsonDict ) {
+            BOOL loaded = [self.supportButton loadConfigurationJSON:json customerInfo:nil];
 
-        if ( loaded ) {
-            msg = @"Configuration read successfully.";
+            if ( loaded ) {
+                msg = @"Configuration read successfully.";
+            } else {
+                msg = @"Unable to read configuration.";
+            }
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+                                             messageAsString:msg];
         } else {
-            msg = @"Unable to read configuration.";
+            msg = [NSString stringWithFormat:@"Unable to read configuration: %@", error.userInfo[@"NSDebugDescription"]];
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                             messageAsString:msg];
         }
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
-                                         messageAsString:msg];
     }
 
     [self.commandDelegate sendPluginResult:pluginResult
@@ -218,6 +227,23 @@
       [supportButton click];
   }
 }
+
+
+- (void) displayMenu:(CDVInvokedUrlCommand*)command
+{
+    CDVPluginResult* pluginResult;
+    if ( self.isConfigured ) {
+        self.supportButton.menuStyle = Menu;
+        [self.supportButton click];
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+                                         messageAsString:@""];
+    } else {
+      pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+    }
+    [self.commandDelegate sendPluginResult:pluginResult
+                            callbackId:command.callbackId];
+}
+
 
 - (void)supportButton:(SupportButton *)supportButton didFailToGetSettingsWithError:(NSError *)error
 {
