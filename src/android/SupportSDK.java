@@ -74,6 +74,11 @@ public class SupportSDK extends CordovaPlugin {
       loadConfigurationFromJSON(args.getString(0), callbackContext);
       return true;
     }
+    if ("initiateBoomtown".equals(action)) {
+      initiateBoomtown(args.getString(0), callbackContext);
+      return true;
+    }
+
     return false;
   }
 
@@ -88,6 +93,12 @@ public class SupportSDK extends CordovaPlugin {
       }
     }
   }
+
+
+  private void initiateBoomtown(String json, CallbackContext callbackContext) {
+    loadConfigurationFromJSON(json, callbackContext);
+  }
+
 
   @Override
   public void onActivityResult(int requestCode, int resultCode, Intent data)
