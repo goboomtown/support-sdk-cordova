@@ -39,9 +39,9 @@
       <resource-file src="src/android/styles.xml" target="res/values/styles.xml" />
       <resource-file src="src/android/custom_logo.png" target="res/drawable/custom_logo.png" />
       <framework src="src/android/supportsdk.gradle" custom="true" type="gradleReference" />
-      <lib-file src="src/android/boomtown-boomtownchat-android-debug.aar" />
-      <lib-file src="src/android/boomtown-video-android-debug.aar" />
-      <lib-file src="src/android/support-sdk-gplay-stage-debug.aar" />
+      <lib-file src="src/android/boomtown-boomtownchat-android-release.aar" />
+      <lib-file src="src/android/boomtown-video-android-release.aar" />
+      <lib-file src="src/android/support-sdk-gplay-production-debug.aar" />
       <framework src="com.google.android.material:material:1.1.0" />
       <framework src="com.wefika:flowlayout:0.4.1" />
       <framework src="com.squareup.okhttp3:okhttp:3.12.8" />
