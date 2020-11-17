@@ -212,7 +212,7 @@
 - (void)supportButtonDidGetSettings:(SupportButton *)supportButton
 {
   self.isConfigured = YES;
-  self.isButtonVisible = YES;
+  self.isButtonVisible = NO;
   if ( self.isButtonVisible) {
       supportButton.menuStyle = Menu; //IconList;
       CGFloat buttonSize = 75;
