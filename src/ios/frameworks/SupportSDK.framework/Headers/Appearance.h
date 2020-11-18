@@ -11,10 +11,30 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+static NSString * const kMenuTextChat       = @"com.goboomtown.supportsdk.menu.text.chat";
+static NSString * const kMenuIconChat       = @"com.goboomtown.supportsdk.menu.icon.chat";
+static NSString * const kMenuTextCallMe     = @"com.goboomtown.supportsdk.menu.text.callme";
+static NSString * const kMenuIconCallMe     = @"com.goboomtown.supportsdk.menu.icon.callme";
+static NSString * const kMenuTextKnowledge  = @"com.goboomtown.supportsdk.menu.text.knowledge";
+static NSString * const kMenuIconKnowledge  = @"com.goboomtown.supportsdk.menu.icon.knowledge";
+static NSString * const kMenuTextWeb        = @"com.goboomtown.supportsdk.menu.text.web";
+static NSString * const kMenuIconWeb        = @"com.goboomtown.supportsdk.menu.icon.web";
+static NSString * const kMenuTextEmail      = @"com.goboomtown.supportsdk.menu.text.email";
+static NSString * const kMenuIconEmail      = @"com.goboomtown.supportsdk.menu.icon.email";
+static NSString * const kMenuTextPhone      = @"com.goboomtown.supportsdk.menu.text.phone";
+static NSString * const kMenuIconPhone      = @"com.goboomtown.supportsdk.menu.icon.phone";
+static NSString * const kMenuTextForms      = @"com.goboomtown.supportsdk.menu.text.forms";
+static NSString * const kMenuIconForms      = @"com.goboomtown.supportsdk.menu.icon.forms";
+static NSString * const kMenuTextHistory    = @"com.goboomtown.supportsdk.menu.text.history";
+static NSString * const kMenuIconHistory    = @"com.goboomtown.supportsdk.menu.icon.history";
+static NSString * const kMenuBorderColor    = @"com.goboomtown.supportsdk.menu.border.color";
+
+
 @interface Appearance : NSObject
 
 @property (class, assign)                       BOOL       darkMode;
 @property (class, assign)                       BOOL       transparentMode;
+@property (class, assign)                       NSDictionary    *menuConfiguration;
 @property (class, nonatomic, assign)            UIColor    *labelColor;
 @property (class, nonatomic, assign)            UIColor    *placeholderTextColor;
 @property (class, nonatomic, assign)            UIColor    *systemBackgroundColor;
@@ -25,6 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (class, nonatomic, assign)            UIColor    *lightTextColor;
 @property (class, nonatomic, assign)            UIColor    *badgeBackgroundColor;
 @property (class, nonatomic, assign)            UIColor    *navigationBarBackgroundColor;
+
 
 @property (class, nonatomic, assign)            UIColor    *homeBackgroundColor;
 @property (class, nonatomic, assign)            UIColor    *linkAndButtonTintColor;
@@ -95,6 +116,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (class, readonly)                     UIColor     *kbFontName;
 @property (class, readonly)                     UIColor     *kbTextColor;
 
+@property (class, nonatomic, assign)            UIImage     *kbFolderIcon;
+@property (class, nonatomic, assign)            UIImage     *chatAttachmentButtonImage;
+@property (class, nonatomic, assign)            UIImage     *chatSendButtonImage;
+
 
 + (void) configure;
 + (void) handleTraits:(UITraitCollection *)traitCollection;
@@ -106,6 +131,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (void) setBackgroundColor:(NSInteger)colorValue;
 + (void) setBorderColor:(NSInteger)colorValue;
 
++ (NSDictionary *) menuConfiguration;
++ (void) setMenuConfiguration:(NSDictionary *)menuConfiguration;
 
 @end
 
