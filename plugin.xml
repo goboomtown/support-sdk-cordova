@@ -16,9 +16,9 @@
       <config-file target="AndroidManifest.xml" parent="/manifest/application">
         <activity android:name="com.goboomtown.plugin.supportsdk.SupportActivity" android:theme="@style/AppTheme" android:clearTaskOnLaunch="true" android:configChanges="orientation|keyboardHidden|screenSize" android:theme="@android:style/Theme.NoTitleBar.Fullscreen" android:windowSoftInputMode="stateAlwaysHidden" android:exported="false" />
       </config-file>
-      <edit-config file="AndroidManifest.xml" target="/manifest/application/activity[@android:name='MainActivity']" mode="overwrite">
+      <!-- <edit-config file="AndroidManifest.xml" target="/manifest/application/activity[@android:name='MainActivity']" mode="overwrite">
         <activity android:name="MainActivity" android:theme="@style/AppTheme" />
-      </edit-config>
+      </edit-config> -->
       <config-file target="AndroidManifest.xml" parent="/manifest">
         <uses-permission android:name="android.permission.CAMERA"/>
         <uses-permission android:name="android.permission.FLASHLIGHT"/>
@@ -34,9 +34,9 @@
       <source-file src="src/android/SupportActivity.java"
         target-dir="src/com/goboomtown/plugin/supportsdk" />
       <resource-file src="src/android/activity_support.xml" target="res/layout/activity_support.xml" />
-      <resource-file src="src/android/layout.xml" target="res/layout/layout.xml" />
-      <resource-file src="src/android/attrs.xml" target="res/values/attrs.xml" />
-      <resource-file src="src/android/styles.xml" target="res/values/styles.xml" />
+      <resource-file src="src/android/support_layout.xml" target="res/layout/support_layout.xml" />
+      <resource-file src="src/android/support_attrs.xml" target="res/values/support_attrs.xml" />
+      <resource-file src="src/android/support_styles.xml" target="res/values/support_styles.xml" />
       <resource-file src="src/android/custom_logo.png" target="res/drawable/custom_logo.png" />
       <framework src="src/android/supportsdk.gradle" custom="true" type="gradleReference" />
       <lib-file src="src/android/boomtown-boomtownchat-android-release.aar" />
