@@ -38,7 +38,11 @@ import com.goboomtown.plugin.supportsdk.SupportActivity;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SupportSDK extends CordovaPlugin {
+import com.goboomtown.supportsdk.view.SupportButton;
+
+
+public class SupportSDK extends CordovaPlugin
+  implements SupportButton.SupportButtonListener {
 
   private CallbackContext callback            = null;
   private Activity        cordovaActivity     = null;
@@ -52,6 +56,8 @@ public class SupportSDK extends CordovaPlugin {
   private LinearLayout    mSupportMenuContainer  = null;
   private FrameLayout     mFragmentContainer  = null;
   private int             mFragmentContainerId  = 0;
+  private SupportButton   mSupportButton = null;
+  private View            mMenuView = null;
 
   public void initialize(CordovaInterface cordova, CordovaWebView webView) {
     super.initialize(cordova, webView);
@@ -64,6 +70,8 @@ public class SupportSDK extends CordovaPlugin {
     mResources = cordovaActivity.getResources();
     mPackageName = cordovaActivity.getPackageName();
     mFrameLayout = (FrameLayout) mView.getParent();
+    // mSupportButton = new SupportButton(mContext);
+    // mSupportButton.setListener(this);
   }
 
 
@@ -78,19 +86,27 @@ public class SupportSDK extends CordovaPlugin {
       initiateBoomtown(args.getString(0), callbackContext);
       return true;
     }
+    if ("displayMenu".equals(action)) {
+      displayMenu(args.getString(0), callbackContext);
+      return true;
+    }
 
     return false;
   }
 
   private void loadConfigurationFromJSON(String json, CallbackContext callbackContext) {
     if (json == null || json.length() == 0) {
-      callbackContext.error("No configuration provided.");
+      // callbackContext.error("No configuration provided.");
+      PluginResult result = new PluginResult(PluginResult.Status.ERROR, "No configuration provided." );
+      result.setKeepCallback(true);
+      callbackContext.sendPluginResult(result);
     } else {
       Intent intent = new Intent(cordovaActivity, SupportActivity.class);
       if ( intent != null ) {
         intent.putExtra("JSON", json);
         cordovaActivity.startActivityForResult(intent, 999);
       }
+      // mSupportButton.loadConfiguration(json, null);
     }
   }
 
@@ -98,6 +114,22 @@ public class SupportSDK extends CordovaPlugin {
   private void initiateBoomtown(String json, CallbackContext callbackContext) {
     loadConfigurationFromJSON(json, callbackContext);
   }
+
+
+  private void displayMenu(String json, CallbackContext callbackContext) {
+    if ( mMenuView != null ) {
+      PluginResult result = new PluginResult(PluginResult.Status.OK, "OK" );
+      result.setKeepCallback(true);
+      callbackContext.sendPluginResult(result);
+
+    } else {
+      PluginResult result = new PluginResult(PluginResult.Status.ERROR, "ERROR" );
+      result.setKeepCallback(true);
+      callbackContext.sendPluginResult(result);
+
+    }
+  }
+
 
 
   @Override
@@ -149,5 +181,80 @@ public class SupportSDK extends CordovaPlugin {
       }
     });
   }
+
+  @Override
+  public void supportButtonDidFailWithError(final String description, final String reason) {
+  }
+
+  @Override
+  public void supportButtonDidGetSettings() {
+    PluginResult result = new PluginResult(PluginResult.Status.OK, "didGetSettings");
+    result.setKeepCallback(false);
+    callback.sendPluginResult(result);
+  }
+
+  @Override
+  public void supportButtonDidFailToGetSettings() {
+    PluginResult result = new PluginResult(PluginResult.Status.ERROR, "didFailToGetSettings" );
+    result.setKeepCallback(false);
+    callback.sendPluginResult(result);
+  }
+
+  @Override
+  public void supportButtonDisplayView(final View view) {
+      // runOnUiThread(new Runnable() {
+      //     @Override
+      //     public void run() {
+      //         PopupWindow popupWindow = new PopupWindow();
+      //         popupWindow.setWindowLayoutMode(
+      //                 WindowManager.LayoutParams.WRAP_CONTENT,
+      //                 WindowManager.LayoutParams.WRAP_CONTENT);
+      //         popupWindow.setHeight(250);
+      //         popupWindow.setWidth(350);
+      //         popupWindow.setContentView(view);
+      //
+      //         //set content and background
+      //
+      //         popupWindow.setTouchable(true);
+      //         popupWindow.setFocusable(true);
+      //
+      //         mSupportMenuContainer.setVisibility(View.VISIBLE);
+      //         mFragmentContainer.setVisibility(View.GONE);
+      //         popupWindow.showAtLocation(mFragmentContainer, Gravity.CENTER, 0, 0);
+      //     }
+      // });
+      mMenuView = view;
+      int i = 1;
+      // runOnUiThread(new Runnable() {
+      //     @Override
+      //     public void run() {
+      //         mSupportMenuContainer.addView(view);
+      //     }
+      // });
+  }
+
+
+  @Override
+  public void supportButtonDisplayFragment(final Fragment fragment, String title) {
+    int i = 1;
+  }
+
+  @Override
+  public void supportButtonSetTitle(String title) {
+  }
+
+
+  @Override
+  public void supportButtonRemoveFragment(Fragment fragment) {
+  }
+
+  @Override
+  public void supportButtonDidAdvertiseService() {
+  }
+
+  @Override
+  public void supportButtonDidFailToAdvertiseService() {
+  }
+
 
 }

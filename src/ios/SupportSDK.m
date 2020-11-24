@@ -70,6 +70,7 @@
         }
     }
 
+    [pluginResult setKeepCallbackAsBool:true];
     [self.commandDelegate sendPluginResult:pluginResult
                                 callbackId:command.callbackId];
   }];
@@ -211,6 +212,14 @@
 
 - (void)supportButtonDidGetSettings:(SupportButton *)supportButton
 {
+  CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+                                   messageAsString:@"didGetSettings"];
+  [pluginResult setKeepCallbackAsBool:false];
+  if ( self.delegateCallbackId ) {
+    [self.commandDelegate sendPluginResult:pluginResult
+                              callbackId:self.delegateCallbackId];
+  }
+
   self.isConfigured = YES;
   self.isButtonVisible = NO;
   if ( self.isButtonVisible) {
@@ -224,7 +233,7 @@
       [self.viewController.view addSubview:supportButton];
   } else {
       supportButton.menuStyle = IconList;
-      [supportButton click];
+      // [supportButton click];
   }
 }
 
@@ -247,6 +256,13 @@
 
 - (void)supportButton:(SupportButton *)supportButton didFailToGetSettingsWithError:(NSError *)error
 {
+  CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                   messageAsString:@"didFailToGetSettingsWithError"];
+  [pluginResult setKeepCallbackAsBool:false];
+  if ( self.delegateCallbackId ) {
+    [self.commandDelegate sendPluginResult:pluginResult
+                              callbackId:self.delegateCallbackId];
+  }
     [self toast:[error localizedDescription]];
 }
 
