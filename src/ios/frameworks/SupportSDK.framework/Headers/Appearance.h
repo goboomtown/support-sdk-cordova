@@ -27,6 +27,8 @@ static NSString * const kMenuTextForms      = @"com.goboomtown.supportsdk.menu.t
 static NSString * const kMenuIconForms      = @"com.goboomtown.supportsdk.menu.icon.forms";
 static NSString * const kMenuTextHistory    = @"com.goboomtown.supportsdk.menu.text.history";
 static NSString * const kMenuIconHistory    = @"com.goboomtown.supportsdk.menu.icon.history";
+static NSString * const kMenuTextExit       = @"com.goboomtown.supportsdk.menu.text.exit";
+static NSString * const kMenuIconExit       = @"com.goboomtown.supportsdk.menu.icon.exit";
 static NSString * const kMenuBorderColor    = @"com.goboomtown.supportsdk.menu.border.color";
 
 

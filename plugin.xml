@@ -15,7 +15,10 @@
       </config-file>
       <config-file target="AndroidManifest.xml" parent="/manifest/application">
         <activity android:name="com.goboomtown.plugin.supportsdk.SupportActivity" android:theme="@style/AppTheme" android:clearTaskOnLaunch="true" android:configChanges="orientation|keyboardHidden|screenSize" android:theme="@android:style/Theme.NoTitleBar.Fullscreen" android:windowSoftInputMode="stateAlwaysHidden" android:exported="false" />
+        <activity android:name="com.goboomtown.supportsdk.activity.VideoActivity" android:configChanges="orientation|keyboardHidden|screenSize|uiMode" />
+        <activity android:name="com.goboomtown.activity.KBActivity" android:configChanges="orientation|keyboardHidden|screenSize|uiMode" />
       </config-file>
+
       <!-- <edit-config file="AndroidManifest.xml" target="/manifest/application/activity[@android:name='MainActivity']" mode="overwrite">
         <activity android:name="MainActivity" android:theme="@style/AppTheme" />
       </edit-config> -->

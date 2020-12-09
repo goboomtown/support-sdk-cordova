@@ -4,6 +4,7 @@
 @interface SupportSDK ()
 
 @property (strong, nonatomic, nonnull)  SupportButton   *supportButton;
+@property (strong, nonatomic, nullable) UIView          *displayedView;
 @property (strong)                      NSString*       delegateCallbackId;
 @property                               BOOL            isConfigured;
 @property                               BOOL            isButtonVisible;
@@ -144,32 +145,9 @@
 
 - (void) supportButton:(SupportButton *)supportButton displayView:(UIView *)view
 {
+  self.displayedView = view;
   dispatch_async(dispatch_get_main_queue(), ^{
-    //
-    // for ( UIView *subview in view.subviews ) {
-    //     if ( [subview isKindOfClass:[LoginView class]] ) {
-    //         subview.hidden = YES;
-    //     }
-    //     else if ( [subview isKindOfClass:[UICollectionView class]] ) {
-    //         subview.hidden = NO;
-    //     }
-    // }
-
-    view.frame = self.viewController.view.bounds;
-
-    // NSString *viewRect = [NSString stringWithFormat:@"view %f %f %f %f\nviewController %f %f %f %f",
-    // view.frame.origin.x,
-    // view.frame.origin.y,
-    // view.frame.size.width,
-    // view.frame.size.height,
-    // self.viewController.view.frame.origin.x,
-    // self.viewController.view.frame.origin.y,
-    // self.viewController.view.frame.size.width,
-    // self.viewController.view.frame.size.height];
-    // [self toast:viewRect];
-
     view.backgroundColor = [UIColor whiteColor];
-    // view.center = self.viewController.view.center;
     [self.viewController.view addSubview:view];
   });
 }
@@ -202,6 +180,16 @@
   dispatch_async(dispatch_get_main_queue(), ^{
     [self.viewController.navigationController pushViewController:viewController animated:NO];
   });
+}
+
+
+- (void) supportButtonDidRequestExit:(nonnull SupportButton *)supportButton;
+{
+    NSLog(@"supportButtonDidRequestExit");
+    if ( self.displayedView ) {
+        [self.displayedView removeFromSuperview];
+        self.displayedView = nil;
+    }
 }
 
 
@@ -242,7 +230,7 @@
 {
     CDVPluginResult* pluginResult;
     if ( self.isConfigured ) {
-        self.supportButton.menuStyle = Menu;
+        self.supportButton.menuStyle = IconListExit; //Menu;
         [self.supportButton click];
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
                                          messageAsString:@""];

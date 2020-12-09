@@ -206,7 +206,7 @@
 		</data>
 		<key>Headers/Appearance.h</key>
 		<data>
-		5SKuRlwJi7LOiYNpBylzhJNCPZs=
+		cSoA5nmqxF3PKHMOVIkZt+b3AKc=
 		</data>
 		<key>Headers/BTConnectIssue.h</key>
 		<data>
@@ -222,11 +222,11 @@
 		</data>
 		<key>Headers/Support.h</key>
 		<data>
-		NmMc4JCA2fBDB1Eytc99cu9hOIU=
+		fUlUDm2ZkAC+Tcqx3gVxJKInivQ=
 		</data>
 		<key>Headers/SupportButton.h</key>
 		<data>
-		MZ8K3HwIC8z5SfmBIO5m4PMRmAE=
+		9W5uBDy5myoodBMXDppKDT+BCTc=
 		</data>
 		<key>Headers/SupportSDK.h</key>
 		<data>
@@ -238,7 +238,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		Q/RJ683X3P464VQGsGoiHMNUEwg=
+		76n8U0Y4JdkZXQablZ4+eLV0Bnc=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -684,6 +684,10 @@
 		<key>foreveralone-1414023140.png</key>
 		<data>
 		W/jUAd62elM5TlRJXk/dUnux/W4=
+		</data>
+		<key>form-help-icon.png</key>
+		<data>
+		jnq4766RaTrALsPorM1LLe87aks=
 		</data>
 		<key>forscale-1428536097.png</key>
 		<data>
@@ -1962,7 +1966,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			vpcoe7G1dgEqrQkdMke9Qxju341PvkWczX6dIz7N0vI=
+			HOiiAHyKwpaydyNFLGIX+qFU4QHmoTfxcUwa+qskPgI=
 			</data>
 		</dict>
 		<key>Headers/BTConnectIssue.h</key>
@@ -1990,14 +1994,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			zuiFg0vjl8CDBSdxCNG7kOZjJjaogExIkoJtWq0GyWM=
+			zUgUvjwfsYo+ywbQxV3EYp9NKDK0XvzEq7PfAHg1NEA=
 			</data>
 		</dict>
 		<key>Headers/SupportButton.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			zYCayDf3/4a0irVBzmccmjNetXXY2qb4H8CUAHZmF+0=
+			RU7wlOEQo61T3yrpWazz9/2Pf7A6W87u/uwSGwbDdJI=
 			</data>
 		</dict>
 		<key>Headers/SupportSDK.h</key>
@@ -2784,6 +2788,13 @@
 			<key>hash2</key>
 			<data>
 			O/6RC3efLgz0NGdOfr5B0voJcD3M8CboeBDThqPPezs=
+			</data>
+		</dict>
+		<key>form-help-icon.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			dqSq1on7wj0pSTNp+xOCUrXETqgldLFzmmufJCTnAfE=
 			</data>
 		</dict>
 		<key>forscale-1428536097.png</key>
