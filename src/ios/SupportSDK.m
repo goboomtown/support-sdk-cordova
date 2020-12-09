@@ -8,6 +8,7 @@
 @property (strong)                      NSString*       delegateCallbackId;
 @property                               BOOL            isConfigured;
 @property                               BOOL            isButtonVisible;
+@property                               NSInteger       desiredMenuType;
 
 @end
 
@@ -51,6 +52,12 @@
     if (json == nil || [json length] == 0) {
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
     } else {
+      self.desiredMenuType = -1;
+      if ( command.arguments.count > 1 ) {
+          NSString* menuTypeString = [command.arguments objectAtIndex:1];
+          self.desiredMenuType = [menuTypeString integerValue];
+      }
+
         NSError *error;
         NSData *data = [json dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
@@ -228,9 +235,13 @@
 
 - (void) displayMenu:(CDVInvokedUrlCommand*)command
 {
+    if ( command.arguments.count > 0 ) {
+        NSString* menuTypeString = [command.arguments objectAtIndex:0];
+        self.desiredMenuType = [menuTypeString integerValue];
+    }
     CDVPluginResult* pluginResult;
     if ( self.isConfigured ) {
-        self.supportButton.menuStyle = IconListExit; //Menu;
+        self.supportButton.menuStyle = self.desiredMenuType == -1 ? IconListExit : self.desiredMenuType; //Menu;
         [self.supportButton click];
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
                                          messageAsString:@""];

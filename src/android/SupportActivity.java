@@ -63,6 +63,8 @@ public class SupportActivity extends AppCompatActivity
     private Resources     mResources;
     private String        mPackageName;
     private int           mFragmentContainerId;
+    private View          mMenuView = null;
+    private SupportButton.MenuStyle     desiredMenuType = SupportButton.MenuStyle.ICON_LIST_EXIT;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,6 +114,17 @@ public class SupportActivity extends AppCompatActivity
         mSupportButton.appearance.setTextColor(Color.BLACK);
 
         String json = getIntent().getStringExtra("JSON");
+        String desiredMenuString = getIntent().getStringExtra("desiredMenuString");
+        // if ( desiredMenuString != null ) {
+        //   desiredMenuType = menuType(Integer.parseInt(desiredMenuString));
+        // } else {
+        //   desiredMenuType = menuType(-1);
+        // }
+        try {
+          desiredMenuType = menuType(Integer.parseInt(desiredMenuString));
+        } catch (Exception e) {
+          desiredMenuType = menuType(-1);
+        }
 
         // int configResource = R.raw.support_sdk_preprod; // R.raw.support_sdk;
         // mSupportButton.loadConfiguration(configResource, null);
@@ -124,6 +137,35 @@ public class SupportActivity extends AppCompatActivity
 
         mSupportButton.advertiseServiceWithPublicData(myPubData, myPrivData);
     }
+
+
+  private SupportButton.MenuStyle menuType(int desiredMenuType) {
+    SupportButton.MenuStyle style = SupportButton.MenuStyle.ICON_LIST_EXIT;
+    switch(desiredMenuType) {
+      case 0:
+        style = SupportButton.MenuStyle.NO_MENU;
+        break;
+      case 1:
+        style = SupportButton.MenuStyle.MENU;
+        break;
+      case 2:
+        style = SupportButton.MenuStyle.BUTTON;
+        break;
+      case 3:
+        style = SupportButton.MenuStyle.ICON_LIST;
+        break;
+      case 4:
+        style = SupportButton.MenuStyle.ICON_LIST_EXIT;
+        break;
+      case 5:
+        style = SupportButton.MenuStyle.ICON_GRID;
+        break;
+      default:
+        style = SupportButton.MenuStyle.ICON_LIST_EXIT;
+        break;
+    }
+    return style;
+  }
 
     private void toast(final String msg) {
       final Activity activity = this;
@@ -215,7 +257,7 @@ private void hideActionBar() {
     public void supportButtonDidGetSettings() {
         Log.d(TAG, "#helpButtonDidGetSettings");
 //        mSupportButton.menuStyle = SupportButton.MenuStyle.BUTTON;
-        mSupportButton.menuStyle = SupportButton.MenuStyle.ICON_LIST;
+        mSupportButton.menuStyle = desiredMenuType;
         mSupportButton.click();
     }
 
@@ -223,6 +265,17 @@ private void hideActionBar() {
     public void supportButtonDidFailToGetSettings() {
       toast("Unable to retrieve settings");
     }
+
+
+    @Override
+    public void supportButtonDidRequestExit() {
+       if ( mMenuView != null ) {
+           mSupportMenuContainer.removeView(mMenuView);
+           mMenuView = null;
+       }
+       finish();
+     }
+
 
     @Override
     public void supportButtonDisplayView(final View view) {
@@ -247,10 +300,14 @@ private void hideActionBar() {
         //         popupWindow.showAtLocation(mFragmentContainer, Gravity.CENTER, 0, 0);
         //     }
         // });
+        if ( view == null ) {
+          return;
+        }
+        mMenuView = view;
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                mSupportMenuContainer.addView(view);
+                mSupportMenuContainer.addView(mMenuView);
             }
         });
     }
@@ -292,6 +349,9 @@ private void hideActionBar() {
                 hideActionBar();
                 // mSupportMenuContainer.setVisibility(View.VISIBLE);
                 // setTitle(getString(R.string.app_name));
+                if ( mSupportButton.menuStyle == SupportButton.MenuStyle.MENU ) {
+                  mSupportButton.showSupportDialog();
+                }
             }
         });
     }

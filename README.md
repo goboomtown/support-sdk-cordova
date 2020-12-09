@@ -56,6 +56,7 @@ function gotFile(fileEntry) {
       console.log(this.result);
       supportsdk.loadConfigurationFromJSON(
         this.result,
+        4,
         function(msg) {
           document
           .getElementById('deviceready')
@@ -78,7 +79,21 @@ function gotFile(fileEntry) {
 }
 ```
 
-## 6. Configuration
+## 6. Menu Types
+
+The second parameter of loadConfigurationFromJSON() is the desired menu type as per the following list:
+
+```
+typedef enum MenuStyle : NSInteger {
+    NoMenu          = 0,
+    Menu            = 1,
+    Button          = 2,
+    IconList        = 3,
+    IconListExit    = 4
+} MenuStyle;
+```
+
+## 7. Configuration
 
 The plugin depends on a JSON file (www/config.json here) that you must obtain from your provider. The file looks like this:
 

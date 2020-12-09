@@ -36,6 +36,8 @@
         target-dir="src/com/goboomtown/plugin/supportsdk" />
       <source-file src="src/android/SupportActivity.java"
         target-dir="src/com/goboomtown/plugin/supportsdk" />
+      <!-- <source-file src="src/android/SupportView.java"
+        target-dir="src/com/goboomtown/plugin/supportsdk" /> -->
       <resource-file src="src/android/activity_support.xml" target="res/layout/activity_support.xml" />
       <resource-file src="src/android/support_layout.xml" target="res/layout/support_layout.xml" />
       <resource-file src="src/android/support_attrs.xml" target="res/values/support_attrs.xml" />

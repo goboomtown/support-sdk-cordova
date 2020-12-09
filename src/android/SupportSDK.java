@@ -58,6 +58,12 @@ public class SupportSDK extends CordovaPlugin
   private int             mFragmentContainerId  = 0;
   private SupportButton   mSupportButton = null;
   private View            mMenuView = null;
+  private View            displayView = null;
+  private Integer         desiredMenuType = -1;
+  private String          mJSON = null;
+  private String          mDesiredMenuString = "";
+  // private SupportView     mSupportView = null;
+
 
   public void initialize(CordovaInterface cordova, CordovaWebView webView) {
     super.initialize(cordova, webView);
@@ -79,11 +85,11 @@ public class SupportSDK extends CordovaPlugin
   public boolean execute(String action, JSONArray args, CallbackContext callbackContext ) throws JSONException {
     callback = callbackContext;
     if ("loadConfigurationFromJSON".equals(action)) {
-      loadConfigurationFromJSON(args.getString(0), callbackContext);
+      loadConfigurationFromJSON(args.getString(0), args.getString(1), callbackContext);
       return true;
     }
     if ("initiateBoomtown".equals(action)) {
-      initiateBoomtown(args.getString(0), callbackContext);
+      initiateBoomtown(args.getString(0), args.getString(1), callbackContext);
       return true;
     }
     if ("displayMenu".equals(action)) {
@@ -94,16 +100,22 @@ public class SupportSDK extends CordovaPlugin
     return false;
   }
 
-  private void loadConfigurationFromJSON(String json, CallbackContext callbackContext) {
+  private void loadConfigurationFromJSON(String json, String desiredMenuString, CallbackContext callbackContext) {
     if (json == null || json.length() == 0) {
       // callbackContext.error("No configuration provided.");
       PluginResult result = new PluginResult(PluginResult.Status.ERROR, "No configuration provided." );
       result.setKeepCallback(true);
       callbackContext.sendPluginResult(result);
     } else {
+      mJSON = json;
+      mDesiredMenuString = desiredMenuString;
+      // mSupportView = new SupportView(mContext, mResources, mPackageName);
       Intent intent = new Intent(cordovaActivity, SupportActivity.class);
       if ( intent != null ) {
         intent.putExtra("JSON", json);
+        if ( desiredMenuString != null ) {
+          intent.putExtra("desiredMenuString", desiredMenuString);
+        }
         cordovaActivity.startActivityForResult(intent, 999);
       }
       // mSupportButton.loadConfiguration(json, null);
@@ -111,17 +123,17 @@ public class SupportSDK extends CordovaPlugin
   }
 
 
-  private void initiateBoomtown(String json, CallbackContext callbackContext) {
-    loadConfigurationFromJSON(json, callbackContext);
+  private void initiateBoomtown(String json, String desiredMenuString, CallbackContext callbackContext) {
+    loadConfigurationFromJSON(json, desiredMenuString, callbackContext);
   }
 
 
-  private void displayMenu(String json, CallbackContext callbackContext) {
-    if ( mMenuView != null ) {
-      PluginResult result = new PluginResult(PluginResult.Status.OK, "OK" );
-      result.setKeepCallback(true);
-      callbackContext.sendPluginResult(result);
-
+  private void displayMenu(String menuTypeString, CallbackContext callbackContext) {
+    if ( mJSON != null ) {
+      loadConfigurationFromJSON(mJSON, mDesiredMenuString, callbackContext);
+      // PluginResult result = new PluginResult(PluginResult.Status.OK, "OK" );
+      // result.setKeepCallback(true);
+      // callbackContext.sendPluginResult(result);
     } else {
       PluginResult result = new PluginResult(PluginResult.Status.ERROR, "ERROR" );
       result.setKeepCallback(true);
@@ -199,6 +211,15 @@ public class SupportSDK extends CordovaPlugin
     result.setKeepCallback(false);
     callback.sendPluginResult(result);
   }
+
+  @Override
+  public void supportButtonDidRequestExit() {
+     if ( displayView != null ) {
+         mSupportMenuContainer.removeView(displayView);
+         displayView = null;
+     }
+   }
+
 
   @Override
   public void supportButtonDisplayView(final View view) {
