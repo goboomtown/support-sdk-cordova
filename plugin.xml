@@ -15,8 +15,8 @@
       </config-file>
       <config-file target="AndroidManifest.xml" parent="/manifest/application">
         <activity android:name="com.goboomtown.plugin.supportsdk.SupportActivity" android:theme="@style/AppTheme" android:clearTaskOnLaunch="true" android:configChanges="orientation|keyboardHidden|screenSize" android:theme="@android:style/Theme.NoTitleBar.Fullscreen" android:windowSoftInputMode="stateAlwaysHidden" android:exported="false" />
-        <activity android:name="com.goboomtown.supportsdk.activity.VideoActivity" android:configChanges="orientation|keyboardHidden|screenSize|uiMode" />
-        <activity android:name="com.goboomtown.activity.KBActivity" android:configChanges="orientation|keyboardHidden|screenSize|uiMode" />
+        <activity android:name="com.goboomtown.supportsdk.activity.VideoActivity" android:theme="@style/AppTheme" android:configChanges="orientation|keyboardHidden|screenSize|uiMode" />
+        <activity android:name="com.goboomtown.activity.KBActivity" android:theme="@style/AppTheme" android:configChanges="orientation|keyboardHidden|screenSize|uiMode" />
       </config-file>
 
       <!-- <edit-config file="AndroidManifest.xml" target="/manifest/application/activity[@android:name='MainActivity']" mode="overwrite">
@@ -32,6 +32,7 @@
           <activity android:name="com.goboomtown.plugin.supportsdk.SupportActivity" android:clearTaskOnLaunch="true" android:configChanges="orientation|keyboardHidden|screenSize" android:theme="@android:style/Theme.NoTitleBar.Fullscreen" android:windowSoftInputMode="stateAlwaysHidden" android:exported="false" />
         </application>
       </config-file> -->
+
       <source-file src="src/android/SupportSDK.java"
         target-dir="src/com/goboomtown/plugin/supportsdk" />
       <source-file src="src/android/SupportActivity.java"
@@ -65,6 +66,7 @@
       <config-file target="config.xml" parent="/*">
         <feature name="SupportSDK">
           <param name="ios-package" value="SupportSDK" />
+          <param name="onload" value="true" />
         </feature>
       </config-file>
 
@@ -78,12 +80,17 @@
         <string>The microphone is used for videoconference calls.</string>
       </config-file>
 
+      <!-- <resource-file src="default_appearance.json"
+        target-dir="default_appearance.json" /> -->
+
       <source-file src="src/ios/SupportSDK.h" />
       <source-file src="src/ios/SupportSDK.m" />
-      <header-file src="src/ios/AppDelegate.h" />
-      <source-file src="src/ios/AppDelegate.m" />
+      <header-file src="src/ios/AppDelegate+SupportSDKPlugin.h" />
+      <source-file src="src/ios/AppDelegate+SupportSDKPlugin.m" />
       <header-file src="src/ios/ViewController.h" />
       <source-file src="src/ios/ViewController.m" />
+
+      <!-- <source-file src="default_appearance.json" target-dir="lib" framework="false" /> -->
 
       <source-file src="src/ios/frameworks/AFNetworking.framework" target-dir="lib" framework="true" />
       <source-file src="src/ios/frameworks/CocoaAsyncSocket.framework" target-dir="lib" framework="true" />

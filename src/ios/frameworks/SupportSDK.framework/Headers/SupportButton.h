@@ -125,6 +125,21 @@ IB_DESIGNABLE
  */
 - (void) click;
 
+
+/**
+ Configure the Support SDK button with new appearance parameters
+ 
+ @param     appearanceJSON
+ */
+- (void) configureWithJSON:(NSString *_Nullable) appearanceJSON;
+
+
+/**
+ Reset support button
+ */
+
+- (void) reset;
+
 /**
  Load the Support SDK configuration from the provided JSON file in the app bundle
 

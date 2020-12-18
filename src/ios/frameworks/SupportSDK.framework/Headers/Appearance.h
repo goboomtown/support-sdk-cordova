@@ -11,130 +11,133 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-static NSString * const kMenuTextChat       = @"com.goboomtown.supportsdk.menu.text.chat";
-static NSString * const kMenuIconChat       = @"com.goboomtown.supportsdk.menu.icon.chat";
-static NSString * const kMenuTextCallMe     = @"com.goboomtown.supportsdk.menu.text.callme";
-static NSString * const kMenuIconCallMe     = @"com.goboomtown.supportsdk.menu.icon.callme";
-static NSString * const kMenuTextKnowledge  = @"com.goboomtown.supportsdk.menu.text.knowledge";
-static NSString * const kMenuIconKnowledge  = @"com.goboomtown.supportsdk.menu.icon.knowledge";
-static NSString * const kMenuTextWeb        = @"com.goboomtown.supportsdk.menu.text.web";
-static NSString * const kMenuIconWeb        = @"com.goboomtown.supportsdk.menu.icon.web";
-static NSString * const kMenuTextEmail      = @"com.goboomtown.supportsdk.menu.text.email";
-static NSString * const kMenuIconEmail      = @"com.goboomtown.supportsdk.menu.icon.email";
-static NSString * const kMenuTextPhone      = @"com.goboomtown.supportsdk.menu.text.phone";
-static NSString * const kMenuIconPhone      = @"com.goboomtown.supportsdk.menu.icon.phone";
-static NSString * const kMenuTextForms      = @"com.goboomtown.supportsdk.menu.text.forms";
-static NSString * const kMenuIconForms      = @"com.goboomtown.supportsdk.menu.icon.forms";
-static NSString * const kMenuTextHistory    = @"com.goboomtown.supportsdk.menu.text.history";
-static NSString * const kMenuIconHistory    = @"com.goboomtown.supportsdk.menu.icon.history";
-static NSString * const kMenuTextExit       = @"com.goboomtown.supportsdk.menu.text.exit";
-static NSString * const kMenuIconExit       = @"com.goboomtown.supportsdk.menu.icon.exit";
-static NSString * const kMenuBorderColor    = @"com.goboomtown.supportsdk.menu.border.color";
-
 
 @interface Appearance : NSObject
 
-@property (class, assign)                       BOOL       darkMode;
-@property (class, assign)                       BOOL       transparentMode;
-@property (class, assign)                       NSDictionary    *menuConfiguration;
-@property (class, nonatomic, assign)            UIColor    *labelColor;
-@property (class, nonatomic, assign)            UIColor    *placeholderTextColor;
-@property (class, nonatomic, assign)            UIColor    *systemBackgroundColor;
-@property (class, nonatomic, assign)            UIColor    *secondarySystemBackgroundColor;
-@property (class, nonatomic, assign)            UIColor    *separatorColor;
-@property (class, nonatomic, assign)            UIColor    *linkColor;
-@property (class, nonatomic, assign)            UIColor    *darkTextColor;
-@property (class, nonatomic, assign)            UIColor    *lightTextColor;
-@property (class, nonatomic, assign)            UIColor    *badgeBackgroundColor;
-@property (class, nonatomic, assign)            UIColor    *navigationBarBackgroundColor;
+@property                                 BOOL       darkMode;
+@property                                   BOOL       transparentMode;
+@property (strong, nonatomic, nullable)          UIColor    *labelColor;
+@property (strong, nonatomic, nullable)            UIColor    *placeholderTextColor;
+@property (strong, nonatomic, nullable)            UIColor    *systemBackgroundColor;
+@property (strong, nonatomic, nullable)            UIColor    *secondarySystemBackgroundColor;
+@property ( nonatomic, assign)            UIColor    *separatorColor;
+@property ( nonatomic, assign)            UIColor    *linkColor;
+@property ( nonatomic, assign)            UIColor    *darkTextColor;
+@property ( nonatomic, assign)            UIColor    *lightTextColor;
+@property ( nonatomic, assign)            UIColor    *badgeBackgroundColor;
+@property (strong, nonatomic, nullable)            UIColor    *navigationBarBackgroundColor;
 
 
-@property (class, nonatomic, assign)            UIColor    *homeBackgroundColor;
-@property (class, nonatomic, assign)            UIColor    *linkAndButtonTintColor;
+@property (strong, nonatomic, nullable)            UIColor    *homeBackgroundColor;
+@property (strong, nonatomic, nullable)            UIColor    *linkAndButtonTintColor;
 
-@property (class, nonatomic, assign, readonly)  UIColor    *redRatingControlColor;
-@property (class, nonatomic, assign, readonly)  UIColor    *yellowRatingControlColor;
-@property (class, nonatomic, assign, readonly)  UIColor    *greenRatingControlColor;
+@property (strong, nonatomic, nullable) UIColor    *redRatingControlColor;
+@property (strong, nonatomic, nullable) UIColor    *yellowRatingControlColor;
+@property (strong, nonatomic, nullable) UIColor    *greenRatingControlColor;
 
-@property (class, nonatomic, assign, readonly)  UIColor    *canceledServiceHistoryFooterColor;
-@property (class, nonatomic, assign, readonly)  UIColor    *completedServiceHistoryFooterColor;
-@property (class, nonatomic, assign, readonly)  UIColor    *inProgressServiceHistoryFooterColor;
+@property ( nonatomic, assign, readonly)  UIColor    *canceledServiceHistoryFooterColor;
+@property ( nonatomic, assign, readonly)  UIColor    *completedServiceHistoryFooterColor;
+@property ( nonatomic, assign, readonly)  UIColor    *inProgressServiceHistoryFooterColor;
 
-@property (class, nonatomic, assign, readonly)  UIImage    *canceledServiceHistoryFooterIcon;
-@property (class, nonatomic, assign, readonly)  UIImage    *completedServiceHistoryFooterIcon;
-@property (class, nonatomic, assign, readonly)  UIImage    *inProgressServiceHistoryFooterIcon;
-@property (class, nonatomic, assign, readonly)  UIImage    *starOffIcon;
-@property (class, nonatomic, assign, readonly)  UIImage    *starOnIcon;
+@property ( nonatomic, assign, readonly)  UIImage    *canceledServiceHistoryFooterIcon;
+@property ( nonatomic, assign, readonly)  UIImage    *completedServiceHistoryFooterIcon;
+@property ( nonatomic, assign, readonly)  UIImage    *inProgressServiceHistoryFooterIcon;
+@property ( nonatomic, assign, readonly)  UIImage    *starOffIcon;
+@property ( nonatomic, assign, readonly)  UIImage    *starOnIcon;
 
-@property (class, nonatomic, assign)            UIImage    *logo;
+@property ( nonatomic, assign)            UIImage    *logo;
 
-@property (class, nonatomic, assign, readonly)  UIColor    *sliderOnColor;
-@property (class, nonatomic, assign, readonly)  UIColor    *sliderOffColor;
-@property (class, nonatomic, assign, readonly)  UIColor    *sliderTextColor;
-@property (class, nonatomic, assign, readonly)  UIColor    *sliderBorderColor;
-@property (class, nonatomic, assign, readonly)  UIColor    *sliderHandleBackgroundColor;
-@property (class, nonatomic, assign, readonly)  UIColor    *sliderHandleTextColor;
+@property ( nonatomic, assign, readonly)  UIColor    *sliderOnColor;
+@property ( nonatomic, assign, readonly)  UIColor    *sliderOffColor;
+@property ( nonatomic, assign, readonly)  UIColor    *sliderTextColor;
+@property ( nonatomic, assign, readonly)  UIColor    *sliderBorderColor;
+@property ( nonatomic, assign, readonly)  UIColor    *sliderHandleBackgroundColor;
+@property ( nonatomic, assign, readonly)  UIColor    *sliderHandleTextColor;
 
-@property (class, nonatomic, assign, readonly)  UIFont     *sliderTextIPadFont;
-@property (class, nonatomic, assign, readonly)  UIFont     *sliderTextIPhoneFont;
+@property ( nonatomic, assign, readonly)  UIFont     *sliderTextIPadFont;
+@property ( nonatomic, assign, readonly)  UIFont     *sliderTextIPhoneFont;
 
 //  Branding colors
-@property (class, readonly)                     UIColor     *loginBackgroundColor;
-@property (class, readonly)                     UIColor     *loginFieldBorderColor;
-@property (class, readonly)                     UIColor     *loginFieldBackgroundColor;
-@property (class, readonly)                     UIColor     *loginFieldTextColor;
-@property (class, readonly)                     UIColor     *loginButtonColor;
-@property (class, readonly)                     CGFloat     loginFieldTextFontSize;
-@property (class, readonly)                     UIColor     *homeIconColor;
-@property (class, readonly)                     UIColor     *homeLineColor;
-@property (class, readonly)                     UIColor     *homeFontName;
-@property (class, readonly)                     UIColor     *homeTextColor;
-@property (class, readonly)                     UIColor     *homeSelectedColor;
-@property (class, readonly)                     UIColor     *callMeHeaderTextColor;
-@property (class, readonly)                     UIColor     *callMeLabelTextColor;
-@property (class, readonly)                     UIColor     *callMeFontName;
-@property (class, readonly)                     UIColor     *callMeHintTextColor;
-@property (class, readonly)                     UIColor     *callMeButtonTextColor;
-@property (class, readonly)                     UIColor     *callMeButtonBackgroundColor;
-@property (class, readonly)                     UIColor     *ratingHeaderTextColor;
-@property (class, readonly)                     UIColor     *ratingLabelTextColor;
-@property (class, readonly)                     UIColor     *ratingFontName;
-@property (class, readonly)                     UIColor     *ratingHintTextColor;
-@property (class, readonly)                     UIColor     *ratingButtonTextColor;
-@property (class, readonly)                     UIColor     *ratingButtonBackgroundColor;
-@property (class, readonly)                     UIColor     *chatRefidTextColor;
-@property (class, readonly)                     UIColor     *chatFontName;
-@property (class, readonly)                     UIColor     *chatNavBarColor;
-@property (class, readonly)                     UIColor     *chatSendButtonEnabledColor;
-@property (class, readonly)                     UIColor     *chatSendButtonDisabledColor;
-@property (class, readonly)                     UIColor     *chatTimeStampColor;
-@property (class, readonly)                     UIColor     *chatActionButtonTextColor;
-@property (class, readonly)                     UIColor     *chatActionButtonSelectedTextColor;
-@property (class, readonly)                     UIColor     *chatActionButtonBorderColor;
-@property (class, readonly)                     UIColor     *chatIconColor;
-@property (class, readonly)                     CGFloat     chatAttachmentIconHeight;
-@property (class, readonly)                     UIColor     *kbFolderNameTextColor;
-@property (class, readonly)                     UIColor     *kbFolderL0BackgroundColor;
-@property (class, readonly)                     UIColor     *kbFontName;
-@property (class, readonly)                     UIColor     *kbTextColor;
+@property (strong, nonatomic, nullable, readonly)                     UIColor     *navigationBarColor;
+@property ( readonly)                     UIColor     *iconColor;
+@property ( readonly)                     UIColor     *buttonColor;
+@property ( readonly)                     UIColor     *lineColor;
+@property ( readonly)                     UIColor     *textColor;
+@property (strong, nonatomic, nullable, readonly)                     UIColor     *loginBackgroundColor;
+@property ( readonly)                     UIColor     *loginFieldBorderColor;
+@property ( readonly)                     UIColor     *loginFieldBackgroundColor;
+@property ( readonly)                     UIColor     *loginFieldTextColor;
+@property ( readonly)                     UIColor     *loginButtonColor;
+@property ( readonly)                     CGFloat     loginFieldTextFontSize;
+@property ( readonly)                     UIColor     *homeIconColor;
+@property ( readonly)                     UIColor     *homeLineColor;
+@property ( readonly)                     NSString    *homeFontName;
+@property ( readonly)                     UIColor     *homeTextColor;
+@property ( readonly)                     UIColor     *homeSelectedColor;
+@property ( readonly)                     UIColor     *callMeHeaderTextColor;
+@property ( readonly)                     UIColor     *callMeLabelTextColor;
+@property ( readonly)                     NSString    *callMeFontName;
+@property ( readonly)                     UIColor     *callMeHintTextColor;
+@property ( readonly)                     UIColor     *callMeButtonTextColor;
+@property ( readonly)                     UIColor     *callMeButtonBackgroundColor;
+@property ( readonly)                     UIColor     *ratingHeaderTextColor;
+@property ( readonly)                     UIColor     *ratingLabelTextColor;
+@property ( readonly)                     NSString    *ratingFontName;
+@property ( readonly)                     UIColor     *ratingHintTextColor;
+@property ( readonly)                     UIColor     *ratingButtonTextColor;
+@property ( readonly)                     UIColor     *ratingButtonBackgroundColor;
+@property ( readonly)                     UIColor     *chatRefidTextColor;
+@property ( readonly)                     NSString    *chatFontName;
+@property ( readonly)                     UIColor     *chatNavBarColor;
+@property ( readonly)                     UIColor     *chatSendButtonEnabledColor;
+@property ( readonly)                     UIColor     *chatSendButtonDisabledColor;
+@property ( readonly)                     UIColor     *chatTimeStampColor;
+@property ( readonly)                     UIColor     *chatActionButtonTextColor;
+@property ( readonly)                     UIColor     *chatActionButtonSelectedTextColor;
+@property ( readonly)                     UIColor     *chatActionButtonBorderColor;
+@property ( readonly)                     UIColor     *chatIconColor;
+@property ( readonly)                     CGFloat     chatAttachmentIconHeight;
+@property ( readonly)                     UIColor     *kbFolderNameTextColor;
+@property ( readonly)                     UIColor     *kbFolderL0BackgroundColor;
+@property ( readonly)                     NSString    *kbFontName;
+@property ( readonly)                     UIColor     *kbTextColor;
+@property ( readonly)                     UIColor     *menuBorderColor;
 
-@property (class, nonatomic, assign)            UIImage     *kbFolderIcon;
-@property (class, nonatomic, assign)            UIImage     *chatAttachmentButtonImage;
-@property (class, nonatomic, assign)            UIImage     *chatSendButtonImage;
+@property ( readonly)                     NSString    *chatMenuText;
+@property ( readonly)                     UIImage     *chatMenuIcon;
+@property ( readonly)                     NSString     *callMeMenuText;
+@property ( readonly)                     UIImage     *callMeMenuIcon;
+@property ( readonly)                     NSString     *knowledgeMenuText;
+@property ( readonly)                     UIImage     *knowledgeMenuIcon;
+@property ( readonly)                     NSString     *webMenuText;
+@property ( readonly)                     UIImage     *webMenuIcon;
+@property ( readonly)                     NSString     *emailMenuText;
+@property ( readonly)                     UIImage     *emailMenuIcon;
+@property ( readonly)                     NSString     *phoneMenuText;
+@property ( readonly)                     UIImage     *phoneMenuIcon;
+@property ( readonly)                     NSString     *formsMenuText;
+@property ( readonly)                     UIImage     *formsMenuIcon;
+@property ( readonly)                     NSString     *historyMenuText;
+@property ( readonly)                     UIImage     *historyMenuIcon;
+@property ( readonly)                     NSString     *exitMenuText;
+@property ( readonly)                     UIImage     *exitMenuIcon;
 
 
-+ (void) configure;
-+ (void) handleTraits:(UITraitCollection *)traitCollection;
-+ (void) setup;
+@property ( nonatomic, assign)            UIImage     *kbFolderIcon;
+@property ( nonatomic, assign)            UIImage     *chatAttachmentButtonImage;
+@property ( nonatomic, assign)            UIImage     *chatSendButtonImage;
 
-+ (void) setIconColor:(NSInteger)colorValue;
-+ (void) setTextColor:(NSInteger)colorValue;
-+ (void) setDisabledColor:(NSInteger)colorValue;
-+ (void) setBackgroundColor:(NSInteger)colorValue;
-+ (void) setBorderColor:(NSInteger)colorValue;
 
-+ (NSDictionary *) menuConfiguration;
-+ (void) setMenuConfiguration:(NSDictionary *)menuConfiguration;
+- (void)            configure;
+- (NSError *)       configureWithJSON:(NSString *)jsonString;
+- (UIColor *)       getColor:(NSUInteger)color;
+- (NSString *)      getJSONFromFile:(NSString *)filename;
+- (void)            handleTraits:(UITraitCollection *)traitCollection;
+- (void)            setup;
+
++ (UIColor *) navigationBarColor;
+
+- (BOOL) hasMenuBorder;
 
 @end
 

@@ -19,6 +19,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "BTConnectIssue.h"
+#import "Appearance.h"
 
 @class CLLocationManager;
 @class SupportButton;
@@ -79,6 +80,7 @@ extern NSString  *const _Nonnull kUserPhone;
 
 @interface Support : NSObject
 
+@property (strong, nonatomic, nullable) Appearance  *appearance;
 @property (strong, nonatomic, nullable) NSString    *sdkName;
 @property (strong, nonatomic, nullable) NSString    *endpoint;
 @property (strong, nonatomic, nullable) NSString    *supportSDKVersion;

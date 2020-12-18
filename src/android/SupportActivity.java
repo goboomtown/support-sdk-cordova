@@ -65,6 +65,7 @@ public class SupportActivity extends AppCompatActivity
     private int           mFragmentContainerId;
     private View          mMenuView = null;
     private SupportButton.MenuStyle     desiredMenuType = SupportButton.MenuStyle.ICON_LIST_EXIT;
+    private String        mAppearanceJSON = null;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,8 +111,13 @@ public class SupportActivity extends AppCompatActivity
         mSupportButton.setVisibility(View.GONE);
         mSupportButton.setListener(this);
 
-        mSupportButton.appearance.setIconColor(Color.RED);
-        mSupportButton.appearance.setTextColor(Color.BLACK);
+        // mSupportButton.appearance.setIconColor(Color.RED);
+        // mSupportButton.appearance.setTextColor(Color.BLACK);
+
+        mAppearanceJSON = getIntent().getStringExtra("appearanceJSON");
+        if ( mAppearanceJSON != null ) {
+          mSupportButton.appearance.configureFromJSON(mAppearanceJSON);
+        }
 
         String json = getIntent().getStringExtra("JSON");
         String desiredMenuString = getIntent().getStringExtra("desiredMenuString");
@@ -205,6 +211,7 @@ public void onBackPressed() {
         if ( count == 1 ) {
             hideActionBar();
             mFragmentContainer.setVisibility(View.GONE);
+            mSupportButton.click();
             // setTitle(getString(R.string.app_name));
         }
         count = getSupportFragmentManager().getBackStackEntryCount();
@@ -265,6 +272,11 @@ private void hideActionBar() {
     public void supportButtonDidFailToGetSettings() {
       toast("Unable to retrieve settings");
     }
+
+    @Override
+     public void supportButtonDidCompleteTask() {
+         mSupportButton.click();
+     }
 
 
     @Override

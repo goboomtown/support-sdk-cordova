@@ -7,11 +7,13 @@
 @property (strong, nonatomic, nullable) UIView          *displayedView;
 @property (strong)                      NSString*       delegateCallbackId;
 @property                               BOOL            isConfigured;
+@property                               BOOL            isViewConfigured;
 @property                               BOOL            isButtonVisible;
 @property                               NSInteger       desiredMenuType;
+@property (strong, nonatomic, nullable) NSString        *supportJSON;
+@property (strong, nonatomic, nullable) NSString        *appearanceJSON;
 
 @end
-
 
 @implementation SupportSDK
 
@@ -20,18 +22,53 @@
 
 - (void)pluginInitialize
 {
-    [self initSupportButton];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishLaunching:) name:UIApplicationDidFinishLaunchingNotification object:nil];
+  [self initSupportButton];
 }
 
+- (void)finishLaunching:(NSNotification *)notification
+{
+// Put here the code that should be on the AppDelegate.m
+}
 
 - (void) initSupportButton
 {
     self.supportButton = [[SupportButton alloc] initWithFrame:CGRectMake(0,0,50,50)];
     self.supportButton.delegate = self;
-    [Appearance setIconColor:0xff0000];
-    [Appearance setTextColor:0x000000];
+    // [Appearance setIconColor:0xff0000];
+    // [Appearance setTextColor:0x000000];
+    // NSString *appearanceConfig = [self getContentsOfFile:@"ui.json"];
+    // [self getDefaults];
 }
 
+
+
+- (NSString *) getContentsOfFile:(NSString *)file
+{
+    NSString *contents;
+    NSURL* fileURL = [NSURL URLWithString:file];
+    NSString* filePath = [self.commandDelegate pathForResource:[fileURL path]];
+    if ( filePath ) {
+        NSURL* url = [NSURL fileURLWithPath:filePath];
+        NSError *error;
+
+        contents = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&error];
+    }
+    return contents;
+}
+
+// - (NSString *) getDefaults
+// {
+//     // get a URL reference (PREFERRED)
+//     NSURL *myURL = [[NSBundle mainBundle] URLForResource:@"default_appearance" withExtension:@"json"];
+//
+//     // read the file from a URL (PREFERRED)
+//     NSError *error = nil;
+//     NSString *jsonString = [[NSString alloc]initWithContentsOfURL:myURL encoding:NSUTF8StringEncoding error:&error];
+//     if ( !error ) {
+//         [self.supportButton configureWithJSON:jsonString];
+//     }
+// }
 
 - (void)onDomDelegateReady:(CDVInvokedUrlCommand*)command {
     CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
@@ -62,7 +99,8 @@
         NSData *data = [json dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
         if ( jsonDict ) {
-            BOOL loaded = [self.supportButton loadConfigurationJSON:json customerInfo:nil];
+          [self.supportButton reset];
+          BOOL loaded = [self.supportButton loadConfigurationJSON:json customerInfo:nil];
 
             if ( loaded ) {
                 msg = @"Configuration read successfully.";
@@ -85,9 +123,96 @@
 }
 
 
+- (void) loadConfigurationWithAppearance:(CDVInvokedUrlCommand*)command
+{
+  // [self fixViewController];
+  [self.commandDelegate runInBackground:^{
+    NSString *msg = @"";
+    self.delegateCallbackId = command.callbackId;
+    CDVPluginResult* pluginResult = nil;
+    NSString* json = [command.arguments objectAtIndex:0];
+    if (json == nil || [json length] == 0) {
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+    } else {
+      self.supportJSON = json;
+      self.desiredMenuType = -1;
+      if ( command.arguments.count > 1 ) {
+          NSString* uiJSON = [command.arguments objectAtIndex:1];
+          if ( [uiJSON isKindOfClass:[NSString class]] ) {
+              self.appearanceJSON = uiJSON;
+              if ( self.appearanceJSON && [self.appearanceJSON length]>0 ) {
+                  [self.supportButton configureWithJSON:self.appearanceJSON];
+              }
+          }
+      }
+
+      if ( command.arguments.count > 2 ) {
+          NSString* menuTypeString = [command.arguments objectAtIndex:2];
+          self.desiredMenuType = [menuTypeString integerValue];
+      }
+
+        NSError *error;
+        NSData *data = [self.supportJSON dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+        if ( jsonDict ) {
+            // if ( self.isConfigured ) {
+            //     dispatch_async(dispatch_get_main_queue(), ^{
+            //         [self supportButtonDidGetSettings:self.supportButton];
+            //     });
+            // } else {
+            [self.supportButton reset];
+                BOOL loaded = [self.supportButton loadConfigurationJSON:self.supportJSON customerInfo:nil];
+
+                if ( loaded ) {
+                    msg = @"Configuration read successfully.";
+                } else {
+                    msg = @"Unable to read configuration.";
+                }
+            // }
+
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+                                             messageAsString:msg];
+        } else {
+            msg = [NSString stringWithFormat:@"Unable to read configuration: %@", error.userInfo[@"NSDebugDescription"]];
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                             messageAsString:msg];
+        }
+    }
+
+    [pluginResult setKeepCallbackAsBool:true];
+    [self.commandDelegate sendPluginResult:pluginResult
+                                callbackId:command.callbackId];
+  }];
+}
+
+
 - (void) initiateBoomtown:(CDVInvokedUrlCommand*)command
 {
     [self loadConfigurationFromJSON:command];
+}
+
+
+- (void) initiateBoomtownWithAppearance:(CDVInvokedUrlCommand*)command
+{
+    [self loadConfigurationWithAppearance:command];
+}
+
+
+- (void) configureAppearance:(CDVInvokedUrlCommand*)command
+{
+    if ( command.arguments.count > 0 ) {
+        self.appearanceJSON = [command.arguments objectAtIndex:0];
+    }
+    CDVPluginResult* pluginResult;
+    if ( self.appearanceJSON ) {
+        [self.supportButton configureWithJSON:self.appearanceJSON];
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+                                         messageAsString:@""];
+    } else {
+      pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+    }
+    [self.commandDelegate sendPluginResult:pluginResult
+                            callbackId:command.callbackId];
 }
 
 
@@ -227,8 +352,9 @@
       supportButton.frame = buttonFrame;
       [self.viewController.view addSubview:supportButton];
   } else {
-      supportButton.menuStyle = IconList;
-      // [supportButton click];
+      supportButton.menuStyle = self.desiredMenuType; // IconList;
+      [supportButton click];
+
   }
 }
 

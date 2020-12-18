@@ -7,14 +7,14 @@
 //
 
 #import "ViewController.h"
-#import "SupportSDK.h"
+// #import "SupportSDK.h"
 
 
-@interface ViewController ()
-
-@property   SupportSDK  *supportSDKPlugin;
-
-@end
+// @interface ViewController ()
+//
+// @property   SupportSDK  *supportSDKPlugin;
+//
+// @end
 
 @implementation ViewController
 
@@ -25,20 +25,20 @@
 }
 
 
-- (void)registerPlugin:(CDVPlugin*)plugin withClassName:(NSString*)className
-{
-    [super registerPlugin:plugin withClassName:className];
-    if ( [plugin isKindOfClass:[SupportSDK class]] ) {
-        self.supportSDKPlugin = (SupportSDK *)plugin;
-    }
-}
-
-- (void)registerPlugin:(CDVPlugin*)plugin withPluginName:(NSString*)pluginName
-{
-    [super registerPlugin:plugin withPluginName:pluginName];
-    if ( [plugin isKindOfClass:[SupportSDK class]] ) {
-        self.supportSDKPlugin = (SupportSDK *)plugin;
-    }
-}
+// - (void)registerPlugin:(CDVPlugin*)plugin withClassName:(NSString*)className
+// {
+//     [super registerPlugin:plugin withClassName:className];
+//     if ( [plugin isKindOfClass:[SupportSDK class]] ) {
+//         self.supportSDKPlugin = (SupportSDK *)plugin;
+//     }
+// }
+//
+// - (void)registerPlugin:(CDVPlugin*)plugin withPluginName:(NSString*)pluginName
+// {
+//     [super registerPlugin:plugin withPluginName:pluginName];
+//     if ( [plugin isKindOfClass:[SupportSDK class]] ) {
+//         self.supportSDKPlugin = (SupportSDK *)plugin;
+//     }
+// }
 
 @end
