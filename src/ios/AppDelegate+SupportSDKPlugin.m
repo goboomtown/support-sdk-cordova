@@ -12,7 +12,6 @@
 @implementation AppDelegate (SupportSDKPlugin)
 
 
-
 /**
  * This is main kick off after the app inits, the views and Settings are setup here. (preferred - iOS4 and up)
  */

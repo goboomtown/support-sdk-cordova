@@ -92,7 +92,8 @@
       self.desiredMenuType = -1;
       if ( command.arguments.count > 1 ) {
           NSString* menuTypeString = [command.arguments objectAtIndex:1];
-          self.desiredMenuType = [menuTypeString integerValue];
+          // self.desiredMenuType = [menuTypeString integerValue];
+          [self getMenuType:menuTypeString];
       }
 
         NSError *error;
@@ -122,6 +123,18 @@
   }];
 }
 
+- (void) getMenuType:(id)menuType
+{
+    if ( [menuType isKindOfClass:[NSNumber class]] ) {
+        NSNumber *number = (NSNumber *) menuType;
+        self.desiredMenuType = [menuType intValue];
+    } else if ( [menuType isKindOfClass:[NSString class]] ) {
+        NSString *string = (NSString *) menuType;
+        self.desiredMenuType = [string integerValue];
+    } else {
+        self.desiredMenuType = Menu;
+    }
+}
 
 - (void) loadConfigurationWithAppearance:(CDVInvokedUrlCommand*)command
 {
@@ -148,7 +161,8 @@
 
       if ( command.arguments.count > 2 ) {
           NSString* menuTypeString = [command.arguments objectAtIndex:2];
-          self.desiredMenuType = [menuTypeString integerValue];
+          // self.desiredMenuType = [menuTypeString integerValue];
+          [self getMenuType:menuTypeString];
       }
 
         NSError *error;
@@ -195,6 +209,27 @@
 - (void) initiateBoomtownWithAppearance:(CDVInvokedUrlCommand*)command
 {
     [self loadConfigurationWithAppearance:command];
+}
+
+
+- (void) displayMenu:(CDVInvokedUrlCommand*)command
+{
+    if ( command.arguments.count > 0 ) {
+        NSString* menuTypeString = [command.arguments objectAtIndex:0];
+        // self.desiredMenuType = [menuTypeString integerValue];
+        [self getMenuType:menuTypeString];
+    }
+    CDVPluginResult* pluginResult;
+    if ( self.isConfigured ) {
+        self.supportButton.menuStyle = self.desiredMenuType == -1 ? IconListExit : self.desiredMenuType; //Menu;
+        [self.supportButton click];
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+                                         messageAsString:@""];
+    } else {
+      pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+    }
+    [self.commandDelegate sendPluginResult:pluginResult
+                            callbackId:command.callbackId];
 }
 
 
@@ -356,26 +391,6 @@
       [supportButton click];
 
   }
-}
-
-
-- (void) displayMenu:(CDVInvokedUrlCommand*)command
-{
-    if ( command.arguments.count > 0 ) {
-        NSString* menuTypeString = [command.arguments objectAtIndex:0];
-        self.desiredMenuType = [menuTypeString integerValue];
-    }
-    CDVPluginResult* pluginResult;
-    if ( self.isConfigured ) {
-        self.supportButton.menuStyle = self.desiredMenuType == -1 ? IconListExit : self.desiredMenuType; //Menu;
-        [self.supportButton click];
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
-                                         messageAsString:@""];
-    } else {
-      pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
-    }
-    [self.commandDelegate sendPluginResult:pluginResult
-                            callbackId:command.callbackId];
 }
 
 

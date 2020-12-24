@@ -95,7 +95,6 @@
       <source-file src="src/ios/frameworks/AFNetworking.framework" target-dir="lib" framework="true" />
       <source-file src="src/ios/frameworks/CocoaAsyncSocket.framework" target-dir="lib" framework="true" />
       <source-file src="src/ios/frameworks/CocoaLumberjack.framework" target-dir="lib" framework="true" />
-      <source-file src="src/ios/frameworks/CocoaLumberjackSwift.framework" target-dir="lib" framework="true" />
       <source-file src="src/ios/frameworks/KissXML.framework" target-dir="lib" framework="true" />
       <source-file src="src/ios/frameworks/libidn.framework" target-dir="lib" framework="true" />
       <source-file src="src/ios/frameworks/MTBBarcodeScanner.framework" target-dir="lib" framework="true" />
@@ -103,12 +102,10 @@
       <source-file src="src/ios/frameworks/SVProgressHUD.framework" target-dir="lib" framework="true" />
       <source-file src="src/ios/frameworks/TwilioVideo.framework" target-dir="lib" framework="true" />
       <source-file src="src/ios/frameworks/XMPPFramework.framework" target-dir="lib" framework="true" />
-      <source-file src="src/ios/frameworks/XMPPFrameworkSwift.framework" target-dir="lib" framework="true" />
 
       <framework src="src/ios/frameworks/AFNetworking.framework" embed="true" custom="true" />
       <framework src="src/ios/frameworks/CocoaAsyncSocket.framework" embed="true" custom="true" />
       <framework src="src/ios/frameworks/CocoaLumberjack.framework" embed="true" custom="true" />
-      <framework src="src/ios/frameworks/CocoaLumberjackSwift.framework" embed="true" custom="true" />
       <framework src="src/ios/frameworks/KissXML.framework" embed="true" custom="true" />
       <framework src="src/ios/frameworks/libidn.framework" embed="true" custom="true" />
       <framework src="src/ios/frameworks/MTBBarcodeScanner.framework" embed="true" custom="true" />
@@ -116,7 +113,6 @@
       <framework src="src/ios/frameworks/SVProgressHUD.framework" embed="true" custom="true" />
       <framework src="src/ios/frameworks/TwilioVideo.framework" embed="true" custom="true" />
       <framework src="src/ios/frameworks/XMPPFramework.framework" embed="true" custom="true" />
-      <framework src="src/ios/frameworks/XMPPFrameworkSwift.framework" embed="true" custom="true" />
 
     </platform>
 </plugin>

@@ -13,7 +13,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface AppDelegate (supportSDKPlugin)
+@interface AppDelegate (SupportSDKPlugin)
 
 
 // @property (strong, nonatomic, nullable) ViewController *btViewController;
