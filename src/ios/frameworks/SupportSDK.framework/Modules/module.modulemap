@@ -1,0 +1,6 @@
+framework module SupportSDK {
+  umbrella header "SupportSDK.h"
+
+  export *
+  module * { export * }
+}
