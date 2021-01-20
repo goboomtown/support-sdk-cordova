@@ -1,4 +1,25 @@
 {
+    "navigationBarAppearance":
+    {
+        "textColor": "#f2f2f2",
+        "backgroundColor": "#ffffff",
+        "iconColor": "#000000"
+    },
+    "menuAppearance":
+    {
+        "heading": "Support",
+        "textSize": "20",
+        "textStyle": "bold",
+        "borderWidth": "1",
+        "padding": "5",
+        "spacing": "20",
+        "textColor": "#000000",
+        "iconColor": "#EF5E0D",
+        "borderColor": "#E0E0E0",
+        "textColorDark": "#ffffff",
+        "iconColorDark": "#EF5E0D",
+        "borderColorDark": "#E0E0E0"
+    },
     "menu":
     {
         "chat": {
@@ -85,5 +106,31 @@
         "kbFolderL0BackgroundColor": "#F3F8F8",
         "kbTextColor": "#303030",
         "menuBorderColor": "#E0E0E0"
+    },
+    "formAppearance":
+    {
+        "cancelButtonText": "Cancel",
+        "saveButtonText": "Save",
+        "label":
+        {
+            "textStyle": "bold",
+            "textSize": "20",
+            "textColor": "#000000",
+            "textColorDark": "#ffffff",
+            "requiredTextColor": "#000000",
+            "requiredTextColorDark": "#ffffff",
+            "requiredIndicatorColor": "#cc0000",
+            "requiredIndicatorColorDark": "#cc0000"
+       },
+        "entry":
+        {
+            "textStyle": "bold",
+            "textSize": "20",
+            "textColor": "#000000",
+            "textColorDark": "#ffffff",
+            "borderColor": "#000000",
+            "borderColorDark": "#ffffff",
+            "borderWidth": "1"
+        }
     }
 }

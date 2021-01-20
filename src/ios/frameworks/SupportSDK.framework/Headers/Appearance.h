@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property ( nonatomic, assign)            UIColor    *darkTextColor;
 @property ( nonatomic, assign)            UIColor    *lightTextColor;
 @property ( nonatomic, assign)            UIColor    *badgeBackgroundColor;
-@property (strong, nonatomic, nullable)            UIColor    *navigationBarBackgroundColor;
+//@property (strong, nonatomic, nullable)            UIColor    *navigationBarBackgroundColor;
 
 
 @property (strong, nonatomic, nullable)            UIColor    *homeBackgroundColor;
@@ -101,7 +101,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property ( readonly)                     UIColor     *kbFolderL0BackgroundColor;
 @property ( readonly)                     NSString    *kbFontName;
 @property ( readonly)                     UIColor     *kbTextColor;
-@property ( readonly)                     UIColor     *menuBorderColor;
 
 @property ( readonly)                     NSString    *chatMenuText;
 @property ( readonly)                     UIImage     *chatMenuIcon;
@@ -122,6 +121,38 @@ NS_ASSUME_NONNULL_BEGIN
 @property ( readonly)                     NSString     *exitMenuText;
 @property ( readonly)                     UIImage     *exitMenuIcon;
 
+
+@property ( readonly)                     UIColor *navigationBarTextColor;
+@property ( readonly)                     UIColor *navigationBarBackgroundColor;
+@property ( readonly)                     UIColor *navigationBarIconColor;
+
+@property ( readonly)                     NSString  *menuHeading;
+@property ( readonly)                     CGFloat   menuTextSize;
+@property ( readonly)                     NSString  *menuTextStyle;
+@property ( readonly)                     UIColor   *menuTextColor;
+@property ( readonly)                     UIColor   *menuIconColor;
+@property ( readonly)                     UIColor   *menuBorderColor;
+@property ( readonly)                     CGFloat   menuBorderWidth;
+@property ( readonly)                     CGFloat   menuPadding;
+@property ( readonly)                     CGFloat   menuSpacing;
+
+@property ( readonly)                     NSString  *formCancelButtonText;
+@property ( readonly)                     NSString  *formSaveButtonText;
+@property ( readonly)                     UIColor   *formEntryBorderColor;
+@property ( readonly)                     UIColor   *formEntryBorderColorDark;
+@property ( readonly)                     CGFloat   formEntryBorderWidth;
+@property ( readonly)                     UIColor   *formEntryTextColor;
+@property ( readonly)                     UIColor   *formEntryTextColorDark;
+@property ( readonly)                     CGFloat   formEntryTextSize;
+@property ( readonly)                     NSString  *formEntryTextStyle;
+@property ( readonly)                     UIColor   *formLabelRequiredIndicatorColor;
+@property ( readonly)                     UIColor   *formLabelRequiredIndicatorColorDark;
+@property ( readonly)                     UIColor   *formLabelRequiredTextColor;
+@property ( readonly)                     UIColor   *formLabelRequiredTextColorDark;
+@property ( readonly)                     UIColor   *formLabelTextColor;
+@property ( readonly)                     UIColor   *formLabelTextColorDark;
+@property ( readonly)                     CGFloat   formLabelTextSize;
+@property ( readonly)                     NSString  *formLabelTextStyle;
 
 @property ( nonatomic, assign)            UIImage     *kbFolderIcon;
 @property ( nonatomic, assign)            UIImage     *chatAttachmentButtonImage;

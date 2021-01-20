@@ -131,7 +131,7 @@ IB_DESIGNABLE
  
  @param     appearanceJSON
  */
-- (void) configureWithJSON:(NSString *_Nullable) appearanceJSON;
+- (NSError * _Nullable) configureWithJSON:(NSString *_Nullable) appearanceJSON;
 
 
 /**
