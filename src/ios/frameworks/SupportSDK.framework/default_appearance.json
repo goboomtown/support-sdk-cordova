@@ -11,8 +11,8 @@
         "textSize": "20",
         "textStyle": "bold",
         "borderWidth": "1",
-        "padding": "5",
-        "spacing": "20",
+        "padding": "10",
+        "spacing": "50",
         "textColor": "#000000",
         "iconColor": "#EF5E0D",
         "borderColor": "#E0E0E0",
@@ -74,7 +74,6 @@
     },
     "colors":
     {
-        "navigationBarColor": "#f2f2f2",
         "iconColor": "#EF5E0D",
         "buttonColor": "#EF5E0D",
         "lineColor": "#E0E0E0",

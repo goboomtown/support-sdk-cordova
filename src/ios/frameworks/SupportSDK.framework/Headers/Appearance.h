@@ -58,7 +58,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property ( nonatomic, assign, readonly)  UIFont     *sliderTextIPhoneFont;
 
 //  Branding colors
-@property (strong, nonatomic, nullable, readonly)                     UIColor     *navigationBarColor;
 @property ( readonly)                     UIColor     *iconColor;
 @property ( readonly)                     UIColor     *buttonColor;
 @property ( readonly)                     UIColor     *lineColor;
@@ -166,7 +165,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)            handleTraits:(UITraitCollection *)traitCollection;
 - (void)            setup;
 
-+ (UIColor *) navigationBarColor;
 
 - (BOOL) hasMenuBorder;
 
