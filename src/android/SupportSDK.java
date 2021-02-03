@@ -66,6 +66,7 @@ public class SupportSDK extends CordovaPlugin
   private Integer         desiredMenuType = -1;
   private String          mJSON = null;
   private String          mDesiredMenuString = "";
+  private String          mCustomerJSON = "";
   private String          mAppearanceJSON = "";
   // private SupportView     mSupportView = null;
 
@@ -129,6 +130,10 @@ public class SupportSDK extends CordovaPlugin
     }
     else if ("initiateBoomtownWithAppearance".equals(action)) {
       initiateBoomtownWithAppearance(args.getString(0), args.getString(1), args.getString(2), callbackContext);
+      return true;
+    }
+    else if ("initiateBoomtownWithCustomerAndAppearance".equals(action)) {
+      initiateBoomtownWithCustomerAndAppearance(args.getString(0), args.getString(1), args.getString(2), args.getString(3), callbackContext);
       return true;
     }
     else if ("displayMenu".equals(action)) {
@@ -196,9 +201,44 @@ public class SupportSDK extends CordovaPlugin
     }
   }
 
+  private void loadConfigurationWithCustomerAndAppearance(String json, String customerJSON, String uiJSON, String desiredMenuString, CallbackContext callbackContext) {
+    if ( mJSON == null && (json == null || json.length() == 0)  ) {
+        // callbackContext.error("No configuration provided.");
+      PluginResult result = new PluginResult(PluginResult.Status.ERROR, "No configuration provided." );
+      result.setKeepCallback(true);
+      callbackContext.sendPluginResult(result);
+    } else {
+      mJSON = json;
+      mCustomerJSON = customerJSON;
+      mAppearanceJSON = uiJSON;
+
+      mDesiredMenuString = desiredMenuString;
+      // mSupportView = new SupportView(mContext, mResources, mPackageName);
+      Intent intent = new Intent(cordovaActivity, SupportActivity.class);
+      if ( intent != null ) {
+        intent.putExtra("JSON", mJSON);
+        if ( mCustomerJSON != null ) {
+          intent.putExtra("customerJSON", mCustomerJSON);
+        }
+        if ( mAppearanceJSON != null ) {
+          intent.putExtra("appearanceJSON", mAppearanceJSON);
+        }
+
+        if ( desiredMenuString != null ) {
+          intent.putExtra("desiredMenuString", desiredMenuString);
+        }
+        cordovaActivity.startActivityForResult(intent, 999);
+      }
+      // mSupportButton.loadConfiguration(json, null);
+    }
+  }
 
   private void initiateBoomtownWithAppearance(String json,  String uiJSON, String desiredMenuString, CallbackContext callbackContext) {
     loadConfigurationWithAppearance(json, uiJSON, desiredMenuString, callbackContext);
+  }
+
+  private void initiateBoomtownWithCustomerAndAppearance(String json,  String customerJSON, String uiJSON, String desiredMenuString, CallbackContext callbackContext) {
+    loadConfigurationWithCustomerAndAppearance(json, customerJSON, uiJSON, desiredMenuString, callbackContext);
   }
 
   private void configureAppearance(String appearanceJSON, CallbackContext callbackContext) {
@@ -297,6 +337,16 @@ public class SupportSDK extends CordovaPlugin
     result.setKeepCallback(false);
     callback.sendPluginResult(result);
   }
+
+  @Override
+  public void supportButtonDidRetrieveAccount(HashMap<String, String> accountInfo) {
+
+  }
+
+  @Override
+  public void supportButtonDidFailToRetrieveAccount(String message) {
+  }
+
 
   @Override
  public void supportButtonDidCompleteTask() {

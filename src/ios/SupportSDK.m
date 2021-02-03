@@ -11,7 +11,10 @@
 @property                               BOOL            isButtonVisible;
 @property                               NSInteger       desiredMenuType;
 @property (strong, nonatomic, nullable) NSString        *supportJSON;
+@property (strong, nonatomic, nullable) NSString        *customerJSON;
+@property (strong, nonatomic, nullable) NSDictionary    *customerInfo;
 @property (strong, nonatomic, nullable) NSString        *appearanceJSON;
+@property (strong, nonatomic, nullable) NSError         *lastError;
 
 @end
 
@@ -85,42 +88,46 @@
     NSString *msg = @"";
     self.delegateCallbackId = command.callbackId;
     CDVPluginResult* pluginResult = nil;
-    NSString* json = [command.arguments objectAtIndex:0];
-    if (json == nil || [json length] == 0) {
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+    self.supportJSON = [self jsonForArgument:[command.arguments objectAtIndex:0]];
+    if ( !self.supportJSON ) {
+        msg = [NSString stringWithFormat:@"Unable to read configuration: %@", self.lastError.userInfo[@"NSDebugDescription"]];
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                       messageAsString:msg];
     } else {
       self.desiredMenuType = -1;
       if ( command.arguments.count > 1 ) {
           NSString* menuTypeString = [command.arguments objectAtIndex:1];
-          // self.desiredMenuType = [menuTypeString integerValue];
           [self getMenuType:menuTypeString];
       }
-
-        NSError *error;
-        NSData *data = [json dataUsingEncoding:NSUTF8StringEncoding];
-        NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-        if ( jsonDict ) {
-          [self.supportButton reset];
-          BOOL loaded = [self.supportButton loadConfigurationJSON:json customerInfo:nil];
-
-            if ( loaded ) {
-                msg = @"Configuration read successfully.";
-            } else {
-                msg = @"Unable to read configuration.";
-            }
-            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
-                                             messageAsString:msg];
-        } else {
-            msg = [NSString stringWithFormat:@"Unable to read configuration: %@", error.userInfo[@"NSDebugDescription"]];
-            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
-                                             messageAsString:msg];
-        }
+      [self.supportButton reset];
+      BOOL loaded = [self.supportButton loadConfigurationJSON:self.supportJSON customerInfo:nil];
+      if ( loaded ) {
+          msg = @"Configuration read successfully.";
+      } else {
+          msg = @"Unable to read configuration.";
+      }
+      pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+                                       messageAsString:msg];
     }
 
     [pluginResult setKeepCallbackAsBool:true];
     [self.commandDelegate sendPluginResult:pluginResult
                                 callbackId:command.callbackId];
   }];
+}
+
+- (NSString *) jsonForArgument:(NSString *)arg
+{
+  NSError *error;
+  if (arg && [arg length]>0) {
+      NSData *data = [arg dataUsingEncoding:NSUTF8StringEncoding];
+      NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+      self.lastError = error;
+      if ( !error ) {
+        return arg;
+      }
+  }
+  return nil;
 }
 
 - (void) getMenuType:(id)menuType
@@ -199,6 +206,63 @@
   }];
 }
 
+- (void) loadConfigurationWithCustomerAndAppearance:(CDVInvokedUrlCommand*)command
+{
+  // [self fixViewController];
+  [self.commandDelegate runInBackground:^{
+    NSString *msg = @"";
+    self.delegateCallbackId = command.callbackId;
+    CDVPluginResult* pluginResult = nil;
+    self.supportJSON = [command.arguments objectAtIndex:0];
+    self.supportJSON = [self jsonForArgument:[command.arguments objectAtIndex:0]];
+    if ( !self.supportJSON ) {
+        msg = [NSString stringWithFormat:@"Unable to read configuration: %@", self.lastError.userInfo[@"NSDebugDescription"]];
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                       messageAsString:msg];
+    } else {
+      if ( command.arguments.count > 1 ) {
+        self.customerJSON = [self jsonForArgument:[command.arguments objectAtIndex:1]];
+        if ( self.customerJSON ) {
+            NSError *error;
+            NSData *data = [self.customerJSON dataUsingEncoding:NSUTF8StringEncoding];
+            self.customerInfo = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+            if ( error ) {
+                self.customerInfo = nil;
+            }
+        }
+      }
+
+      if ( command.arguments.count > 2 ) {
+        self.appearanceJSON = [self jsonForArgument:[command.arguments objectAtIndex:2]];
+        if ( self.appearanceJSON ) {
+          [self.supportButton configureWithJSON:self.appearanceJSON];
+        }
+      }
+
+      self.desiredMenuType = -1;
+      if ( command.arguments.count > 3 ) {
+          NSString* menuTypeString = [command.arguments objectAtIndex:3];
+          // self.desiredMenuType = [menuTypeString integerValue];
+          [self getMenuType:menuTypeString];
+      }
+      [self.supportButton reset];
+      BOOL loaded = [self.supportButton loadConfigurationJSON:self.supportJSON customerInfo:self.customerInfo];
+
+      if ( loaded ) {
+        msg = @"Configuration read successfully.";
+      } else {
+        msg = @"Unable to read configuration.";
+      }
+      pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+                                             messageAsString:msg];
+    }
+
+    [pluginResult setKeepCallbackAsBool:true];
+    [self.commandDelegate sendPluginResult:pluginResult
+                                callbackId:command.callbackId];
+  }];
+}
+
 
 - (void) initiateBoomtown:(CDVInvokedUrlCommand*)command
 {
@@ -209,6 +273,12 @@
 - (void) initiateBoomtownWithAppearance:(CDVInvokedUrlCommand*)command
 {
     [self loadConfigurationWithAppearance:command];
+}
+
+
+- (void) initiateBoomtownWithCustomerAndAppearance:(CDVInvokedUrlCommand*)command
+{
+    [self loadConfigurationWithCustomerAndAppearance:command];
 }
 
 

@@ -32,18 +32,21 @@ AndroidManifest.xml is automatically updated to use the new SupportActivity.
 
 ## 5. Initialization Methods
 
-There are two basic methods available to initiate the Support SDK:
+There are three basic methods available to initiate the Support SDK:
 
 ```
 supportsdk.initiateBoomtown(boomtownConfigJSON, desiredMenuType, success, failure);
 
 supportsdk.initiateBoomtownWithAppearance(boomtownConfigJSON, uiConfigJSON, desiredMenuType, success, failure);
 
+supportsdk.initiateBoomtownWithCustomerAndAppearance(boomtownConfigJSON, customerJSON, uiConfigJSON, desiredMenuType, success, failure);
+
 ```
 
 where:
 
 boomtownConfigJSON is a JSON string containing the server configuration
+customerJSON is a JSON string containing keys which identify the customer
 uiConfigJSON is a JSON string containing the appearance configuration
 
 
@@ -99,16 +102,38 @@ This file enables communication with the server and configures the available fea
 The second parameter of loadConfigurationFromJSON() is the desired menu type as per the following list:
 
 ```
-typedef enum MenuStyle : NSInteger {
-    NoMenu          = 0,
-    Menu            = 1,
-    Button          = 2,
-    IconList        = 3,
-    IconListExit    = 4
-} MenuStyle;
+NoMenu: 0,
+Menu: 1,
+Button: 2,
+IconList: 3,
+IconListExit: 4,
 ```
 
-## 9. Appearance Configuration
+## 9. Customer Configuration
+
+If desired, the customer may be identified by providing values for any of the following keys"
+
+```
+CustomerId : "members_id",
+CustomerExternalId: "members_external_id",
+CustomerLocationId: "members_locations_id",
+CustomerLocationExternalId: "members_locations_external_id",
+CustomerLocationMid: "members_locations_mid",
+UserId: "members_users_id",
+UserExternalId: "members_users_external_id",
+UserEmail: "members_users_email",
+UserPhone: "members_users_phone",
+```
+
+like this:
+
+```
+var customerJSON = {
+  "members_users_email": "email@example.com"
+};
+```
+
+## 10. Appearance Configuration
 
 Much of the application (menus, icons, and colors currently) can be configured using a JSON file as follows:
 

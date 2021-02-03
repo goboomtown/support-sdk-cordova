@@ -65,6 +65,7 @@ public class SupportActivity extends AppCompatActivity
     private int           mFragmentContainerId;
     private View          mMenuView = null;
     private SupportButton.MenuStyle     desiredMenuType = SupportButton.MenuStyle.ICON_LIST_EXIT;
+    private String        mCustomerJSON = null;
     private String        mAppearanceJSON = null;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +115,7 @@ public class SupportActivity extends AppCompatActivity
         // mSupportButton.appearance.setIconColor(Color.RED);
         // mSupportButton.appearance.setTextColor(Color.BLACK);
 
+        mCustomerJSON = getIntent().getStringExtra("customerJSON");
         mAppearanceJSON = getIntent().getStringExtra("appearanceJSON");
         if ( mAppearanceJSON != null ) {
           mSupportButton.appearance.configureFromJSON(mAppearanceJSON);
@@ -134,7 +136,7 @@ public class SupportActivity extends AppCompatActivity
 
         // int configResource = R.raw.support_sdk_preprod; // R.raw.support_sdk;
         // mSupportButton.loadConfiguration(configResource, null);
-        mSupportButton.loadConfiguration(json, null);
+        mSupportButton.loadConfiguration(json, mCustomerJSON);
 
         Map<String, String> myPubData = new HashMap<>();
         myPubData.put("public", "fooData");
@@ -271,6 +273,15 @@ private void hideActionBar() {
     @Override
     public void supportButtonDidFailToGetSettings() {
       toast("Unable to retrieve settings");
+    }
+
+    @Override
+    public void supportButtonDidRetrieveAccount(HashMap<String, String> accountInfo) {
+
+    }
+
+    @Override
+    public void supportButtonDidFailToRetrieveAccount(String message) {
     }
 
     @Override

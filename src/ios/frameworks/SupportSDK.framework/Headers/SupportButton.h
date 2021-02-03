@@ -144,7 +144,7 @@ IB_DESIGNABLE
  Load the Support SDK configuration from the provided JSON file in the app bundle
 
  @param     configFileName      the file name of the configuration file (i.e support_sdk.json)
- @param     customerId          an id (emai, MID, etc) to identify a customer
+ @param     customerId          an NSDictionary containing key/value id pairs (emai, MID, etc) to identify a customer
 
  @return    YES if configuration was successfully loaded, NO if not
  */
@@ -154,19 +154,40 @@ IB_DESIGNABLE
 /**
  Load the Support SDK configuration from the provided JSON string
 
- @param     json                the configuration information JSON
- @param     customerId          an id (emai, MID, etc) to identify a customer
+ @param     json                the configuration information JSON as a string
+ @param     customerId          an NSDictionary containing key/value id pairs (emai, MID, etc) to identify a customer
 
  @return    YES if configuration was successfully loaded, NO if not
  */
-- (BOOL) loadConfigurationJSON:(NSString *_Nonnull)json customerInfo:(NSDictionary *_Nullable)customerInfo;
+- (BOOL) loadConfigurationJSON:(NSString *_Nonnull)json customerInfo:(NSDictionary * _Nullable)customerInfo;
+
+
+/**
+ Load the Support SDK configuration from the provided JSON string
+
+ @param     json                the configuration information JSON
+ @param     customerInfoJson    an id (emai, MID, etc) to identify a customer
+
+ @return    YES if configuration was successfully loaded, NO if not
+ */
+
+- (BOOL) loadConfigurationJSON:(NSString * _Nonnull)json customerInfoJSON:(NSString * _Nullable)customerInfoJSON;
+
+
+/**
+Retrieve and load the desired customer into the Support SDK. This must me done after the settings have been retrieved
+
+@param     customerInformationJSON       a JSON string of possible keys (i.e. customer_email) and values (i.e. an email address)
+*/
+- (void) getCustomerWithJSON:(NSString * _Nullable)customerInfoJSON;
+
 
 /**
 Retrieve and load the desired customer into the Support SDK. This must me done after the settings have been retrieved
 
 @param     customerInformation       a dictionary of possible keys (i.e. customer_email) and values (i.e. an email address)
 */
-- (void) getCustomerWithInformation:(nullable NSDictionary *)customerInformation;
+- (void) getCustomerWithInformation:(NSDictionary * _Nullable)customerInformation;
 
 /**
  Customer information keys
