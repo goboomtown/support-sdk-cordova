@@ -15,6 +15,8 @@
 @property (strong, nonatomic, nullable) NSDictionary    *customerInfo;
 @property (strong, nonatomic, nullable) NSString        *appearanceJSON;
 @property (strong, nonatomic, nullable) NSError         *lastError;
+@property (strong, nonatomic, nullable) UINavigationController  *localNavigationController;
+@property                               BOOL            isViewControllerOnly;
 
 @end
 
@@ -36,12 +38,29 @@
 
 - (void) initSupportButton
 {
+  self.isViewControllerOnly = YES;
     self.supportButton = [[SupportButton alloc] initWithFrame:CGRectMake(0,0,50,50)];
     self.supportButton.delegate = self;
     // [Appearance setIconColor:0xff0000];
     // [Appearance setTextColor:0x000000];
     // NSString *appearanceConfig = [self getContentsOfFile:@"ui.json"];
     // [self getDefaults];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                         selector:@selector(handleNotifications:)
+                                             name:kSupportSDKNotification
+                                           object:nil];
+
+}
+
+
+-(void) handleNotifications:(NSNotification*)notification
+{
+    // NSString *eventRequest = [notification object];
+    // if ( [eventRequest isEqualToString:kEventChatStarted] ) {
+    // }
+    // CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:eventRequest];
+    // [result setKeepCallbackAsBool:YES];
+    // [self.commandDelegate sendPluginResult:result callbackId:self.delegateCallbackId];
 }
 
 
@@ -119,7 +138,7 @@
 - (NSString *) jsonForArgument:(NSString *)arg
 {
   NSError *error;
-  if (arg && [arg length]>0) {
+  if (arg && ![arg isKindOfClass:[NSNull class]] && [arg length]>0) {
       NSData *data = [arg dataUsingEncoding:NSUTF8StringEncoding];
       NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
       self.lastError = error;
@@ -221,6 +240,7 @@
                                        messageAsString:msg];
     } else {
       if ( command.arguments.count > 1 ) {
+        self.customerInfo = nil;
         self.customerJSON = [self jsonForArgument:[command.arguments objectAtIndex:1]];
         if ( self.customerJSON ) {
             NSError *error;
@@ -397,7 +417,11 @@
     if ( self.viewController.view.traitCollection.horizontalSizeClass != UIUserInterfaceSizeClassCompact )
     {
         // In this case the device is an iPad.
-        [self.viewController.navigationController presentViewController:alertController animated:YES completion:nil];
+        if ( self.isViewControllerOnly ) {
+          [self.viewController presentViewController:alertController animated:YES completion:nil];
+        } else {
+          [self.viewController.navigationController presentViewController:alertController animated:YES completion:nil];
+        }
         UIPopoverPresentationController *popPresenter = [alertController
                                                          popoverPresentationController];
         popPresenter.sourceView = supportButton;
@@ -406,7 +430,11 @@
     else
     {
         // In this case the device is an iPhone/iPod Touch.
-        [self.viewController.navigationController presentViewController:alertController animated:YES completion:nil];
+        if ( self.isViewControllerOnly ) {
+          [self.viewController presentViewController:alertController animated:YES completion:nil];
+        } else {
+          [self.viewController.navigationController presentViewController:alertController animated:YES completion:nil];
+        }
     }
   });
 }
@@ -414,9 +442,28 @@
 
 - (void) supportButton:(SupportButton *)supportButton displayViewController:(UIViewController *)viewController
 {
+
   dispatch_async(dispatch_get_main_queue(), ^{
+    if ( self.isViewControllerOnly ) {
+      UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Back", nil)
+                                                               style:UIBarButtonItemStylePlain
+                                                              target:self
+                                                              action:@selector(back:)];
+      self.localNavigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+      viewController.navigationItem.backBarButtonItem = backButton;
+      viewController.navigationItem.leftBarButtonItem = backButton;
+      self.localNavigationController.modalPresentationStyle = UIModalPresentationOverFullScreen;
+      [self.viewController presentViewController:self.localNavigationController animated:YES completion:nil];
+  } else {
     [self.viewController.navigationController pushViewController:viewController animated:NO];
+  }
   });
+}
+
+
+- (IBAction)back:(id)sender
+{
+    [self.localNavigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 
@@ -439,7 +486,7 @@
 {
   CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
                                    messageAsString:@"didGetSettings"];
-  [pluginResult setKeepCallbackAsBool:false];
+  [pluginResult setKeepCallbackAsBool:YES];
   if ( self.delegateCallbackId ) {
     [self.commandDelegate sendPluginResult:pluginResult
                               callbackId:self.delegateCallbackId];
@@ -468,7 +515,7 @@
 {
   CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
                                    messageAsString:@"didFailToGetSettingsWithError"];
-  [pluginResult setKeepCallbackAsBool:false];
+  [pluginResult setKeepCallbackAsBool:YES];
   if ( self.delegateCallbackId ) {
     [self.commandDelegate sendPluginResult:pluginResult
                               callbackId:self.delegateCallbackId];

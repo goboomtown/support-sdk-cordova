@@ -78,6 +78,7 @@
         "buttonColor": "#EF5E0D",
         "lineColor": "#E0E0E0",
         "textColor": "#4F4F4F",
+        "textColorDark": "#ffffff",
         "homeIconColor": "#EF5E0D",
         "homeLineColor": "#E0E0E0",
         "homeTextColor": "#007AFF",

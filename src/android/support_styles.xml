@@ -2,6 +2,7 @@
 <resources>
 
     <style name="AppTheme" parent="Theme.AppCompat">
+    <!-- <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar.FullScreen"> -->
         <!--<item name="colorPrimary">@color/colorPrimary</item>-->
         <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
         <!--<item name="colorAccent">@color/colorAccent</item>-->

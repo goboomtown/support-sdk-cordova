@@ -20,6 +20,16 @@ typedef enum MenuStyle : NSInteger {
     IconListExit    = 4
 } MenuStyle;
 
+
+static NSString * const _Nonnull kSupportSDKNotification         = @"com.goboomtown.support_sdk_notitication";
+
+static NSString * const _Nonnull kEventChatStarted               = @"com.goboomtown.event.chat_started";
+static NSString * const _Nonnull kEventChatEnded                 = @"com.goboomtown.event.chat_ended";
+
+static NSString * const _Nonnull kRequestSupportSDKExit          = @"com.goboomtown.request.support_sdk_exit";
+static NSString * const _Nonnull kRequestChatExit                = @"com.goboomtown.request.chat_exit";
+static NSString * const _Nonnull kRequestChatExitResolvingIssue  = @"com.goboomtown.event.chat_exit_resolve_issue";
+
 extern NSString  *const _Nonnull SupportSDKErrorDomain;
 
 /**

@@ -78,6 +78,8 @@ public class SupportActivity extends AppCompatActivity
         // setContentView(R.layout.activity_support);
         setContentView(as_id);
 
+        hideActionBar();
+
         int tb_id = mResources.getIdentifier("toolbar", "id", mPackageName);
         Toolbar toolbar = findViewById(tb_id);
         // setSupportActionBar(toolbar);
@@ -131,7 +133,6 @@ public class SupportActivity extends AppCompatActivity
         try {
           desiredMenuType = menuType(Integer.parseInt(desiredMenuString));
         } catch (Exception e) {
-          desiredMenuType = menuType(-1);
         }
 
         // int configResource = R.raw.support_sdk_preprod; // R.raw.support_sdk;

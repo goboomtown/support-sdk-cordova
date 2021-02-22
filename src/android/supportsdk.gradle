@@ -12,6 +12,14 @@ repositories{
 
 dependencies {
   implementation fileTree(dir: 'libs', include: ['*.aar'])
+
+  implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+  implementation('androidx.appcompat:appcompat:1.0.0') {
+    exclude module: 'support-v4'
+    }
+
+  implementation 'com.google.android.material:material:1.3.0-alpha01'
+
 }
 
 android {

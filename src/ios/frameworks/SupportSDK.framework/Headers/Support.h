@@ -153,6 +153,9 @@ extern NSString  *const _Nonnull kUserPhone;
 - (void)    chatGet:(NSString *_Nonnull)commId
             success:(void (^_Nonnull)(NSDictionary *_Nonnull))success
             failure:(void (^_Nonnull)(NSDictionary *_Nonnull))failure;
+- (void) chatPutWithSuccess:(void (^_Nonnull)(NSDictionary*_Nonnull))success
+                    failure:(void (^_Nonnull)(NSDictionary*_Nonnull))failure;
+
 
 - (nullable BTFormModel *) currentForm;
 
@@ -170,6 +173,8 @@ extern NSString  *const _Nonnull kUserPhone;
                               failure:(void (^_Nonnull)(NSDictionary*_Nonnull))failure;
 
 - (void) displayRatingScreenFromButton:(nonnull SupportButton *)supportButton;
+- (void) displayRatingScreenFromButton:(SupportButton *_Nonnull)supportButton withVC:(UIViewController *_Nonnull)vc;
+
 
 - (NSString *_Nullable)      encodeString:(NSString *_Nonnull)data;
 - (NSDictionary *_Nullable)	extractXmppInformation:(NSString *_Nonnull)xmppData;

@@ -1,6 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="cordova-plugin-supportsdk" version="1.1.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<plugin id="cordova-plugin-supportsdk" version="1.1.2" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
     <name>SupportSDK</name>
+    <author>Larry Borsato</author>
+    <license>Apache 2.0 License</license>
+    <!-- <info>
+      If video/screen sharing is not required the <activity android:name="com.goboomtown.supportsdk.activity.VideoActivity"...> and <framework src="com.twilio:video-android:5.11.1" /> lines may be commented out for a smaller .apk file.
+    </info> -->
 
     <js-module name="SupportSDK" src="www/SupportSDK.js">
         <clobbers target="supportsdk" />
@@ -13,8 +18,13 @@
              value="com.goboomtown.plugin.supportsdk.SupportSDK"/>
         </feature>
       </config-file>
-      <config-file target="AndroidManifest.xml" parent="/manifest/application">
+      <!-- <config-file target="AndroidManifest.xml" parent="/manifest/application">
         <activity android:name="com.goboomtown.plugin.supportsdk.SupportActivity" android:theme="@style/AppTheme" android:clearTaskOnLaunch="true" android:configChanges="orientation|keyboardHidden|screenSize" android:theme="@android:style/Theme.NoTitleBar.Fullscreen" android:windowSoftInputMode="stateAlwaysHidden" android:exported="false" />
+        <activity android:name="com.goboomtown.supportsdk.activity.VideoActivity" android:theme="@style/AppTheme" android:configChanges="orientation|keyboardHidden|screenSize|uiMode" />
+        <activity android:name="com.goboomtown.activity.KBActivity" android:theme="@style/AppTheme" android:configChanges="orientation|keyboardHidden|screenSize|uiMode" />
+      </config-file> -->
+      <config-file target="AndroidManifest.xml" parent="/manifest/application">
+        <activity android:name="com.goboomtown.plugin.supportsdk.SupportActivity" android:theme="@style/AppTheme" android:clearTaskOnLaunch="true" android:configChanges="orientation|keyboardHidden|screenSize" android:windowSoftInputMode="stateAlwaysHidden" android:exported="false" />
         <activity android:name="com.goboomtown.supportsdk.activity.VideoActivity" android:theme="@style/AppTheme" android:configChanges="orientation|keyboardHidden|screenSize|uiMode" />
         <activity android:name="com.goboomtown.activity.KBActivity" android:theme="@style/AppTheme" android:configChanges="orientation|keyboardHidden|screenSize|uiMode" />
       </config-file>
@@ -50,7 +60,7 @@
       <framework src="src/android/supportsdk.gradle" custom="true" type="gradleReference" />
       <lib-file src="src/android/boomtown-boomtownchat-android-release.aar" />
       <lib-file src="src/android/boomtown-video-android-release.aar" />
-      <lib-file src="src/android/support-sdk-gplay-production-debug.aar" />
+      <lib-file src="src/android/support-sdk-gplay-production-release.aar" />
       <framework src="com.google.android.material:material:1.1.0" />
       <framework src="com.wefika:flowlayout:0.4.1" />
       <framework src="com.squareup.okhttp3:okhttp:3.12.8" />
@@ -59,7 +69,7 @@
       <framework src="joda-time:joda-time:2.3" />
       <framework src="pl.droidsonroids.gif:android-gif-drawable:1.2.8" />
       <framework src="org.apache.commons:commons-compress:1.18" />
-      <framework src="com.twilio:video-android:5.1.0" />
+      <framework src="com.twilio:video-android:5.11.1" />
       <framework src="org.conscrypt:conscrypt-android:2.4.0" />
       <framework src="androidx.legacy:legacy-support-v4:1.0.0" />
       <framework src="androidx.appcompat:appcompat:1.3.0-alpha02" />
@@ -91,10 +101,10 @@
 
       <source-file src="src/ios/SupportSDK.h" />
       <source-file src="src/ios/SupportSDK.m" />
-      <header-file src="src/ios/AppDelegate+SupportSDKPlugin.h" />
+      <!-- <header-file src="src/ios/AppDelegate+SupportSDKPlugin.h" />
       <source-file src="src/ios/AppDelegate+SupportSDKPlugin.m" />
       <header-file src="src/ios/ViewController.h" />
-      <source-file src="src/ios/ViewController.m" />
+      <source-file src="src/ios/ViewController.m" /> -->
 
       <!-- <source-file src="default_appearance.json" target-dir="lib" framework="false" /> -->
 
