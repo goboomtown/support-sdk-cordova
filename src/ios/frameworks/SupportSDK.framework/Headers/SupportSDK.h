@@ -23,3 +23,4 @@ FOUNDATION_EXPORT const unsigned char SupportSDKVersionString[];
 #import "SupportSDKProactive.h"
 #import "LoginView.h"
 #import "Appearance.h"
+#import "EventManager.h"

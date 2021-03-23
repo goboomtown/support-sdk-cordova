@@ -41,26 +41,31 @@
   self.isViewControllerOnly = YES;
     self.supportButton = [[SupportButton alloc] initWithFrame:CGRectMake(0,0,50,50)];
     self.supportButton.delegate = self;
-    // [Appearance setIconColor:0xff0000];
-    // [Appearance setTextColor:0x000000];
-    // NSString *appearanceConfig = [self getContentsOfFile:@"ui.json"];
-    // [self getDefaults];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                         selector:@selector(handleNotifications:)
-                                             name:kSupportSDKNotification
-                                           object:nil];
-
-}
+    [EventManager addObserver:self selector:@selector(handleEvents:)];
+  }
 
 
--(void) handleNotifications:(NSNotification*)notification
+-(void) handleEvents:(NSNotification*)notification
 {
-    // NSString *eventRequest = [notification object];
-    // if ( [eventRequest isEqualToString:kEventChatStarted] ) {
-    // }
-    // CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:eventRequest];
-    // [result setKeepCallbackAsBool:YES];
-    // [self.commandDelegate sendPluginResult:result callbackId:self.delegateCallbackId];
+    NSString *eventRequest = [notification object];
+    NSDictionary *userInfo = [notification userInfo];
+    if ( [eventRequest isEqualToString:kRequestToast] ) {
+      [self toast:userInfo[kRequestAlertTitle] withDelayInSeconds:5];
+    } else if ( [eventRequest isEqualToString:kRequestAlert] ) {
+      [self alertWithTitle:userInfo[kRequestAlertTitle]
+                      message:userInfo[kRequestAlertMessage]
+          positiveButtonTitle:userInfo[kRequestAlertPositiveButtonTitle]
+          negativeButtonTitle:userInfo[kRequestAlertNegativeButtonTitle]];
+    }
+    NSDictionary *payload;
+    if ( userInfo ) {
+      payload = @{ kSupportSDKEventName: kSupportSDKEvent, kSupportSDKEventType: eventRequest, @"userInfo": userInfo};
+    } else {
+      payload = @{ kSupportSDKEventName: kSupportSDKEvent, kSupportSDKEventType: eventRequest};
+    }
+    CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:payload];
+    [result setKeepCallbackAsBool:YES];
+    [self.commandDelegate sendPluginResult:result callbackId:self.delegateCallbackId];
 }
 
 
@@ -79,18 +84,6 @@
     return contents;
 }
 
-// - (NSString *) getDefaults
-// {
-//     // get a URL reference (PREFERRED)
-//     NSURL *myURL = [[NSBundle mainBundle] URLForResource:@"default_appearance" withExtension:@"json"];
-//
-//     // read the file from a URL (PREFERRED)
-//     NSError *error = nil;
-//     NSString *jsonString = [[NSString alloc]initWithContentsOfURL:myURL encoding:NSUTF8StringEncoding error:&error];
-//     if ( !error ) {
-//         [self.supportButton configureWithJSON:jsonString];
-//     }
-// }
 
 - (void)onDomDelegateReady:(CDVInvokedUrlCommand*)command {
     CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
@@ -302,6 +295,25 @@
 }
 
 
+- (void) sendRequest:(CDVInvokedUrlCommand*)command
+{
+  if ( command.arguments.count == 0 ) {
+      return;
+  }
+  NSString *request = [command.arguments objectAtIndex:0];
+  id userInfo = command.arguments.count>1 ? [command.arguments objectAtIndex:1] : nil;
+    CDVPluginResult* pluginResult;
+    if ( self.isConfigured ) {
+        [EventManager notify:request userInfo:userInfo];
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+                                         messageAsString:@""];
+    } else {
+      pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+    }
+    [self.commandDelegate sendPluginResult:pluginResult
+                            callbackId:command.callbackId];
+}
+
 - (void) displayMenu:(CDVInvokedUrlCommand*)command
 {
     if ( command.arguments.count > 0 ) {
@@ -368,7 +380,15 @@
 }
 
 
+#pragma mark - Message display
+
 - (void) toast:(NSString *)msg
+{
+    [self toast:msg withDelayInSeconds:5];
+}
+
+
+- (void) toast:(NSString *)msg withDelayInSeconds:(NSInteger)delayInSeconds
 {
     UIAlertView *toast = [[UIAlertView alloc] initWithTitle:@""
                                                     message:msg
@@ -378,11 +398,57 @@
 
     [toast show];
 
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC),
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC),
                    dispatch_get_main_queue(), ^{
         [toast dismissWithClickedButtonIndex:0 animated:YES];
       }
     );
+}
+
+
+- (void) alertWithTitle:(NSString *)title
+                message:(NSString *)msg
+    positiveButtonTitle:(NSString *)positiveButtonTitle
+    negativeButtonTitle:(NSString *)negativeButtonTitle
+{
+    NSString *defaultButtonTitle;
+    if ( !positiveButtonTitle || !negativeButtonTitle ) {
+        defaultButtonTitle = positiveButtonTitle ? positiveButtonTitle : negativeButtonTitle;
+        if ( !defaultButtonTitle ) {
+          defaultButtonTitle = @"OK";
+        }
+    }
+    UIAlertController *alertController = [UIAlertController
+                                          alertControllerWithTitle:NSLocalizedString(title, nil)
+                                          message:NSLocalizedString(msg, nil)
+                                          preferredStyle:UIAlertControllerStyleActionSheet];
+    if ( defaultButtonTitle ) {
+        UIAlertAction *action = [UIAlertAction actionWithTitle:NSLocalizedString(defaultButtonTitle, nil)
+                                                                style:UIAlertActionStyleDefault
+                                                           handler:^(UIAlertAction *action)
+                                 {
+            [EventManager notify:kEventAlertDefaultClicked userInfo:nil];
+                                 }];
+        [alertController addAction:action];
+    } else {
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(negativeButtonTitle, nil)
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:^(UIAlertAction *action)
+                                   {
+            [EventManager notify:kEventAlertNegativeClicked userInfo:nil];
+                                   }];
+        [alertController addAction:cancelAction];
+        UIAlertAction *action = [UIAlertAction actionWithTitle:NSLocalizedString(positiveButtonTitle, nil)
+                                                                style:UIAlertActionStyleDefault
+                                                           handler:^(UIAlertAction *action)
+                                 {
+            [EventManager notify:kEventAlertPositiveClicked userInfo:nil];
+                                 }];
+        [alertController addAction:action];
+    }
+    [self.viewController presentViewController:alertController animated:YES completion:^{
+        [EventManager notify:kEventMenuStarted userInfo:nil];
+   }];
 }
 
 #pragma mark - Support Button delegates
@@ -458,6 +524,7 @@
     [self.viewController.navigationController pushViewController:viewController animated:NO];
   }
   });
+
 }
 
 
@@ -529,80 +596,6 @@
 //    [self warnWithError:error];
 }
 
-
-# pragma mark Javascript Plugin API
-
-//- (void)onDomDelegateReady:(CDVInvokedUrlCommand*)command {
-//    [self _handleCallSafely:^CDVPluginResult *(CDVInvokedUrlCommand * command) {
-//
-//        // Starts propagating the events.
-////        [self resumeEventPropagationToDom];
-//
-//        return [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-//    } :command];
-//}
-
-
-
-#pragma mark Utilities
-
-//- (NSError*) parseErrorWithDescription:(NSString*) description {
-//    return [self errorWithCode:CDV_LOCATION_MANAGER_INPUT_PARSE_ERROR andDescription:description];
-//}
-//
-//
-//- (NSError*) errorWithCode: (int)code andDescription:(NSString*) description {
-//
-//    NSMutableDictionary* details;
-//    if (description != nil) {
-//        details = [NSMutableDictionary dictionary];
-//        [details setValue:description forKey:NSLocalizedDescriptionKey];
-//    }
-//
-//    return [[NSError alloc] initWithDomain:@"CDVLocationManager" code:code userInfo:details];
-//}
-
-//- (void) _handleCallSafely: (CDVPluginCommandHandler) unsafeHandler : (CDVInvokedUrlCommand*) command  {
-//    [self _handleCallSafely:unsafeHandler :command :true];
-//}
-//
-//- (void) _handleCallSafely: (CDVPluginCommandHandler) unsafeHandler : (CDVInvokedUrlCommand*) command : (BOOL) runInBackground :(NSString*) callbackId {
-//    if (runInBackground) {
-//        [self.commandDelegate runInBackground:^{
-//            @try {
-//                [self.commandDelegate sendPluginResult:unsafeHandler(command) callbackId:callbackId];
-//            }
-//            @catch (NSException * exception) {
-//                [self _handleExceptionOfCommand:command :exception];
-//            }
-//        }];
-//    } else {
-//        @try {
-//            [self.commandDelegate sendPluginResult:unsafeHandler(command) callbackId:callbackId];
-//        }
-//        @catch (NSException * exception) {
-//            [self _handleExceptionOfCommand:command :exception];
-//        }
-//    }
-//}
-//
-//- (void) _handleCallSafely: (CDVPluginCommandHandler) unsafeHandler : (CDVInvokedUrlCommand*) command : (BOOL) runInBackground {
-//    [self _handleCallSafely:unsafeHandler :command :true :command.callbackId];
-//
-//}
-//
-//- (void) _handleExceptionOfCommand: (CDVInvokedUrlCommand*) command : (NSException*) exception {
-//    NSLog(@"Uncaught exception: %@", exception.description);
-//    NSLog(@"Stack trace: %@", [exception callStackSymbols]);
-//
-//    // When calling without a request (LocationManagerDelegate callbacks) from the client side the command can be null.
-//    if (command == nil) {
-//        return;
-//    }
-//    CDVPluginResult* pluginResult = nil;
-//    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:exception.description];
-//    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-//}
 
 
 

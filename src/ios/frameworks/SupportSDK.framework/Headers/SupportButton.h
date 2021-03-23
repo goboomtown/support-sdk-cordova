@@ -11,6 +11,7 @@
 
 @class SupportButton;
 @class Support;
+@class EventManager;
 
 typedef enum MenuStyle : NSInteger {
     NoMenu          = 0,
@@ -21,14 +22,14 @@ typedef enum MenuStyle : NSInteger {
 } MenuStyle;
 
 
-static NSString * const _Nonnull kSupportSDKNotification         = @"com.goboomtown.support_sdk_notitication";
-
-static NSString * const _Nonnull kEventChatStarted               = @"com.goboomtown.event.chat_started";
-static NSString * const _Nonnull kEventChatEnded                 = @"com.goboomtown.event.chat_ended";
-
-static NSString * const _Nonnull kRequestSupportSDKExit          = @"com.goboomtown.request.support_sdk_exit";
-static NSString * const _Nonnull kRequestChatExit                = @"com.goboomtown.request.chat_exit";
-static NSString * const _Nonnull kRequestChatExitResolvingIssue  = @"com.goboomtown.event.chat_exit_resolve_issue";
+//static NSString * const _Nonnull kSupportSDKNotification         = @"com.goboomtown.support_sdk_notitication";
+//
+//static NSString * const _Nonnull kEventChatStarted               = @"com.goboomtown.event.chat_started";
+//static NSString * const _Nonnull kEventChatEnded                 = @"com.goboomtown.event.chat_ended";
+//
+//static NSString * const _Nonnull kRequestSupportSDKExit          = @"com.goboomtown.request.support_sdk_exit";
+//static NSString * const _Nonnull kRequestChatExit                = @"com.goboomtown.request.chat_exit";
+//static NSString * const _Nonnull kRequestChatExitResolvingIssue  = @"com.goboomtown.event.chat_exit_resolve_issue";
 
 extern NSString  *const _Nonnull SupportSDKErrorDomain;
 
@@ -149,6 +150,15 @@ IB_DESIGNABLE
  */
 
 - (void) reset;
+
+
+/**
+ Send request to SDK
+ 
+ @param request     the event request
+ */
+- (void) sendRequest:(nonnull NSString *)request;
+
 
 /**
  Load the Support SDK configuration from the provided JSON file in the app bundle

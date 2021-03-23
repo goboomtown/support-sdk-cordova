@@ -137,6 +137,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property ( readonly)                     NSString  *formCancelButtonText;
 @property ( readonly)                     NSString  *formSaveButtonText;
+@property ( readonly)                     CGFloat   formSpacing;
 @property ( readonly)                     UIColor   *formEntryBorderColor;
 @property ( readonly)                     UIColor   *formEntryBorderColorDark;
 @property ( readonly)                     CGFloat   formEntryBorderWidth;

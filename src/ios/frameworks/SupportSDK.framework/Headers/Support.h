@@ -131,6 +131,8 @@ extern NSString  *const _Nonnull kUserPhone;
 @property (strong, nonatomic, nullable) NSMutableArray<BTFormModel *>       *forms;
 @property (strong, nonatomic, nonnull)  NSMutableArray<HistoryEntryModel *> *historyEntries;
 
+@property                               BOOL                isKBRequested;
+@property                               BOOL                isHistoryRequested;
 @property                               BOOL                isUndecorated;
 @property                               BOOL                isSideBySideForms;
 
@@ -173,7 +175,6 @@ extern NSString  *const _Nonnull kUserPhone;
                               failure:(void (^_Nonnull)(NSDictionary*_Nonnull))failure;
 
 - (void) displayRatingScreenFromButton:(nonnull SupportButton *)supportButton;
-- (void) displayRatingScreenFromButton:(SupportButton *_Nonnull)supportButton withVC:(UIViewController *_Nonnull)vc;
 
 
 - (NSString *_Nullable)      encodeString:(NSString *_Nonnull)data;
@@ -187,18 +188,17 @@ extern NSString  *const _Nonnull kUserPhone;
 success:(void (^_Nullable)(NSDictionary *_Nullable))success
 failure:(void (^_Nullable)(NSDictionary *_Nullable))failure;
 
-- (void) getForms:(nullable id<SupportDelegate>)sender;
-
 - (void) getHistory;
 
 - (void) getKB:(nullable id<SupportDelegate>)sender;
 - (void) getIssue:(NSString *_Nonnull)issueId
           success:(void (^_Nonnull)(NSDictionary*_Nonnull))success
           failure:(void (^_Nonnull)(NSDictionary*_Nonnull))failure;
-//- (NSDictionary *)  getServerFailureResponseForOperation:(NSURLSessionTask *)operation;
 - (NSString *_Nonnull)      getServerFailureMessageForOperation:(NSURLSessionTask *_Nonnull)operation;
 - (void)            getSettingsWithSuccess:(void (^_Nonnull)(NSDictionary*_Nonnull))success
                                    failure:(void (^_Nonnull)(NSDictionary*_Nonnull))failure;
+- (void) getSupportForms;
+
 - (BOOL) isProactiveEnabled;
 - (void) postChecks:(NSArray *_Nonnull)checks
             success:(void (^_Nonnull)(NSDictionary*_Nonnull))success

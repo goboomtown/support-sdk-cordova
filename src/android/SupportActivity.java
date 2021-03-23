@@ -14,6 +14,9 @@ import android.os.Bundle;
 
 import android.widget.Toast;
 
+import android.content.BroadcastReceiver;
+import com.goboomtown.supportsdk.api.EventManager;
+
 import com.goboomtown.supportsdk.view.SupportButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -49,6 +52,12 @@ import java.util.HashMap;
 import java.util.Map;
 import androidx.fragment.app.FragmentActivity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import androidx.lifecycle.Lifecycle;
+
+
+
 //public class SupportActivity extends AppCompatActivity
 
 public class SupportActivity extends AppCompatActivity
@@ -75,47 +84,31 @@ public class SupportActivity extends AppCompatActivity
         mPackageName = getPackageName();
 
         int as_id = mResources.getIdentifier("activity_support", "layout", mPackageName);
-        // setContentView(R.layout.activity_support);
         setContentView(as_id);
 
         hideActionBar();
 
         int tb_id = mResources.getIdentifier("toolbar", "id", mPackageName);
         Toolbar toolbar = findViewById(tb_id);
-        // setSupportActionBar(toolbar);
-        // toolbar.setTitle(R.string.app_name);
 
         int mSupportMenuContainerId = mResources.getIdentifier("supportMenuContainer", "id", mPackageName);
         mSupportMenuContainer = findViewById(mSupportMenuContainerId);
 
         mFragmentContainerId = mResources.getIdentifier("fragment_container", "id", mPackageName);
 
-        // mFragmentContainer = findViewById(R.id.fragment_container);
         mFragmentContainer = findViewById(mFragmentContainerId);
 
-        // try {
         int logoViewId = mResources.getIdentifier("logoImageView", "id", mPackageName);
         int logoId = mResources.getIdentifier("custom_logo", "drawable", mPackageName);
-        // mSupportButton = findViewById(R.id.supportButton);
-        // if ( logoViewId!=0 && logoId!=0 ) {
         ImageView logoView = findViewById(logoViewId);
-          if ( logoView != null ) {
+        if ( logoView != null ) {
             logoView.setImageDrawable(getResources().getDrawable(logoId));
-          }
-        // }
-      // } catch (Expection e) {
-      //   e.printStackTrace();
-      //
-      // }
+        }
 
         int sb_id = mResources.getIdentifier("supportButton", "id", mPackageName);
-        // mSupportButton = findViewById(R.id.supportButton);
         mSupportButton = findViewById(sb_id);
         mSupportButton.setVisibility(View.GONE);
         mSupportButton.setListener(this);
-
-        // mSupportButton.appearance.setIconColor(Color.RED);
-        // mSupportButton.appearance.setTextColor(Color.BLACK);
 
         mCustomerJSON = getIntent().getStringExtra("customerJSON");
         mAppearanceJSON = getIntent().getStringExtra("appearanceJSON");
@@ -125,18 +118,11 @@ public class SupportActivity extends AppCompatActivity
 
         String json = getIntent().getStringExtra("JSON");
         String desiredMenuString = getIntent().getStringExtra("desiredMenuString");
-        // if ( desiredMenuString != null ) {
-        //   desiredMenuType = menuType(Integer.parseInt(desiredMenuString));
-        // } else {
-        //   desiredMenuType = menuType(-1);
-        // }
         try {
           desiredMenuType = menuType(Integer.parseInt(desiredMenuString));
         } catch (Exception e) {
         }
 
-        // int configResource = R.raw.support_sdk_preprod; // R.raw.support_sdk;
-        // mSupportButton.loadConfiguration(configResource, null);
         mSupportButton.loadConfiguration(json, mCustomerJSON);
 
         Map<String, String> myPubData = new HashMap<>();
@@ -145,6 +131,8 @@ public class SupportActivity extends AppCompatActivity
         myPrivData.put("private", "someEncryptedData");
 
         mSupportButton.advertiseServiceWithPublicData(myPubData, myPrivData);
+
+        EventManager.addObserver(mEventReceiver);
     }
 
 
@@ -176,8 +164,8 @@ public class SupportActivity extends AppCompatActivity
     return style;
   }
 
-    private void toast(final String msg) {
-      final Activity activity = this;
+  private void toast(final String msg) {
+    final Activity activity = this;
     runOnUiThread(new Runnable() {
       @Override
       public void run() {
@@ -185,6 +173,71 @@ public class SupportActivity extends AppCompatActivity
       }
     });
   }
+
+  private void alert(JSONObject userInfo) {
+    if ( !getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED) ) {
+       return;
+   }
+     runOnUiThread(new Runnable() {
+           @Override
+           public void run() {
+               String title = null;
+               String message = null;
+               String positiveButtonTitle = null;
+               String negativeButtonTitle = null;
+               try {
+                   title = userInfo.getString(EventManager.kRequestAlertTitle);
+                   message = userInfo.getString(EventManager.kRequestAlertMessage);
+                   positiveButtonTitle = userInfo.getString(EventManager.kRequestAlertPositiveButtonTitle);
+                   negativeButtonTitle = userInfo.getString(EventManager.kRequestAlertNegativeButtonTitle);
+               } catch (JSONException e) {
+
+               }
+               AlertDialog.Builder builder = new AlertDialog.Builder(SupportActivity.this, AlertDialog.THEME_HOLO_LIGHT);
+               builder.setTitle(title);
+               builder.setMessage(message);
+
+               String defaultButtonTitle = null;
+               if ( positiveButtonTitle==null || negativeButtonTitle==null ) {
+                   defaultButtonTitle = positiveButtonTitle!=null ? positiveButtonTitle : negativeButtonTitle;
+                   if ( defaultButtonTitle == null ) {
+                       defaultButtonTitle = "OK";
+                   }
+               }
+               if ( defaultButtonTitle != null ) {
+                   DialogInterface.OnClickListener defaultOnClickListener = new DialogInterface.OnClickListener() {
+                       @Override
+                       public void onClick(DialogInterface dialog, int which) {
+                           EventManager.notify(EventManager.kEventAlertDefaultClicked, null);
+                       }
+                   };
+                   builder.setPositiveButton(defaultButtonTitle, defaultOnClickListener);
+                   builder.setCancelable(true);
+               } else {
+                   builder.setPositiveButton(positiveButtonTitle, new DialogInterface.OnClickListener() {
+                       @Override
+                       public void onClick(DialogInterface dialog, int which) {
+                           EventManager.notify(EventManager.kEventAlertPositiveClicked, null);
+                       }
+                   });
+                   builder.setNegativeButton(negativeButtonTitle, new DialogInterface.OnClickListener() {
+                       @Override
+                       public void onClick(DialogInterface dialog, int which) {
+                           EventManager.notify(EventManager.kEventAlertNegativeClicked, null);
+                       }
+                   });
+                   builder.setCancelable(false);
+               }
+
+               final AlertDialog dlg = builder.create();
+               if (dlg != null) {
+                   dlg.show();
+                   EventManager.notify(EventManager.kEventAlertPresented, null);
+               }
+           }
+       });
+
+   }
 
 
     @Override
@@ -206,41 +259,37 @@ public class SupportActivity extends AppCompatActivity
 
 
     @Override
-public void onBackPressed() {
-    int count = getSupportFragmentManager().getBackStackEntryCount();
+    public void onBackPressed() {
+        int count = getSupportFragmentManager().getBackStackEntryCount();
 
-    if ( count > 0 ) {
-        getSupportFragmentManager().popBackStack();
-        if ( count == 1 ) {
+        if ( count > 0 ) {
+            getSupportFragmentManager().popBackStack();
+            if ( count == 1 ) {
+                hideActionBar();
+                mFragmentContainer.setVisibility(View.GONE);
+                mSupportButton.click();
+            }
+            count = getSupportFragmentManager().getBackStackEntryCount();
+        } else {
             hideActionBar();
             mFragmentContainer.setVisibility(View.GONE);
-            mSupportButton.click();
-            // setTitle(getString(R.string.app_name));
+            super.onBackPressed();
         }
-        count = getSupportFragmentManager().getBackStackEntryCount();
-    } else {
-//            mFragmentContainer.setVisibility(View.GONE);
-        hideActionBar();
-        mFragmentContainer.setVisibility(View.GONE);
-        // setTitle(getString(R.string.app_name));
-        super.onBackPressed();
     }
-}
 
-private void showActionBar() {
-    ActionBar actionBar = getSupportActionBar();
-    if ( actionBar != null ) {
-        actionBar.show();
+    private void showActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        if ( actionBar != null ) {
+            actionBar.show();
+        }
     }
-}
 
-private void hideActionBar() {
-    ActionBar actionBar = getSupportActionBar();
-    if ( actionBar != null ) {
-        actionBar.hide();
+    private void hideActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        if ( actionBar != null ) {
+            actionBar.hide();
+        }
     }
-}
-
 
 
     @Override
@@ -266,7 +315,6 @@ private void hideActionBar() {
     @Override
     public void supportButtonDidGetSettings() {
         Log.d(TAG, "#helpButtonDidGetSettings");
-//        mSupportButton.menuStyle = SupportButton.MenuStyle.BUTTON;
         mSupportButton.menuStyle = desiredMenuType;
         mSupportButton.click();
     }
@@ -303,27 +351,6 @@ private void hideActionBar() {
 
     @Override
     public void supportButtonDisplayView(final View view) {
-        // runOnUiThread(new Runnable() {
-        //     @Override
-        //     public void run() {
-        //         PopupWindow popupWindow = new PopupWindow();
-        //         popupWindow.setWindowLayoutMode(
-        //                 WindowManager.LayoutParams.WRAP_CONTENT,
-        //                 WindowManager.LayoutParams.WRAP_CONTENT);
-        //         popupWindow.setHeight(250);
-        //         popupWindow.setWidth(350);
-        //         popupWindow.setContentView(view);
-        //
-        //         //set content and background
-        //
-        //         popupWindow.setTouchable(true);
-        //         popupWindow.setFocusable(true);
-        //
-        //         mSupportMenuContainer.setVisibility(View.VISIBLE);
-        //         mFragmentContainer.setVisibility(View.GONE);
-        //         popupWindow.showAtLocation(mFragmentContainer, Gravity.CENTER, 0, 0);
-        //     }
-        // });
         if ( view == null ) {
           return;
         }
@@ -350,12 +377,23 @@ private void hideActionBar() {
                 if ( title != null ) {
                     setTitle(title);
                 }
-                // mSupportMenuContainer.setVisibility(View.GONE);
                 mFragmentContainer.setVisibility(View.VISIBLE);
             }
         });
-//        startService(new Intent(this, SupportOverlayService.class));
     }
+
+
+//    private void kill() {
+//        final Handler handler = new Handler(Looper.getMainLooper());
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                //Do something after 100ms
+//                EventManager.notify(EventManager.kRequestChatExitResolveIssue, null);
+//            }
+//        }, 10000);
+//    }
+
 
     @Override
     public void supportButtonSetTitle(String title) {
@@ -371,8 +409,6 @@ private void hideActionBar() {
             public void run() {
                 mFragmentContainer.setVisibility(View.GONE);
                 hideActionBar();
-                // mSupportMenuContainer.setVisibility(View.VISIBLE);
-                // setTitle(getString(R.string.app_name));
                 if ( mSupportButton.menuStyle == SupportButton.MenuStyle.MENU ) {
                   mSupportButton.showSupportDialog();
                 }
@@ -389,4 +425,37 @@ private void hideActionBar() {
     public void supportButtonDidFailToAdvertiseService() {
         Log.i(TAG, "error when advertising service");
     }
+
+    private BroadcastReceiver mEventReceiver = new BroadcastReceiver() {
+      @Override
+      public void onReceive(Context context, final Intent intent) {
+        String intentAction = null;
+        if (intent != null) {
+            intentAction = intent.getAction();
+        }
+        Log.d(TAG, "msg received with intent: " + intentAction);
+
+        if (EventManager.kSupportSDKEvent.equals(intentAction)) {
+
+            String type = intent.getStringExtra(EventManager.kSupportSDKEventType);
+            Log.d(TAG, "msg received with type: " + type );
+            String userInfoString = intent.getStringExtra(EventManager.kSupportSDKEventData);
+            JSONObject userInfo = null;
+            try {
+                if (userInfoString != null) {
+                    userInfo = new JSONObject(userInfoString);
+                }
+            } catch(JSONException e) {
+
+            }
+            if ( type.equals(EventManager.kRequestToast) ) {
+
+            } else if ( type.equals(EventManager.kRequestAlert) ) {
+                alert(userInfo);
+            }
+
+        }
+      }
+  };
+
 }

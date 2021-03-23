@@ -38,6 +38,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 
 import com.goboomtown.plugin.supportsdk.SupportActivity;
+import com.goboomtown.supportsdk.api.EventManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -68,7 +69,6 @@ public class SupportSDK extends CordovaPlugin
   private String          mDesiredMenuString = "";
   private String          mCustomerJSON = "";
   private String          mAppearanceJSON = "";
-  // private SupportView     mSupportView = null;
 
 
   public void initialize(CordovaInterface cordova, CordovaWebView webView) {
@@ -82,8 +82,7 @@ public class SupportSDK extends CordovaPlugin
     mResources = cordovaActivity.getResources();
     mPackageName = cordovaActivity.getPackageName();
     mFrameLayout = (FrameLayout) mView.getParent();
-    // mSupportButton = new SupportButton(mContext);
-    // mSupportButton.setListener(this);
+    EventManager.setContext(mContext);
   }
 
 
@@ -136,6 +135,12 @@ public class SupportSDK extends CordovaPlugin
       initiateBoomtownWithCustomerAndAppearance(args.getString(0), args.getString(1), args.getString(2), args.getString(3), callbackContext);
       return true;
     }
+    else if ("sendRequest".equals(action)) {
+      String type = args.getString(0);
+      JSONObject userInfo = args.getJSONObject(1);
+      sendRequest(type, userInfo, callbackContext);
+      return true;
+    }
     else if ("displayMenu".equals(action)) {
       displayMenu(args.getString(0), callbackContext);
       return true;
@@ -147,14 +152,12 @@ public class SupportSDK extends CordovaPlugin
 
   private void loadConfigurationFromJSON(String json, String desiredMenuString, CallbackContext callbackContext) {
     if (json == null || json.length() == 0) {
-      // callbackContext.error("No configuration provided.");
       PluginResult result = new PluginResult(PluginResult.Status.ERROR, "No configuration provided." );
       result.setKeepCallback(true);
       callbackContext.sendPluginResult(result);
     } else {
       mJSON = json;
       mDesiredMenuString = desiredMenuString;
-      // mSupportView = new SupportView(mContext, mResources, mPackageName);
       Intent intent = new Intent(cordovaActivity, SupportActivity.class);
       if ( intent != null ) {
         intent.putExtra("JSON", json);
@@ -163,7 +166,6 @@ public class SupportSDK extends CordovaPlugin
         }
         cordovaActivity.startActivityForResult(intent, 999);
       }
-      // mSupportButton.loadConfiguration(json, null);
     }
   }
 
@@ -184,7 +186,6 @@ public class SupportSDK extends CordovaPlugin
       mAppearanceJSON = uiJSON;
 
       mDesiredMenuString = desiredMenuString;
-      // mSupportView = new SupportView(mContext, mResources, mPackageName);
       Intent intent = new Intent(cordovaActivity, SupportActivity.class);
       if ( intent != null ) {
         intent.putExtra("JSON", mJSON);
@@ -197,7 +198,6 @@ public class SupportSDK extends CordovaPlugin
         }
         cordovaActivity.startActivityForResult(intent, 999);
       }
-      // mSupportButton.loadConfiguration(json, null);
     }
   }
 
@@ -213,7 +213,6 @@ public class SupportSDK extends CordovaPlugin
       mAppearanceJSON = uiJSON;
 
       mDesiredMenuString = desiredMenuString;
-      // mSupportView = new SupportView(mContext, mResources, mPackageName);
       Intent intent = new Intent(cordovaActivity, SupportActivity.class);
       if ( intent != null ) {
         intent.putExtra("JSON", mJSON);
@@ -229,7 +228,6 @@ public class SupportSDK extends CordovaPlugin
         }
         cordovaActivity.startActivityForResult(intent, 999);
       }
-      // mSupportButton.loadConfiguration(json, null);
     }
   }
 
@@ -254,12 +252,25 @@ public class SupportSDK extends CordovaPlugin
     }
   }
 
+
+  private void sendRequest(String request, JSONObject userInfo, CallbackContext callbackContext) {
+  if ( request != null ) {
+      EventManager.notify(request, userInfo);
+      PluginResult result = new PluginResult(PluginResult.Status.OK, "OK" );
+      result.setKeepCallback(true);
+      callbackContext.sendPluginResult(result);
+    } else {
+      PluginResult result = new PluginResult(PluginResult.Status.ERROR, "ERROR" );
+      result.setKeepCallback(true);
+      callbackContext.sendPluginResult(result);
+
+    }
+  }
+
+
   private void displayMenu(String menuTypeString, CallbackContext callbackContext) {
     if ( mJSON != null ) {
       loadConfigurationFromJSON(mJSON, menuTypeString, callbackContext);
-      // PluginResult result = new PluginResult(PluginResult.Status.OK, "OK" );
-      // result.setKeepCallback(true);
-      // callbackContext.sendPluginResult(result);
     } else {
       PluginResult result = new PluginResult(PluginResult.Status.ERROR, "ERROR" );
       result.setKeepCallback(true);
@@ -290,26 +301,6 @@ public class SupportSDK extends CordovaPlugin
     }
   }
 
-
-//  private void customLayout() {
-//    cordova.getActivity().runOnUiThread(new Runnable() {
-//      @Override
-//      public void run() {
-//        cordovaActivity.setContentView(mResources.getIdentifier("layout", "layout", mPackageName));
-////        mFragmentContainer = cordovaActivity.getContentView().findViewById(R.id.fragment_container);
-//        mFragmentContainerId = mResources.getIdentifier("fragment_container", "id", mPackageName);
-//        mFragmentContainer = mView.findViewById(mFragmentContainerId);
-//
-//        int mSupportMenuContainerId = mResources.getIdentifier("supportMenuContainer", "id", mPackageName);
-//        mSupportMenuContainer = mView.findViewById(mSupportMenuContainerId);
-//
-////        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-////        mMainView = inflater.inflate(R.layout.layout, null);
-////        mView.addView(mMainView);
-////        cordovaActivity.setContentView(resources.getIdentifier("layout", "layout", packageName));
-//      }
-//    });
-//  }
 
   private void toast(final String msg) {
     cordovaActivity.runOnUiThread(new Runnable() {
@@ -349,8 +340,8 @@ public class SupportSDK extends CordovaPlugin
 
 
   @Override
- public void supportButtonDidCompleteTask() {
- }
+  public void supportButtonDidCompleteTask() {
+  }
 
 
   @Override
@@ -364,35 +355,8 @@ public class SupportSDK extends CordovaPlugin
 
   @Override
   public void supportButtonDisplayView(final View view) {
-      // runOnUiThread(new Runnable() {
-      //     @Override
-      //     public void run() {
-      //         PopupWindow popupWindow = new PopupWindow();
-      //         popupWindow.setWindowLayoutMode(
-      //                 WindowManager.LayoutParams.WRAP_CONTENT,
-      //                 WindowManager.LayoutParams.WRAP_CONTENT);
-      //         popupWindow.setHeight(250);
-      //         popupWindow.setWidth(350);
-      //         popupWindow.setContentView(view);
-      //
-      //         //set content and background
-      //
-      //         popupWindow.setTouchable(true);
-      //         popupWindow.setFocusable(true);
-      //
-      //         mSupportMenuContainer.setVisibility(View.VISIBLE);
-      //         mFragmentContainer.setVisibility(View.GONE);
-      //         popupWindow.showAtLocation(mFragmentContainer, Gravity.CENTER, 0, 0);
-      //     }
-      // });
       mMenuView = view;
       int i = 1;
-      // runOnUiThread(new Runnable() {
-      //     @Override
-      //     public void run() {
-      //         mSupportMenuContainer.addView(view);
-      //     }
-      // });
   }
 
 
