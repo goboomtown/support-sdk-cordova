@@ -1,0 +1,6 @@
+framework module XMPPFramework {
+  umbrella header "XMPPFramework.h"
+
+  export *
+  module * { export * }
+}

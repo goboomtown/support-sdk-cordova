@@ -1,0 +1,5 @@
+configurations {
+  all*.exclude group: 'com.android.support', module: 'support-v4'
+  all*.exclude group: 'com.android.support', module: 'support-annotations'
+  implementation.exclude group: 'org.jetbrains', module: 'annotations'
+}

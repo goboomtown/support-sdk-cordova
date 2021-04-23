@@ -1,0 +1,542 @@
+BCSymbolMap Version: 2.0
+Apple clang version 12.0.0 (clang-1200.0.32.29)
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.4.sdk
+iPhoneOS14.4.sdk
+/Users/larry/Library/Caches/org.carthage.CarthageKit/DerivedData/12.4_12D4e/KissXML/5.3.2/Build/Intermediates.noindex/ArchiveIntermediates/KissXML (iOS)/IntermediateBuildFilesPath/KissXML.build/Release-iphoneos/KissXML (iOS).build/DerivedSources/KissXML_vers.c
+/Users/larry/Documents/Development/GizmoCreative/ios/support-sdk-ios/Carthage/Checkouts/KissXML
++[DDXMLElement(DDAdditions) elementWithName:xmlns:]
+-[DDXMLElement(DDAdditions) elementForName:]
+-[DDXMLElement(DDAdditions) elementForName:xmlns:]
+-[DDXMLElement(DDAdditions) xmlns]
+-[DDXMLElement(DDAdditions) setXmlns:]
+-[DDXMLElement(DDAdditions) prettyXMLString]
+-[DDXMLElement(DDAdditions) compactXMLString]
+-[DDXMLElement(DDAdditions) addAttributeWithName:stringValue:]
+-[DDXMLElement(DDAdditions) attributesAsDictionary]
+_OBJC_CLASSLIST_REFERENCES_$_
+_OBJC_SELECTOR_REFERENCES_
+_OBJC_SELECTOR_REFERENCES_.2
+_OBJC_SELECTOR_REFERENCES_.4
+_OBJC_SELECTOR_REFERENCES_.6
+_OBJC_SELECTOR_REFERENCES_.8
+_OBJC_SELECTOR_REFERENCES_.10
+_OBJC_SELECTOR_REFERENCES_.12
+_OBJC_SELECTOR_REFERENCES_.14
+_OBJC_CLASSLIST_REFERENCES_$_.15
+_OBJC_SELECTOR_REFERENCES_.17
+_OBJC_SELECTOR_REFERENCES_.19
+_OBJC_SELECTOR_REFERENCES_.21
+_OBJC_SELECTOR_REFERENCES_.23
+_OBJC_SELECTOR_REFERENCES_.25
+_OBJC_SELECTOR_REFERENCES_.27
+_OBJC_CLASSLIST_REFERENCES_$_.28
+_OBJC_SELECTOR_REFERENCES_.30
+_OBJC_SELECTOR_REFERENCES_.32
+_OBJC_SELECTOR_REFERENCES_.34
+__OBJC_$_CATEGORY_INSTANCE_METHODS_DDXMLElement_$_DDAdditions
+__OBJC_$_CATEGORY_CLASS_METHODS_DDXMLElement_$_DDAdditions
+__OBJC_$_CATEGORY_DDXMLElement_$_DDAdditions
+/Users/larry/Documents/Development/GizmoCreative/ios/support-sdk-ios/Carthage/Checkouts/KissXML/KissXML/Additions/DDXMLElementAdditions.m
+KissXML/Additions/DDXMLElementAdditions.m
++[DDXMLDocument nodeWithDocPrimitive:owner:]
+-[DDXMLDocument initWithDocPrimitive:owner:]
++[DDXMLDocument nodeWithPrimitive:owner:]
+-[DDXMLDocument initWithPrimitive:owner:]
+-[DDXMLDocument initWithXMLString:options:error:]
+-[DDXMLDocument initWithData:options:error:]
+-[DDXMLDocument rootElement]
+-[DDXMLDocument XMLData]
+-[DDXMLDocument XMLDataWithOptions:]
+_OBJC_CLASSLIST_REFERENCES_$_.9
+_OBJC_SELECTOR_REFERENCES_.11
+_OBJC_SELECTOR_REFERENCES_.13
+_OBJC_CLASSLIST_REFERENCES_$_.14
+_OBJC_SELECTOR_REFERENCES_.16
+_OBJC_SELECTOR_REFERENCES_.18
+_OBJC_SELECTOR_REFERENCES_.20
+__OBJC_$_CLASS_METHODS_DDXMLDocument
+__OBJC_METACLASS_RO_$_DDXMLDocument
+__OBJC_$_INSTANCE_METHODS_DDXMLDocument
+__OBJC_$_PROP_LIST_DDXMLDocument
+__OBJC_CLASS_RO_$_DDXMLDocument
+/Users/larry/Documents/Development/GizmoCreative/ios/support-sdk-ios/Carthage/Checkouts/KissXML/KissXML/DDXMLDocument.m
+KissXML/DDXMLDocument.m
++[DDXMLNode initialize]
+___23+[DDXMLNode initialize]_block_invoke
+_MyErrorHandler
++[DDXMLNode elementWithName:]
++[DDXMLNode elementWithName:stringValue:]
++[DDXMLNode elementWithName:children:attributes:]
++[DDXMLNode elementWithName:URI:]
++[DDXMLNode attributeWithName:stringValue:]
++[DDXMLNode attributeWithName:URI:stringValue:]
++[DDXMLNode namespaceWithName:stringValue:]
++[DDXMLNode processingInstructionWithName:stringValue:]
++[DDXMLNode commentWithStringValue:]
++[DDXMLNode textWithStringValue:]
++[DDXMLNode nodeWithUnknownPrimitive:owner:]
++[DDXMLNode nodeWithPrimitive:owner:]
+-[DDXMLNode initWithPrimitive:owner:]
+-[DDXMLNode init]
+-[DDXMLNode dealloc]
+-[DDXMLNode copyWithZone:]
+-[DDXMLNode isEqual:]
+-[DDXMLNode kind]
+-[DDXMLNode setName:]
+-[DDXMLNode name]
+-[DDXMLNode setStringValue:]
+-[DDXMLNode stringValue]
+-[DDXMLNode index]
+-[DDXMLNode level]
+-[DDXMLNode rootDocument]
+-[DDXMLNode parent]
+-[DDXMLNode childCount]
+-[DDXMLNode children]
+-[DDXMLNode childAtIndex:]
+-[DDXMLNode previousSibling]
+-[DDXMLNode nextSibling]
+-[DDXMLNode previousNode]
+-[DDXMLNode nextNode]
+-[DDXMLNode detach]
+-[DDXMLNode _XPathPreProcess:]
+-[DDXMLNode XPath]
+-[DDXMLNode localName]
+-[DDXMLNode prefix]
+-[DDXMLNode setURI:]
+-[DDXMLNode URI]
++[DDXMLNode getHasPrefix:localName:forName:]
++[DDXMLNode getPrefix:localName:forName:]
++[DDXMLNode localNameForName:]
++[DDXMLNode prefixForName:]
+-[DDXMLNode description]
+-[DDXMLNode XMLString]
+-[DDXMLNode XMLStringWithOptions:]
+-[DDXMLNode nodesForXPath:error:]
+-[DDXMLNode _hasParent]
++[DDXMLNode stripDocPointersFromAttr:]
++[DDXMLNode recursiveStripDocPointersFromNode:]
++[DDXMLNode recursiveStripNamespace:fromNode:]
++[DDXMLNode recursiveMigrateNamespace:to:node:]
++[DDXMLNode recursiveFixDefaultNamespacesInNode:withNewRoot:]
++[DDXMLNode detachNamespace:fromNode:]
++[DDXMLNode removeNamespace:fromNode:]
++[DDXMLNode removeAllNamespacesFromNode:]
++[DDXMLNode detachAttribute:andClean:]
++[DDXMLNode detachAttribute:]
++[DDXMLNode removeAttribute:]
++[DDXMLNode removeAllAttributesFromNode:]
++[DDXMLNode detachChild:andClean:andFixNamespaces:]
++[DDXMLNode detachChild:]
++[DDXMLNode removeChild:]
++[DDXMLNode removeAllChildrenFromNode:]
++[DDXMLNode lastError]
+-[DDXMLNode .cxx_destruct]
++[DDXMLNamespaceNode nodeWithNsPrimitive:nsParent:owner:]
+-[DDXMLNamespaceNode initWithNsPrimitive:nsParent:owner:]
++[DDXMLNamespaceNode nodeWithPrimitive:owner:]
+-[DDXMLNamespaceNode initWithPrimitive:owner:]
+-[DDXMLNamespaceNode setName:]
+-[DDXMLNamespaceNode name]
+-[DDXMLNamespaceNode setStringValue:]
+-[DDXMLNamespaceNode stringValue]
+-[DDXMLNamespaceNode index]
+-[DDXMLNamespaceNode level]
+-[DDXMLNamespaceNode rootDocument]
+-[DDXMLNamespaceNode parent]
+-[DDXMLNamespaceNode childCount]
+-[DDXMLNamespaceNode children]
+-[DDXMLNamespaceNode childAtIndex:]
+-[DDXMLNamespaceNode previousSibling]
+-[DDXMLNamespaceNode nextSibling]
+-[DDXMLNamespaceNode previousNode]
+-[DDXMLNamespaceNode nextNode]
+-[DDXMLNamespaceNode detach]
+-[DDXMLNamespaceNode _XPathPreProcess:]
+-[DDXMLNamespaceNode localName]
+-[DDXMLNamespaceNode prefix]
+-[DDXMLNamespaceNode setURI:]
+-[DDXMLNamespaceNode URI]
+-[DDXMLNamespaceNode _hasParent]
+-[DDXMLNamespaceNode _nsParentPtr]
+-[DDXMLNamespaceNode _setNsParentPtr:]
++[DDXMLAttributeNode nodeWithAttrPrimitive:owner:]
+-[DDXMLAttributeNode initWithAttrPrimitive:owner:]
++[DDXMLAttributeNode nodeWithPrimitive:owner:]
+-[DDXMLAttributeNode initWithPrimitive:owner:]
+-[DDXMLAttributeNode dealloc]
+-[DDXMLAttributeNode name]
+-[DDXMLAttributeNode setStringValue:]
+-[DDXMLAttributeNode stringValue]
+-[DDXMLAttributeNode previousNode]
+-[DDXMLAttributeNode nextNode]
+-[DDXMLAttributeNode detach]
+-[DDXMLAttributeNode _XPathPreProcess:]
+-[DDXMLAttributeNode setURI:]
+-[DDXMLAttributeNode URI]
+-[DDXMLInvalidNode kind]
+-[DDXMLInvalidNode setName:]
+-[DDXMLInvalidNode name]
+-[DDXMLInvalidNode setObjectValue:]
+-[DDXMLInvalidNode objectValue]
+-[DDXMLInvalidNode setStringValue:]
+-[DDXMLInvalidNode setStringValue:resolvingEntities:]
+-[DDXMLInvalidNode stringValue]
+-[DDXMLInvalidNode index]
+-[DDXMLInvalidNode level]
+-[DDXMLInvalidNode rootDocument]
+-[DDXMLInvalidNode parent]
+-[DDXMLInvalidNode childCount]
+-[DDXMLInvalidNode children]
+-[DDXMLInvalidNode childAtIndex:]
+-[DDXMLInvalidNode previousSibling]
+-[DDXMLInvalidNode nextSibling]
+-[DDXMLInvalidNode previousNode]
+-[DDXMLInvalidNode nextNode]
+-[DDXMLInvalidNode detach]
+-[DDXMLInvalidNode XPath]
+-[DDXMLInvalidNode localName]
+-[DDXMLInvalidNode prefix]
+-[DDXMLInvalidNode setURI:]
+-[DDXMLInvalidNode URI]
+-[DDXMLInvalidNode description]
+-[DDXMLInvalidNode XMLString]
+-[DDXMLInvalidNode XMLStringWithOptions:]
+-[DDXMLInvalidNode canonicalXMLStringPreservingComments:]
+-[DDXMLInvalidNode nodesForXPath:error:]
+-[DDXMLInvalidNode objectsForXQuery:constants:error:]
+-[DDXMLInvalidNode objectsForXQuery:error:]
+_initialize.onceToken
+___block_descriptor_32_e5_v8?0l
+___block_literal_global
+_OBJC_CLASSLIST_REFERENCES_$_.13
+_OBJC_SELECTOR_REFERENCES_.15
+_OBJC_CLASSLIST_REFERENCES_$_.20
+_OBJC_SELECTOR_REFERENCES_.22
+_OBJC_CLASSLIST_REFERENCES_$_.23
+_OBJC_CLASSLIST_REFERENCES_$_.26
+_OBJC_SELECTOR_REFERENCES_.28
+_OBJC_SELECTOR_REFERENCES_.36
+_OBJC_CLASSLIST_REFERENCES_$_.37
+_OBJC_SELECTOR_REFERENCES_.39
+_OBJC_SELECTOR_REFERENCES_.41
+_OBJC_SELECTOR_REFERENCES_.43
+_OBJC_SELECTOR_REFERENCES_.45
+_OBJC_SELECTOR_REFERENCES_.47
+_OBJC_CLASSLIST_REFERENCES_$_.48
+_OBJC_SELECTOR_REFERENCES_.50
+_OBJC_SELECTOR_REFERENCES_.53
+_OBJC_SELECTOR_REFERENCES_.57
+_OBJC_SELECTOR_REFERENCES_.59
+_OBJC_SELECTOR_REFERENCES_.61
+_OBJC_CLASSLIST_REFERENCES_$_.62
+_OBJC_SELECTOR_REFERENCES_.64
+_OBJC_SELECTOR_REFERENCES_.66
+_OBJC_SELECTOR_REFERENCES_.68
+_OBJC_CLASSLIST_REFERENCES_$_.69
+_OBJC_SELECTOR_REFERENCES_.71
+_OBJC_SELECTOR_REFERENCES_.76
+_OBJC_SELECTOR_REFERENCES_.78
+_OBJC_SELECTOR_REFERENCES_.80
+_OBJC_SELECTOR_REFERENCES_.82
+_OBJC_CLASSLIST_REFERENCES_$_.83
+_OBJC_SELECTOR_REFERENCES_.85
+_OBJC_SELECTOR_REFERENCES_.87
+_OBJC_SELECTOR_REFERENCES_.91
+_OBJC_SELECTOR_REFERENCES_.95
+_OBJC_SELECTOR_REFERENCES_.97
+_OBJC_SELECTOR_REFERENCES_.99
+_OBJC_SELECTOR_REFERENCES_.101
+_OBJC_SELECTOR_REFERENCES_.103
+_OBJC_SELECTOR_REFERENCES_.105
+_OBJC_SELECTOR_REFERENCES_.109
+_OBJC_SELECTOR_REFERENCES_.111
+_OBJC_SELECTOR_REFERENCES_.113
+_OBJC_SELECTOR_REFERENCES_.117
+_OBJC_SELECTOR_REFERENCES_.119
+_OBJC_CLASSLIST_REFERENCES_$_.120
+_OBJC_SELECTOR_REFERENCES_.122
+_OBJC_SELECTOR_REFERENCES_.124
+_OBJC_SELECTOR_REFERENCES_.126
+_OBJC_SELECTOR_REFERENCES_.128
+_OBJC_SELECTOR_REFERENCES_.130
+_OBJC_SELECTOR_REFERENCES_.132
+_OBJC_SELECTOR_REFERENCES_.134
+_OBJC_SELECTOR_REFERENCES_.136
+_OBJC_SELECTOR_REFERENCES_.138
+_OBJC_CLASSLIST_REFERENCES_$_.139
+_OBJC_SELECTOR_REFERENCES_.141
+_OBJC_SELECTOR_REFERENCES_.143
+_OBJC_SELECTOR_REFERENCES_.147
+_OBJC_SELECTOR_REFERENCES_.149
+_OBJC_CLASSLIST_REFERENCES_$_.150
+_OBJC_SELECTOR_REFERENCES_.152
+_OBJC_SELECTOR_REFERENCES_.154
+_OBJC_CLASSLIST_REFERENCES_$_.155
+_OBJC_SELECTOR_REFERENCES_.157
+_OBJC_CLASSLIST_REFERENCES_$_.158
+_OBJC_SELECTOR_REFERENCES_.162
+__OBJC_$_CLASS_METHODS_DDXMLNode
+__OBJC_$_PROTOCOL_INSTANCE_METHODS_NSCopying
+__OBJC_$_PROTOCOL_METHOD_TYPES_NSCopying
+__OBJC_PROTOCOL_$_NSCopying
+__OBJC_LABEL_PROTOCOL_$_NSCopying
+__OBJC_CLASS_PROTOCOLS_$_DDXMLNode
+__OBJC_METACLASS_RO_$_DDXMLNode
+__OBJC_$_INSTANCE_METHODS_DDXMLNode
+__OBJC_$_INSTANCE_VARIABLES_DDXMLNode
+__OBJC_$_PROP_LIST_DDXMLNode
+__OBJC_CLASS_RO_$_DDXMLNode
+_OBJC_SELECTOR_REFERENCES_.260
+__OBJC_$_CLASS_METHODS_DDXMLNamespaceNode
+__OBJC_METACLASS_RO_$_DDXMLNamespaceNode
+__OBJC_$_INSTANCE_METHODS_DDXMLNamespaceNode
+__OBJC_$_INSTANCE_VARIABLES_DDXMLNamespaceNode
+__OBJC_CLASS_RO_$_DDXMLNamespaceNode
+_OBJC_SELECTOR_REFERENCES_.271
+_OBJC_SELECTOR_REFERENCES_.276
+__OBJC_$_CLASS_METHODS_DDXMLAttributeNode
+__OBJC_METACLASS_RO_$_DDXMLAttributeNode
+__OBJC_$_INSTANCE_METHODS_DDXMLAttributeNode
+__OBJC_$_INSTANCE_VARIABLES_DDXMLAttributeNode
+__OBJC_CLASS_RO_$_DDXMLAttributeNode
+__OBJC_METACLASS_RO_$_DDXMLInvalidNode
+__OBJC_$_INSTANCE_METHODS_DDXMLInvalidNode
+__OBJC_CLASS_RO_$_DDXMLInvalidNode
+_OBJC_SELECTOR_REFERENCES_.292
+_OBJC_CLASSLIST_REFERENCES_$_.293
+_OBJC_SELECTOR_REFERENCES_.296
+_OBJC_SELECTOR_REFERENCES_.298
+/Users/larry/Documents/Development/GizmoCreative/ios/support-sdk-ios/Carthage/Checkouts/KissXML/KissXML/DDXMLNode.m
+KissXML/DDXMLNode.m
+IsXmlDocPtr
+KissXML/Private/DDXMLPrivate.h
+IsXmlNsPtr
+IsXmlNodePtr
+DDXMLNodeKindForXmlKind
+MyErrorHandler
+__23+[DDXMLNode initialize]_block_invoke
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.4.sdk/usr/include/dispatch/once.h
++[DDXMLElement nodeWithElementPrimitive:owner:]
+-[DDXMLElement initWithElementPrimitive:owner:]
++[DDXMLElement nodeWithPrimitive:owner:]
+-[DDXMLElement initWithPrimitive:owner:]
+-[DDXMLElement initWithName:]
+-[DDXMLElement initWithName:URI:]
+-[DDXMLElement initWithName:stringValue:]
+-[DDXMLElement initWithXMLString:error:]
+-[DDXMLElement _elementsForName:localName:prefix:uri:]
+-[DDXMLElement elementsForName:]
+-[DDXMLElement elementsForLocalName:URI:]
+-[DDXMLElement _hasAttributeWithName:]
+-[DDXMLElement _removeAttributeForName:]
+-[DDXMLElement addAttribute:]
+-[DDXMLElement removeAttributeForName:]
+-[DDXMLElement attributes]
+-[DDXMLElement attributeForName:]
+-[DDXMLElement setAttributes:]
+-[DDXMLElement _removeNamespaceForPrefix:]
+-[DDXMLElement _addNamespace:]
+-[DDXMLElement addNamespace:]
+-[DDXMLElement removeNamespaceForPrefix:]
+-[DDXMLElement namespaces]
+-[DDXMLElement namespaceForPrefix:]
+-[DDXMLElement setNamespaces:]
+-[DDXMLElement _recursiveResolveNamespaceForPrefix:atNode:]
+-[DDXMLElement resolveNamespaceForName:]
+-[DDXMLElement _recursiveResolvePrefixForURI:atNode:]
+-[DDXMLElement resolvePrefixForNamespaceURI:]
+-[DDXMLElement addChild:]
+-[DDXMLElement insertChild:atIndex:]
+-[DDXMLElement removeChildAtIndex:]
+-[DDXMLElement setChildren:]
+_OBJC_CLASSLIST_REFERENCES_$_.16
+_OBJC_SELECTOR_REFERENCES_.24
+_OBJC_CLASSLIST_REFERENCES_$_.25
+_OBJC_CLASSLIST_REFERENCES_$_.29
+_OBJC_SELECTOR_REFERENCES_.31
+_OBJC_SELECTOR_REFERENCES_.33
+_OBJC_SELECTOR_REFERENCES_.35
+_OBJC_SELECTOR_REFERENCES_.37
+_OBJC_CLASSLIST_REFERENCES_$_.42
+_OBJC_SELECTOR_REFERENCES_.44
+_OBJC_SELECTOR_REFERENCES_.49
+_OBJC_SELECTOR_REFERENCES_.55
+_OBJC_CLASSLIST_REFERENCES_$_.56
+_OBJC_SELECTOR_REFERENCES_.58
+_OBJC_SELECTOR_REFERENCES_.60
+_OBJC_SELECTOR_REFERENCES_.62
+_OBJC_SELECTOR_REFERENCES_.74
+_OBJC_CLASSLIST_REFERENCES_$_.75
+_OBJC_SELECTOR_REFERENCES_.77
+_OBJC_SELECTOR_REFERENCES_.79
+_OBJC_SELECTOR_REFERENCES_.81
+_OBJC_SELECTOR_REFERENCES_.89
+_OBJC_SELECTOR_REFERENCES_.93
+_OBJC_SELECTOR_REFERENCES_.107
+__OBJC_$_CLASS_METHODS_DDXMLElement
+__OBJC_METACLASS_RO_$_DDXMLElement
+__OBJC_$_INSTANCE_METHODS_DDXMLElement
+__OBJC_$_PROP_LIST_DDXMLElement
+__OBJC_CLASS_RO_$_DDXMLElement
+/Users/larry/Documents/Development/GizmoCreative/ios/support-sdk-ios/Carthage/Checkouts/KissXML/KissXML/DDXMLElement.m
+KissXML/DDXMLElement.m
+IsXmlAttrPtr
+-[NSString(DDXML) dd_xmlChar]
+-[NSString(DDXML) dd_stringByTrimming]
+-[NSString(DDXMLDeprecated) xmlChar]
+-[NSString(DDXMLDeprecated) stringByTrimming]
+__OBJC_$_CATEGORY_INSTANCE_METHODS_NSString_$_DDXML
+__OBJC_$_CATEGORY_NSString_$_DDXML
+_OBJC_SELECTOR_REFERENCES_.9
+__OBJC_$_CATEGORY_INSTANCE_METHODS_NSString_$_DDXMLDeprecated
+__OBJC_$_CATEGORY_NSString_$_DDXMLDeprecated
+/Users/larry/Documents/Development/GizmoCreative/ios/support-sdk-ios/Carthage/Checkouts/KissXML/KissXML/Categories/NSString+DDXML.m
+KissXML/Categories/NSString+DDXML.m
+__ZL15__ARCLite__loadv
+__ZL58__arclite_NSMutableDictionary__setObject_forKeyedSubscriptP19NSMutableDictionaryP13objc_selectorP11objc_objectS4_
+__ZL22add_image_hook_swiftV1PK11mach_headerl
+__ZL42__arclite_NSUndoManagerProxy_isKindOfClassP11objc_objectP13objc_selectorP10objc_class
+__ZL30__arclite_NSManagedObject_initP11objc_objectP13objc_selector
+__ZL41__arclite_NSManagedObject_allocWithEntityP11objc_objectP13objc_selectorS0_
+__ZL36__arclite_NSManagedObject_allocBatchP11objc_objectP13objc_selectorPS0_S0_j
+__ZL37__arclite_NSKKMS_fastIndexForKnownKeyP11objc_objectP13objc_selectorS0_
+__ZL28__arclite_NSKKMS_indexForKeyP11objc_objectP13objc_selectorS0_
+__ZL29__arclite_NSKKsD_objectForKeyP11objc_objectP13objc_selectorS0_
+__ZL35__arclite_NSKKsD_removeObjectForKeyP11objc_objectP13objc_selectorS0_
+__ZL33__arclite_NSKKsD_setObject_forKeyP11objc_objectP13objc_selectorS0_S0_
+__ZL41__arclite_NSKKsD_addEntriesFromDictionaryP11objc_objectP13objc_selectorP12NSDictionary
+__ZL28__arclite_objc_readClassPairP10objc_classPK15objc_image_info
+__ZL32__arclite_objc_allocateClassPairP10objc_classPKcm
+__ZL32__arclite_object_getIndexedIvarsP11objc_object
+__ZL23__arclite_objc_getClassPKc
+__ZL27__arclite_objc_getMetaClassPKc
+__ZL31__arclite_objc_getRequiredClassPKc
+__ZL26__arclite_objc_lookUpClassPKc
+__ZL26__arclite_objc_getProtocolPKc
+__ZL23__arclite_class_getNameP10objc_class
+__ZL26__arclite_protocol_getNameP8Protocol
+__ZL37__arclite_objc_copyClassNamesForImagePKcPj
+__ZL17transcribeMethodsP10objc_classP15glue_class_ro_t
+__ZL19transcribeProtocolsP10objc_classP15glue_class_ro_t
+__ZL20transcribePropertiesP10objc_classP15glue_class_ro_t
+__ZL14initialize_impP11objc_objectP13objc_selector
+__ZL18allocateMaybeSwiftP18glue_swift_class_tm
+__ZL22copySwiftV1MangledNamePKcb
+__ZL13demangledNamePKcb
+__ZL16scanMangledFieldRPKcS0_S1_Ri
+__ZL30arclite_uninitialized_functionv
+__ZL12cxxConstructP11objc_object
+__ZL20fixStringForCoreDataP11objc_object
+_OBJC_METACLASS_$___ARCLite__
+__ZL24OBJC_CLASS_$___ARCLite__
+__ZL31OBJC_METACLASS_RO_$___ARCLite__
+__non_lazy_classes
+__ZL27OBJC_CLASS_RO_$___ARCLite__
+__ZL11_class_name
+__ZL32OBJC_$_CLASS_METHODS___ARCLite__
+__ZL17_load_method_name
+__ZL17_load_method_type
+__OBJC_$_PROTOCOL_INSTANCE_METHODS___ARCLiteKeyedSubscripting__
+__OBJC_$_PROTOCOL_METHOD_TYPES___ARCLiteKeyedSubscripting__
+__OBJC_PROTOCOL_$___ARCLiteKeyedSubscripting__
+__OBJC_LABEL_PROTOCOL_$___ARCLiteKeyedSubscripting__
+__OBJC_PROTOCOL_REFERENCE_$___ARCLiteKeyedSubscripting__
+__ZL30NSUndoManagerProxy_targetClass
+__ZL29original_NSManagedObject_init
+__ZL40original_NSManagedObject_allocWithEntity
+__ZL35original_NSManagedObject_allocBatch
+__ZL25NSMutableDictionary_class
+__ZL22NSConstantString_class
+__ZL14NSString_class
+__ZL36original_NSKKMS_fastIndexForKnownKey
+__ZL27original_NSKKMS_indexForKey
+__ZL28original_NSKKsD_objectForKey
+__ZL34original_NSKKsD_removeObjectForKey
+__ZL32original_NSKKsD_setObject_forKey
+__ZL40original_NSKKsD_addEntriesFromDictionary
+__ZZL22add_image_hook_swiftV1PK11mach_headerlE7patches
+__ZGVZL22add_image_hook_swiftV1PK11mach_headerlE7patches
+__ZL31original_objc_allocateClassPair
+__ZL31original_object_getIndexedIvars
+__ZL22original_objc_getClass
+__ZL26original_objc_getMetaClass
+__ZL30original_objc_getRequiredClass
+__ZL25original_objc_lookUpClass
+__ZL25original_objc_getProtocol
+__ZL22original_class_getName
+__ZL25original_protocol_getName
+__ZL36original_objc_copyClassNamesForImage
+__ZL12demangleLock
+__ZL9Demangled
+_OBJC_SELECTOR_REFERENCES_.70
+Apple clang version 12.0.0 (clang-1200.0.32.28)
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c++ --target=arm64-apple-ios4.3 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=c++11 -Wno-trigraphs -fno-exceptions -fno-rtti -fno-sanitize=vptr -mpascal-strings -Os -Wno-missing-field-initializers -Wmissing-prototypes -Wno-implicit-atomic-properties -Wno-objc-interface-ivars -Wno-arc-repeated-use-of-weak -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-float-conversion -Wno-non-literal-null-conversion -Wno-objc-literal-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -Wno-c++11-extensions -D NDEBUG=1 -D OBJC_OLD_DISPATCH_PROTOTYPES=0 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.2.Internal.sdk -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -Winvalid-offsetof -g -fno-threadsafe-statics -Wno-sign-conversion -Wno-infinite-recursion -Wno-move -Wno-comma -Wno-block-capture-autoreleasing -Wno-strict-prototypes -Wno-range-loop-analysis -Wno-semicolon-before-method-body -fembed-bitcode=all -iquote /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-generated-files.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-own-target-headers.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-all-target-headers.hmap -iquote /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-project-headers.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/Symbols/BuiltProducts/include -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/DerivedSources-normal/arm64 -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/DerivedSources/arm64 -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/DerivedSources -F/Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/Symbols/BuiltProducts -iframework /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.2.Internal.sdk/System/Library/PrivateFrameworks -Wall -Wextra -Wno-gcc-compat -Wno-error=incomplete-umbrella -Wno-error=invalid-ios-deployment-target -Wno-error=deprecated-declarations -Wno-error=documentation -Wno-error=incomplete-umbrella -Wno-error=invalid-ios-deployment-target -Wno-error=deprecated-declarations -Wno-error=documentation -MMD -MT dependencies -MF /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/Objects-normal/arm64/arclite.d --serialize-diagnostics /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/Objects-normal/arm64/arclite.dia -c /Library/Caches/com.apple.xbs/Sources/arclite_iOS/arclite-76/source/arclite.mm -o /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/Objects-normal/arm64/arclite.o -Wno-reorder-init-list -Wno-implicit-int-float-conversion -Wno-c99-designator -Wno-final-dtor-non-final-class -Wno-extra-semi-stmt -Wno-misleading-indentation -Wno-quoted-include-in-framework-header -Wno-implicit-fallthrough -Wno-enum-enum-conversion -Wno-enum-float-conversion -mlinker-version=609.8
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.2.Internal.sdk
+iPhoneOS14.2.Internal.sdk
+/Library/Caches/com.apple.xbs/Sources/arclite_iOS/arclite-76/source/arclite.mm
+/Library/Caches/com.apple.xbs/Sources/arclite_iOS/arclite-76
+fixStringForCoreData
+source/arclite.mm
+cxxConstruct
+arclite_uninitialized_function
+scanMangledField
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.2.Internal.sdk/usr/include/_ctype.h
+__isctype
+demangledName
+copySwiftV1DemangledName
+copySwiftV1MangledName
+allocateMaybeSwift
+word_align
+isSwift
+initialize_imp
+transcribeProperties
+property_list_nth
+transcribeProtocols
+transcribeMethods
+data
+method_list_nth
+__arclite_objc_copyClassNamesForImage
+__arclite_protocol_getName
+__arclite_class_getName
+__arclite_objc_getProtocol
+__arclite_objc_lookUpClass
+__arclite_objc_getRequiredClass
+__arclite_objc_getMetaClass
+__arclite_objc_getClass
+__arclite_object_getIndexedIvars
+__arclite_objc_allocateClassPair
+metaclass
+__arclite_objc_readClassPair
+transcribeIvars
+ivar_list_nth
+max
+alignment
+ro
+fastFlags
+__arclite_NSKKsD_addEntriesFromDictionary
+__arclite_NSKKsD_setObject_forKey
+__arclite_NSKKsD_removeObjectForKey
+__arclite_NSKKsD_objectForKey
+__arclite_NSKKMS_indexForKey
+__arclite_NSKKMS_fastIndexForKnownKey
+__arclite_NSManagedObject_allocBatch
+__arclite_NSManagedObject_allocWithEntity
+__arclite_NSManagedObject_init
+__arclite_NSUndoManagerProxy_isKindOfClass
+add_image_hook_swiftV1
+patch_lazy_pointers
+patch_t<const char **(const char *, unsigned int *)>
+patch_t<const char *(Protocol *)>
+patch_t<const char *(Class)>
+patch_t<Protocol *(const char *)>
+patch_t<Class (const char *)>
+patch_t<void *(id)>
+patch_t<Class (Class, const char *, unsigned long)>
+patch_t<Class (Class, const objc_image_info *)>
+__arclite_NSMutableDictionary__setObject_forKeyedSubscript
+__ARCLite__load
+install_swiftV1
+replaceMethod
+install_dict_nil_value
+addOrReplaceMethod
+keyedGetter
