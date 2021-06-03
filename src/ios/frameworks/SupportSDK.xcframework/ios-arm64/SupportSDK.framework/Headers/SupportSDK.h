@@ -15,12 +15,9 @@ FOUNDATION_EXPORT double SupportSDKVersionNumber;
 FOUNDATION_EXPORT const unsigned char SupportSDKVersionString[];
 
 
-//#import <SupportSDK/Support.h>
-//#import <SupportSDK/SupportButton.h>
-
-#import "Support.h"
-#import "SupportButton.h"
-#import "SupportSDKProactive.h"
-#import "LoginView.h"
-#import "Appearance.h"
-#import "EventManager.h"
+#import <SupportSDK/Support.h>
+#import <SupportSDK/SupportButton.h>
+#import <SupportSDK/SupportSDKProactive.h>
+#import <SupportSDK/LoginView.h>
+#import <SupportSDK/Appearance.h>
+#import <SupportSDK/EventManager.h>

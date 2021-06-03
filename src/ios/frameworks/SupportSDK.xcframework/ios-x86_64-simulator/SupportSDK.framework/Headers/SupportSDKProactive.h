@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Check.h"
+#import <SupportSDK/Check.h>
 //#import "CheckAppCloud.h"
 //#import "CheckAppDump.h"
 //#import "CheckAppHardware.h"

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="cordova-plugin-supportsdk" version="1.3.5" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<plugin id="cordova-plugin-supportsdk" version="1.3.7" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
     <name>SupportSDK</name>
     <author>Larry Borsato</author>
     <license>Apache 2.0 License</license>
@@ -34,7 +34,7 @@
         target-dir="src/com/goboomtown/plugin/supportsdk" />
       <source-file src="src/android/SupportActivity.java"
         target-dir="src/com/goboomtown/plugin/supportsdk" />
-  
+
       <resource-file src="src/android/activity_support.xml" target="res/layout/activity_support.xml" />
       <resource-file src="src/android/support_layout.xml" target="res/layout/support_layout.xml" />
       <resource-file src="src/android/support_attrs.xml" target="res/values/support_attrs.xml" />

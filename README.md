@@ -35,11 +35,11 @@ AndroidManifest.xml is automatically updated to use the new SupportActivity.
 There are three basic methods available to initiate the Support SDK:
 
 ```
-supportsdk.initiateBoomtown(boomtownConfigJSON, desiredMenuType, success, failure);
+supportsdk.initiateBoomtown(boomtownConfigJSON, null, success, failure);
 
-supportsdk.initiateBoomtownWithAppearance(boomtownConfigJSON, uiConfigJSON, desiredMenuType, success, failure);
+supportsdk.initiateBoomtownWithAppearance(boomtownConfigJSON, uiConfigJSON, null, success, failure);
 
-supportsdk.initiateBoomtownWithCustomerAndAppearance(boomtownConfigJSON, customerJSON, uiConfigJSON, desiredMenuType, success, failure);
+supportsdk.initiateBoomtownWithCustomerAndAppearance(boomtownConfigJSON, customerJSON, uiConfigJSON, null, success, failure);
 
 ```
 
@@ -72,7 +72,7 @@ function startBoomtown() {
     JSON.stringify(boomtownConfig),
     null,
     JSON.stringify(uiConfig),
-    1,
+    null,
     function(response) {
     },
     function(err) {
@@ -203,14 +203,24 @@ This file enables communication with the server and configures the available fea
 
 ## Menu Types
 
-The second parameter of loadConfigurationFromJSON() is the desired menu type as per the following list:
+The menu style is configured in the menuAppearance section of the appearance JSON like this:
 
 ```
-NoMenu: 0,
-Menu: 1,
-Button: 2,
-IconList: 3,
-IconListExit: 4,
+"menuAppearance":
+{
+  "style": "iconlist"
+...
+}
+
+```
+The style value may be one of the following:
+
+```
+"nomenu"
+"menu"
+"button"
+"iconlist"
+"iconlistexit"
 ```
 
 ## Customer Configuration
@@ -253,6 +263,7 @@ This is the default JSON.
   },
   "menuAppearance":
   {
+    "style": "iconlist",
     "heading": "Support",
     "textSize": "20",
     "textStyle": "bold",

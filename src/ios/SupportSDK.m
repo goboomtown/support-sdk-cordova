@@ -106,11 +106,11 @@
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
                                        messageAsString:msg];
     } else {
-      self.desiredMenuType = -1;
-      if ( command.arguments.count > 1 ) {
-          NSString* menuTypeString = [command.arguments objectAtIndex:1];
-          [self getMenuType:menuTypeString];
-      }
+      // self.desiredMenuType = -1;
+      // if ( command.arguments.count > 1 ) {
+      //     NSString* menuTypeString = [command.arguments objectAtIndex:1];
+      //     [self getMenuType:menuTypeString];
+      // }
       [self.supportButton reset];
       BOOL loaded = [self.supportButton loadConfigurationJSON:self.supportJSON customerInfo:nil];
       if ( loaded ) {
@@ -142,18 +142,18 @@
   return nil;
 }
 
-- (void) getMenuType:(id)menuType
-{
-    if ( [menuType isKindOfClass:[NSNumber class]] ) {
-        NSNumber *number = (NSNumber *) menuType;
-        self.desiredMenuType = [menuType intValue];
-    } else if ( [menuType isKindOfClass:[NSString class]] ) {
-        NSString *string = (NSString *) menuType;
-        self.desiredMenuType = [string integerValue];
-    } else {
-        self.desiredMenuType = Menu;
-    }
-}
+// - (void) getMenuType:(id)menuType
+// {
+//     if ( [menuType isKindOfClass:[NSNumber class]] ) {
+//         NSNumber *number = (NSNumber *) menuType;
+//         self.desiredMenuType = [menuType intValue];
+//     } else if ( [menuType isKindOfClass:[NSString class]] ) {
+//         NSString *string = (NSString *) menuType;
+//         self.desiredMenuType = [string integerValue];
+//     } else {
+//         self.desiredMenuType = Menu;
+//     }
+// }
 
 - (void) loadConfigurationWithAppearance:(CDVInvokedUrlCommand*)command
 {
@@ -167,7 +167,7 @@
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
     } else {
       self.supportJSON = json;
-      self.desiredMenuType = -1;
+      // self.desiredMenuType = -1;
       if ( command.arguments.count > 1 ) {
           NSString* uiJSON = [command.arguments objectAtIndex:1];
           if ( [uiJSON isKindOfClass:[NSString class]] ) {
@@ -178,11 +178,11 @@
           }
       }
 
-      if ( command.arguments.count > 2 ) {
-          NSString* menuTypeString = [command.arguments objectAtIndex:2];
-          // self.desiredMenuType = [menuTypeString integerValue];
-          [self getMenuType:menuTypeString];
-      }
+      // if ( command.arguments.count > 2 ) {
+      //     NSString* menuTypeString = [command.arguments objectAtIndex:2];
+      //     // self.desiredMenuType = [menuTypeString integerValue];
+      //     [self getMenuType:menuTypeString];
+      // }
 
         NSError *error;
         NSData *data = [self.supportJSON dataUsingEncoding:NSUTF8StringEncoding];
@@ -252,12 +252,12 @@
         }
       }
 
-      self.desiredMenuType = -1;
-      if ( command.arguments.count > 3 ) {
-          NSString* menuTypeString = [command.arguments objectAtIndex:3];
-          // self.desiredMenuType = [menuTypeString integerValue];
-          [self getMenuType:menuTypeString];
-      }
+      // self.desiredMenuType = -1;
+      // if ( command.arguments.count > 3 ) {
+      //     NSString* menuTypeString = [command.arguments objectAtIndex:3];
+      //     // self.desiredMenuType = [menuTypeString integerValue];
+      //     [self getMenuType:menuTypeString];
+      // }
       [self.supportButton reset];
       BOOL loaded = [self.supportButton loadConfigurationJSON:self.supportJSON customerInfo:self.customerInfo];
 
@@ -317,13 +317,13 @@
 - (void) displayMenu:(CDVInvokedUrlCommand*)command
 {
     if ( command.arguments.count > 0 ) {
-        NSString* menuTypeString = [command.arguments objectAtIndex:0];
-        // self.desiredMenuType = [menuTypeString integerValue];
-        [self getMenuType:menuTypeString];
+        // NSString* menuTypeString = [command.arguments objectAtIndex:0];
+        // // self.desiredMenuType = [menuTypeString integerValue];
+        // [self getMenuType:menuTypeString];
     }
     CDVPluginResult* pluginResult;
     if ( self.isConfigured ) {
-        self.supportButton.menuStyle = self.desiredMenuType == -1 ? IconListExit : self.desiredMenuType; //Menu;
+        // self.supportButton.menuStyle = self.desiredMenuType == -1 ? IconListExit : self.desiredMenuType; //Menu;
         [self.supportButton click];
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
                                          messageAsString:@""];
@@ -571,7 +571,7 @@
       supportButton.frame = buttonFrame;
       [self.viewController.view addSubview:supportButton];
   } else {
-      supportButton.menuStyle = self.desiredMenuType; // IconList;
+      // supportButton.menuStyle = self.desiredMenuType; // IconList;
       [supportButton click];
 
   }

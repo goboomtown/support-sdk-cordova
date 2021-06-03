@@ -128,7 +128,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property ( readonly)                     NSString  *menuStyle;
 @property ( readonly)                     NSString  *menuHeading;
 @property ( readonly)                     CGFloat   menuTextSize;
-@property ( readonly)                     NSString  *menuTextStyle;
+@property ( readonly)                     NSString  *_Nullable menuTextStyle;
 @property ( readonly)                     UIColor   *menuTextColor;
 @property ( readonly)                     UIColor   *menuIconColor;
 @property ( readonly)                     UIColor   *menuBorderColor;
@@ -145,7 +145,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property ( readonly)                     UIColor   *formEntryTextColor;
 @property ( readonly)                     UIColor   *formEntryTextColorDark;
 @property ( readonly)                     CGFloat   formEntryTextSize;
-@property ( readonly)                     NSString  *formEntryTextStyle;
+@property ( readonly)                     NSString  *_Nullable formEntryTextStyle;
 @property ( readonly)                     UIColor   *formLabelRequiredIndicatorColor;
 @property ( readonly)                     UIColor   *formLabelRequiredIndicatorColorDark;
 @property ( readonly)                     UIColor   *formLabelRequiredTextColor;
@@ -153,19 +153,19 @@ NS_ASSUME_NONNULL_BEGIN
 @property ( readonly)                     UIColor   *formLabelTextColor;
 @property ( readonly)                     UIColor   *formLabelTextColorDark;
 @property ( readonly)                     CGFloat   formLabelTextSize;
-@property ( readonly)                     NSString  *formLabelTextStyle;
+@property ( readonly)                     NSString  *_Nullable formLabelTextStyle;
 
 @property ( nonatomic, assign)            UIImage     *kbFolderIcon;
 @property ( nonatomic, assign)            UIImage     *chatAttachmentButtonImage;
 @property ( nonatomic, assign)            UIImage     *chatSendButtonImage;
 
 
-- (void)            configure;
-- (NSError *)       configureWithJSON:(NSString *)jsonString;
-- (UIColor *)       getColor:(NSUInteger)color;
-- (NSString *)      getJSONFromFile:(NSString *)filename;
-- (void)            handleTraits:(UITraitCollection *)traitCollection;
-- (void)            setup;
+- (void)                configure;
+- (NSError *)           configureWithJSON:(NSString *)jsonString;
+- (UIColor *)           getColor:(NSUInteger)color;
+- (nullable NSString *) getJSONFromFile:(NSString *)filename;
+- (void)                handleTraits:(UITraitCollection *)traitCollection;
+- (void)                setup;
 
 
 - (BOOL) hasMenuBorder;

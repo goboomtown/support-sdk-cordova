@@ -18,8 +18,8 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "BTIssue.h"
-#import "Appearance.h"
+#import <SupportSDK/BTIssue.h>
+#import <SupportSDK/Appearance.h>
 
 @class CLLocationManager;
 @class SupportButton;
@@ -27,6 +27,7 @@
 @class BTFormModel;
 @class HistoryEntryModel;
 @class HistoryViewModel;
+@class JourneyModel;
 
 extern NSString *_Nonnull const kSDKV1Endpoint;
 
@@ -57,7 +58,7 @@ extern NSString  *const _Nonnull kUserPhone;
 
 @optional
 
-- (void) supportUpdateKBWithModel:(nonnull KBViewModel *)kbViewModel;
+- (void) supportUpdateKBWithModel:(nullable KBViewModel *)kbViewModel;
 - (void) supportSearchKBWithModel:(nonnull KBViewModel *)kbViewModel;
 - (void) supportUpdateFormWithModel:(nonnull BTFormModel *)formModel;
 - (void) supportUpdateForms;
@@ -71,7 +72,7 @@ extern NSString  *const _Nonnull kUserPhone;
 
 @optional
 
-- (void) supportUpdateHistory:(nonnull HistoryViewModel *)historyViewModel;
+- (void) supportUpdateHistory:(nullable HistoryViewModel *)historyViewModel;
 
 @end
 
@@ -130,11 +131,13 @@ extern NSString  *const _Nonnull kUserPhone;
 @property (strong, nonatomic, nullable) HistoryViewModel    *historyViewModel;
 
 @property (strong, nonatomic, nullable) NSMutableArray<BTFormModel *>       *forms;
+@property (strong, nonatomic, nullable) NSMutableArray<JourneyModel *>      *journeys;
 @property (strong, nonatomic, nonnull)  NSMutableArray<HistoryEntryModel *> *historyEntries;
 
 @property                               BOOL                isKBRequested;
 @property                               BOOL                isHistoryRequested;
 @property                               BOOL                isFormsRequested;
+@property                               BOOL                isJourneysRequested;
 @property                               BOOL                isUndecorated;
 @property                               BOOL                isSideBySideForms;
 

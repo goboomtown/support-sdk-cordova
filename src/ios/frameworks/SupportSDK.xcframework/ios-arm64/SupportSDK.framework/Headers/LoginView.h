@@ -6,8 +6,8 @@
 //  Copyright © 2020 Boomtown. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "Support.h"
+@import UIKit;
+@class Support;
 
 NS_ASSUME_NONNULL_BEGIN
 
