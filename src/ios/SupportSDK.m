@@ -470,7 +470,7 @@
 {
   self.displayedView = view;
   dispatch_async(dispatch_get_main_queue(), ^{
-    view.backgroundColor = [UIColor whiteColor];
+    // view.backgroundColor = [UIColor whiteColor];
     [self.viewController.view addSubview:view];
   });
 }

@@ -195,6 +195,8 @@ failure:(void (^_Nullable)(NSDictionary *_Nullable))failure;
 
 - (void) getHistory;
 
+- (void) getJourneys;
+
 - (void) getKB:(nullable id<SupportDelegate>)sender;
 - (void) getIssue:(NSString *_Nonnull)issueId
           success:(void (^_Nonnull)(NSDictionary*_Nonnull))success

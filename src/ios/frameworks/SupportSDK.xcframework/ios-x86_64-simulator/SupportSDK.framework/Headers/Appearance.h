@@ -132,6 +132,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property ( readonly)                     UIColor   *menuTextColor;
 @property ( readonly)                     UIColor   *menuIconColor;
 @property ( readonly)                     UIColor   *menuBorderColor;
+@property ( readonly)                     UIColor   *menuBackgroundColor;
 @property ( readonly)                     CGFloat   menuBorderWidth;
 @property ( readonly)                     CGFloat   menuPadding;
 @property ( readonly)                     CGFloat   menuSpacing;

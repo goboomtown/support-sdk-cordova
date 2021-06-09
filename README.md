@@ -257,9 +257,12 @@ This is the default JSON.
 {
   "navigationBarAppearance":
   {
-    "textColor": "#000000",
     "backgroundColor": "#ffffff",
-    "iconColor": "#000000"
+    "backgroundColorDark": "#121212",
+    "textColor": "#000000",
+    "textColorDark": "#ffffff",
+    "iconColor": "#000000",
+    "iconColorDark": "#ffffff"
   },
   "menuAppearance":
   {
@@ -269,13 +272,15 @@ This is the default JSON.
     "textStyle": "bold",
     "borderWidth": "1",
     "padding": "10",
-    "spacing": "20",
+    "spacing": "50",
     "textColor": "#000000",
-    "iconColor": "#EF5E0D",
-    "borderColor": "#E0E0E0",
     "textColorDark": "#ffffff",
+    "iconColor": "#EF5E0D",
     "iconColorDark": "#EF5E0D",
-    "borderColorDark": "#E0E0E0"
+    "borderColor": "#E0E0E0",
+    "borderColorDark": "#E0E0E0",
+    "backgroundColor":  "#FAFAFA",
+    "backgroundColorDark": "#121212"
   },
   "menu":
   {
