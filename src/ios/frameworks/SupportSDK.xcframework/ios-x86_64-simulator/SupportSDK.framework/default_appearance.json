@@ -16,7 +16,7 @@
         "textStyle": "bold",
         "borderWidth": "1",
         "padding": "10",
-        "spacing": "50",
+        "spacing": "30",
         "textColor": "#000000",
         "textColorDark": "#ffffff",
         "iconColor": "#EF5E0D",
@@ -66,6 +66,11 @@
         {
             "text": "History",
             "icon": "customer_alt"
+        },
+        "journeys":
+        {
+            "text": "Journeys",
+            "icon": "journey"
         },
         "exit":
         {

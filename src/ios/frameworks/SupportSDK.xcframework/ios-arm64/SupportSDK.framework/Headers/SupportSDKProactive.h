@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <SupportSDK/Support.h>
 #import <SupportSDK/Check.h>
 //#import "CheckAppCloud.h"
 //#import "CheckAppDump.h"
@@ -15,7 +16,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SupportSDKProactive : NSObject
+@interface SupportSDKProactive : NSObject <SupportDelegate>
 
 - (instancetype)    initWithConfigurationFile:(NSString *)configFileName customerInfo:(nullable NSDictionary *)customerInfo;
 - (BOOL)            loadConfigurationFile:(NSString *)configFileName;

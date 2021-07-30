@@ -77,6 +77,7 @@ public class SupportActivity extends AppCompatActivity
     private String        mCustomerJSON = null;
     private String        mAppearanceJSON = null;
 
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -111,19 +112,19 @@ public class SupportActivity extends AppCompatActivity
         mSupportButton.setListener(this);
 
         mCustomerJSON = getIntent().getStringExtra("customerJSON");
-        mAppearanceJSON = getIntent().getStringExtra("appearanceJSON");
-        if ( mAppearanceJSON != null ) {
-          mSupportButton.appearance.configureFromJSON(mAppearanceJSON);
-        }
 
         String json = getIntent().getStringExtra("JSON");
-        String desiredMenuString = getIntent().getStringExtra("desiredMenuString");
-        try {
-          desiredMenuType = menuType(Integer.parseInt(desiredMenuString));
-        } catch (Exception e) {
-        }
+//        String desiredMenuString = getIntent().getStringExtra("desiredMenuString");
+//        try {
+//          desiredMenuType = menuType(Integer.parseInt(desiredMenuString));
+//        } catch (Exception e) {
+//        }
 
         mSupportButton.loadConfiguration(json, mCustomerJSON);
+//        mAppearanceJSON = getIntent().getStringExtra("appearanceJSON");
+//        if ( mAppearanceJSON != null ) {
+//            mSupportButton.appearance.configureFromJSON(mAppearanceJSON);
+//        }
 
         Map<String, String> myPubData = new HashMap<>();
         myPubData.put("public", "fooData");
@@ -341,11 +342,8 @@ public class SupportActivity extends AppCompatActivity
 
     @Override
     public void supportButtonDidRequestExit() {
-       if ( mMenuView != null ) {
-           mSupportMenuContainer.removeView(mMenuView);
-           mMenuView = null;
-       }
-       finish();
+        clearMenuViewIfNecessary();
+        finish();
      }
 
 
@@ -354,7 +352,11 @@ public class SupportActivity extends AppCompatActivity
         if ( view == null ) {
           return;
         }
+        clearMenuViewIfNecessary();
         mMenuView = view;
+        if ( mMenuView.getParent() == mSupportMenuContainer ) {
+            mSupportMenuContainer.removeView(mMenuView);
+        }
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -377,23 +379,19 @@ public class SupportActivity extends AppCompatActivity
                 if ( title != null ) {
                     setTitle(title);
                 }
+                clearMenuViewIfNecessary();
                 mFragmentContainer.setVisibility(View.VISIBLE);
             }
         });
     }
 
 
-//    private void kill() {
-//        final Handler handler = new Handler(Looper.getMainLooper());
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                //Do something after 100ms
-//                EventManager.notify(EventManager.kRequestChatExitResolveIssue, null);
-//            }
-//        }, 10000);
-//    }
-
+    private void clearMenuViewIfNecessary() {
+        if ( mMenuView != null ) {
+            mSupportMenuContainer.removeView(mMenuView);
+            mMenuView = null;
+        }
+    }
 
     @Override
     public void supportButtonSetTitle(String title) {

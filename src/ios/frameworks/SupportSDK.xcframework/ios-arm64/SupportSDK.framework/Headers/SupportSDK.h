@@ -21,3 +21,4 @@ FOUNDATION_EXPORT const unsigned char SupportSDKVersionString[];
 #import <SupportSDK/LoginView.h>
 #import <SupportSDK/Appearance.h>
 #import <SupportSDK/EventManager.h>
+#import <SupportSDK/SettingsViewController.h>

@@ -117,9 +117,20 @@ NS_ASSUME_NONNULL_BEGIN
 @property ( readonly)                     UIImage     *formsMenuIcon;
 @property ( readonly)                     NSString     *historyMenuText;
 @property ( readonly)                     UIImage     *historyMenuIcon;
+@property ( readonly)                     NSString     *journeysMenuText;
+@property ( readonly)                     UIImage     *journeysMenuIcon;
 @property ( readonly)                     NSString     *exitMenuText;
 @property ( readonly)                     UIImage     *exitMenuIcon;
 
+@property (nullable)                        NSString    *chatTitle;
+@property (nullable)                        NSString    *callmeTitle;
+@property (nullable)                        NSString    *kbTitle;
+@property (nullable)                        NSString    *websiteTitle;
+@property (nullable)                        NSString    *emailTitle;
+@property (nullable)                        NSString    *phoneTitle;
+@property (nullable)                        NSString    *formsTitle;
+@property (nullable)                        NSString    *historyTitle;
+@property (nullable)                        NSString    *journeysTitle;
 
 @property ( readonly)                     UIColor *navigationBarTextColor;
 @property ( readonly)                     UIColor *navigationBarBackgroundColor;
@@ -163,6 +174,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)                configure;
 - (NSError *)           configureWithJSON:(NSString *)jsonString;
+- (void)                configureWithSettings:(NSDictionary *)dict;
 - (UIColor *)           getColor:(NSUInteger)color;
 - (nullable NSString *) getJSONFromFile:(NSString *)filename;
 - (void)                handleTraits:(UITraitCollection *)traitCollection;

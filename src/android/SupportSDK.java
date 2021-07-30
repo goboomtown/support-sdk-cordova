@@ -145,8 +145,12 @@ public class SupportSDK extends CordovaPlugin
       displayMenu(args.getString(0), callbackContext);
       return true;
     }
+    else if ("settings".equals(action)) {
+        settings(args.getString(0), callbackContext);
+        return true;
+    }
 
-    return false;
+      return false;
   }
 
 
@@ -280,8 +284,20 @@ public class SupportSDK extends CordovaPlugin
   }
 
 
+    private void settings(String arg, CallbackContext callbackContext) {
+        if ( mJSON != null ) {
+            loadConfigurationFromJSON(mJSON, null, callbackContext);
+        } else {
+            PluginResult result = new PluginResult(PluginResult.Status.ERROR, "ERROR" );
+            result.setKeepCallback(true);
+            callbackContext.sendPluginResult(result);
 
-  @Override
+        }
+    }
+
+
+
+    @Override
   public void onActivityResult(int requestCode, int resultCode, Intent data)
   {
     if( requestCode == 999 )

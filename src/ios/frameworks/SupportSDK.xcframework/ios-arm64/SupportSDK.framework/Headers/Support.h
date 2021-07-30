@@ -29,14 +29,38 @@
 @class HistoryViewModel;
 @class JourneyModel;
 
-extern NSString *_Nonnull const kSDKV1Endpoint;
+static NSString * _Nonnull const    PRODUCTION          = @"Production";
+static NSString * _Nonnull const    PREPROD             = @"Preprod";
+static NSString * _Nonnull const    INTEG               = @"Integ";
+static NSString * _Nonnull const    UAT                 = @"UAT";
+static NSString * _Nonnull const    SANDBOX             = @"Sandbox";
+static NSString * _Nonnull const    LOCAL_ENV           = @"Local Environment";
 
-extern NSString *_Nonnull const kStartingBoomtownVideoTitle;
+static NSString * _Nonnull const    SERVER_PRODUCTION   = @"https://api.goboomtown.com";
+static NSString * _Nonnull const    SERVER_PREPROD      = @"https://api.preprod.goboomtown.com";
+static NSString * _Nonnull const    SERVER_INTEG        = @"https://api.integ.goboomtown.com";
+static NSString * _Nonnull const    SERVER_UAT          = @"https://api.uat.goboomtown.com";
+static NSString * _Nonnull const    SERVER_SANDBOX      = @"https://api.sandbox.goboomtown.com";
+static NSString * _Nonnull const    SERVER_LOCAL_ENV    = @"https://api.local-env.goboomtown.com";
 
-extern NSString *_Nonnull const BTConnectAPIBaseURL;
+static NSString * _Nonnull const    JSON_API_HOST       = @"apiHost";
+static NSString * _Nonnull const    JSON_INTEGRATION_ID = @"integrationId";
+static NSString * _Nonnull const    JSON_API_KEY        = @"apiKey";
 
-extern NSString *_Nonnull const kBroadcastExtensionSetupUIBundleId;
-extern NSString *_Nonnull const kBroadcastExtensionBundleId;
+static NSString * _Nonnull const    SDK_V1_ENDPOINT     = @"/sdk/v1";
+
+
+static NSString * _Nonnull const    KEY_APP_VERSION_LAST                = @"com.goboomtown.supportsdk.version_last_app";
+static NSString * _Nonnull const    KEY_APP_BUILD_LAST                  = @"com.goboomtown.supportsdk.build_last_app";
+static NSString * _Nonnull const    KEY_SDK_VERSION_LAST                = @"com.goboomtown.supportsdk.version_last_sdk";
+static NSString * _Nonnull const    KEY_SDK_BUILD_LAST                  = @"com.goboomtown.supportsdk.build_last_sdk";
+
+extern NSString * _Nonnull const kStartingBoomtownVideoTitle;
+
+extern NSString * _Nonnull const BTConnectAPIBaseURL;
+
+extern NSString * _Nonnull const kBroadcastExtensionSetupUIBundleId;
+extern NSString * _Nonnull const kBroadcastExtensionBundleId;
 
 /**
  Customer information keys
@@ -57,6 +81,9 @@ extern NSString  *const _Nonnull kUserPhone;
 @required
 
 @optional
+
+- (void) supportDidRetrieveSettings:(nonnull NSDictionary *)response;
+- (void) supportDidFailToRetrieveSettings:(nonnull NSDictionary *)response;
 
 - (void) supportUpdateKBWithModel:(nullable KBViewModel *)kbViewModel;
 - (void) supportSearchKBWithModel:(nonnull KBViewModel *)kbViewModel;
@@ -84,10 +111,12 @@ extern NSString  *const _Nonnull kUserPhone;
 @property (strong, nonatomic, nullable) Appearance  *appearance;
 @property (strong, nonatomic, nullable) NSString    *sdkName;
 @property (strong, nonatomic, nullable) NSString    *endpoint;
+@property (strong, nonatomic, nullable) NSString    *supportSDKName;
 @property (strong, nonatomic, nullable) NSString    *supportSDKVersion;
 @property (strong, nonatomic, nullable) NSString    *supportSDKBuild;
+
 @property (strong, nonatomic, nullable) NSString    *osVersion;
-@property (strong, nonatomic, nullable) NSString    *providerId;
+@property (readonly, nullable) NSString    *providerId;
 @property (strong, nonatomic, nullable)	NSString	*membersId;
 @property (strong, nonatomic, nullable)	NSString	*membersUsersId;
 @property (strong, nonatomic, nullable)	NSString	*membersLocationsId;
@@ -95,6 +124,7 @@ extern NSString  *const _Nonnull kUserPhone;
 @property                               BOOL        isScreenCapture;
 @property                               BOOL        isCloudConfigComplete;
 
+@property (strong, nonatomic, nullable) id<SupportDelegate> delegate;
 @property (strong, nonatomic, nullable) id<SupportDelegate> formsDelegate;
 @property (strong, nonatomic, nullable) id<HistoryDelegate> historyDelegate;
 
@@ -108,13 +138,16 @@ extern NSString  *const _Nonnull kUserPhone;
 @property (strong, nonatomic, nullable) NSString        *supportPhoneNumber;
 @property (strong, nonatomic, nullable) NSString        *supportWebsite;
 @property (strong, nonatomic, nullable) NSURL           *supportWebsiteURL;
-@property                               BOOL            showSupportEmail;
-@property                               BOOL            showSupportPhone;
-@property                               BOOL            showSupportWebsite;
-@property                               BOOL            showSupportKnowledgeBase;
-@property                               BOOL            showSupportCallMe;
-@property                               BOOL            showSupportForms;
-@property                               BOOL            showSupportHistory;
+@property                               BOOL            chatEnabled;
+@property                               BOOL            callmeEnabled;
+@property                               BOOL            kbEnabled;
+@property                               BOOL            websiteEnabled;
+@property                               BOOL            emailEnabled;
+@property                               BOOL            phoneEnabled;
+@property                               BOOL            formsEnabled;
+@property                               BOOL            historyEnabled;
+@property                               BOOL            journeysEnabled;
+
 @property (strong, nonatomic, nullable) NSArray         *supportForms;
 @property (strong, nonatomic, nullable) NSString        *callMeButtonText;
 @property (strong, nonatomic, nullable) NSString        *callMeButtonConfirmation;
@@ -122,6 +155,7 @@ extern NSString  *const _Nonnull kUserPhone;
 @property                               BOOL            supportScreenShareEnabled;
 @property                               BOOL            supportUnavailable;
 @property (strong, nonatomic, nullable) NSString        *supportUnavailableSummary;
+@property (strong, nonatomic, nullable) NSDictionary    *advancedConfiguration;
 
 @property (strong, nonatomic, nullable) NSString        *downloadSessionToken;
 
@@ -137,13 +171,9 @@ extern NSString  *const _Nonnull kUserPhone;
 @property                               BOOL                isKBRequested;
 @property                               BOOL                isHistoryRequested;
 @property                               BOOL                isFormsRequested;
-@property                               BOOL                isJourneysRequested;
 @property                               BOOL                isUndecorated;
 @property                               BOOL                isSideBySideForms;
 
-
-
-+ (Support *_Nonnull)sharedInstance;
 
 - (void)    chatEnter:(nonnull NSString *)commId
               success:(void (^_Nonnull)(NSDictionary *_Nonnull))success
@@ -166,6 +196,11 @@ extern NSString  *const _Nonnull kUserPhone;
 
 - (nullable BTFormModel *) currentForm;
 
+- (void) executeGet:(nonnull NSString *)uriString
+           endpoint:(nullable NSString *)endpoint
+         parameters:(nullable NSDictionary *)parameters
+         completion:(void (^)(NSDictionary *))completion;
+
 - (BTIssue *_Nullable)   loadCurrentIssue;
 - (void)                        saveCurrentIssue:(BTIssue *_Nonnull)issue;
 - (void)                        clearCurrentIssue;
@@ -178,6 +213,8 @@ extern NSString  *const _Nonnull kUserPhone;
                           description:(NSString *_Nullable)description
                               success:(void (^_Nonnull)(NSDictionary*_Nonnull))success
                               failure:(void (^_Nonnull)(NSDictionary*_Nonnull))failure;
+
+- (void) configureWithJSON:(nullable NSDictionary *)json;
 
 - (void) displayRatingScreenFromButton:(nonnull SupportButton *)supportButton;
 
@@ -193,22 +230,39 @@ extern NSString  *const _Nonnull kUserPhone;
 success:(void (^_Nullable)(NSDictionary *_Nullable))success
 failure:(void (^_Nullable)(NSDictionary *_Nullable))failure;
 
+- (nullable UIImage *)getButtonImage;
+
+
 - (void) getHistory;
 
-- (void) getJourneys;
+- (nullable NSString *) getHost;
+
+- (void) getJourneysWithCompletion:(void (^)(void))completion;
 
 - (void) getKB:(nullable id<SupportDelegate>)sender;
 - (void) getIssue:(NSString *_Nonnull)issueId
           success:(void (^_Nonnull)(NSDictionary*_Nonnull))success
           failure:(void (^_Nonnull)(NSDictionary*_Nonnull))failure;
 - (NSString *_Nonnull)      getServerFailureMessageForOperation:(NSURLSessionTask *_Nonnull)operation;
-- (void)            getSettingsWithSuccess:(void (^_Nonnull)(NSDictionary*_Nonnull))success
-                                   failure:(void (^_Nonnull)(NSDictionary*_Nonnull))failure;
+
+
+- (void)            getSettings;
 - (void) getSupportForms;
+
+- (BOOL) hasProviderId;
+
+- (nullable instancetype) initWithDictionary:(nullable NSDictionary *)json delegate:(nullable id<SupportDelegate>)delegate;
 
 - (BOOL) isMemberSet;
 
++ (BOOL) isNewAppVersion;
++ (BOOL) isNewSDKVersion;
+
 - (BOOL) isProactiveEnabled;
+- (BOOL) isProduction;
+
++ (nullable NSDictionary *) jsonFromFile:(nonnull NSString *)filename;
+
 - (void) postChecks:(NSArray *_Nonnull)checks
             success:(void (^_Nonnull)(NSDictionary*_Nonnull))success
             failure:(void (^_Nonnull)(NSDictionary*_Nonnull))failure;
@@ -226,13 +280,19 @@ failure:(void (^_Nullable)(NSDictionary *_Nullable))failure;
 
 - (void)            refreshIssue:(nullable NSString *)issueId;
 
+- (void)            reloadWithJSON:(nullable NSDictionary *)json;
+
 - (void)            resolveIssue:(nonnull NSString *)issueId
                          success:(void (^_Nonnull)(NSDictionary*_Nonnull))success
                          failure:(void (^_Nonnull)(NSDictionary*_Nonnull))failure;
 
+- (void) restoreDefaultConfiguration;
+
 - (void)            retrieveKB:(nullable NSString *)id
                        success:(void (^_Nonnull)(NSDictionary*_Nonnull))success
                        failure:(void (^_Nonnull)(NSDictionary*_Nonnull))failure;
+
++ (void) saveVersionInformation;
 
 - (void) searchKB:(nullable id<SupportDelegate>)sender query:(nullable NSString *)query;
 

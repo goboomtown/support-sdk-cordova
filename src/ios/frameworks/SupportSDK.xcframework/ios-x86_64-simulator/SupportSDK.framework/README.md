@@ -1,4 +1,6 @@
-# Boomtown Product Support Platform SDK for ios
+# Boomtown Product Support Platform SDK for iOS
+
+Learn about the SDK Advanced Configuration [here](https://git.goboomtown.com/mobile/support-sdk-ios/-/blob/master/sdk_json.json.md).
 
 ### Getting Started
 

@@ -247,10 +247,7 @@
 
       if ( command.arguments.count > 2 ) {
         self.appearanceJSON = [self jsonForArgument:[command.arguments objectAtIndex:2]];
-        if ( self.appearanceJSON ) {
-          [self.supportButton configureWithJSON:self.appearanceJSON];
-        }
-      }
+       }
 
       // self.desiredMenuType = -1;
       // if ( command.arguments.count > 3 ) {
@@ -266,6 +263,10 @@
       } else {
         msg = @"Unable to read configuration.";
       }
+      if ( self.appearanceJSON ) {
+        [self.supportButton configureWithJSON:self.appearanceJSON];
+      }
+
       pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
                                              messageAsString:msg];
     }
@@ -274,6 +275,21 @@
     [self.commandDelegate sendPluginResult:pluginResult
                                 callbackId:command.callbackId];
   }];
+}
+
+
+- (void) settings:(CDVInvokedUrlCommand*)command
+{
+    CDVPluginResult* pluginResult;
+    if ( self.isConfigured ) {
+        [self.supportButton settings];
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+                                         messageAsString:@""];
+    } else {
+      pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+    }
+    [self.commandDelegate sendPluginResult:pluginResult
+                            callbackId:command.callbackId];
 }
 
 
