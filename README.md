@@ -71,7 +71,7 @@ function startBoomtown() {
   supportsdk.startBoomtownWithCustomerAndAppearance(
     JSON.stringify(boomtownConfig),
     null,
-    JSON.stringify(uiConfig),
+    null,
     null,
     function(response) {
     },
@@ -203,8 +203,8 @@ This file enables communication with the server and configures the available fea
 
 ## Menu Types
 
-The menu style is configured in the menuAppearance section of the appearance JSON like this:
-
+The menu style, and the appearance in general, 
+is configured via the Support SDK configurator in CXM as follows:
 ```
 "menuAppearance":
 {
@@ -247,164 +247,3 @@ var customerJSON = {
 };
 ```
 
-## Appearance Configuration
-
-Much of the application (menus, icons, and colors currently) can be configured using a JSON file as follows:
-
-This is the default JSON.
-
-```
-{
-  "navigationBarAppearance":
-  {
-    "backgroundColor": "#ffffff",
-    "backgroundColorDark": "#121212",
-    "textColor": "#000000",
-    "textColorDark": "#ffffff",
-    "iconColor": "#000000",
-    "iconColorDark": "#ffffff"
-  },
-  "menuAppearance":
-  {
-    "style": "iconlist",
-    "heading": "Support",
-    "textSize": "20",
-    "textStyle": "bold",
-    "borderWidth": "1",
-    "padding": "10",
-    "spacing": "50",
-    "textColor": "#000000",
-    "textColorDark": "#ffffff",
-    "iconColor": "#EF5E0D",
-    "iconColorDark": "#EF5E0D",
-    "borderColor": "#E0E0E0",
-    "borderColorDark": "#E0E0E0",
-    "backgroundColor":  "#FAFAFA",
-    "backgroundColorDark": "#121212"
-  },
-  "menu":
-  {
-    "chat": {
-      "text": "Chat with Us",
-      "icon": "a_chat"
-    },
-    "callme":
-    {
-      "text": "Call Me",
-      "icon": "phone_call"
-    },
-    "knowledge":
-    {
-      "text": "Search Knowledge",
-      "icon": "book_bookmark"
-    },
-    "web":
-    {
-      "text": "Web Support",
-      "icon": "globe"
-    },
-    "email":
-    {
-      "text": "Email Support",
-      "icon": "letter"
-    },
-    "phone":
-    {
-      "text": "Phone Support",
-      "icon": "phone"
-    },
-    "forms":
-    {
-      "text": "Forms",
-      "icon": "form"
-    },
-    "history":
-    {
-      "text": "History",
-      "icon": "customer_alt"
-    },
-    "exit":
-    {
-      "text": "Exit"
-    }
-  },
-  "icons":
-  {
-    "kbFolderIcon": "book-bookmark",
-    "chatAttachmentButtonImage": "paperclip.png",
-    "chatSendButtonImage": "send.png"
-  },
-  "colors":
-  {
-    "navigationBarColor": "#f2f2f2",
-    "iconColor": "#EF5E0D",
-    "buttonColor": "#EF5E0D",
-    "lineColor": "#E0E0E0",
-    "textColor": "#4F4F4F",
-    "textColorDark": "#ffffff",
-    "homeIconColor": "#EF5E0D",
-    "homeLineColor": "#E0E0E0",
-    "homeTextColor": "#007AFF",
-    "homeSelectedColor": "#EBEBEB",
-    "callMeHeaderTextColor": "#4F4F4F",
-    "callMeLabelTextColor": "#626363",
-    "callMeHintTextColor": "#ACACAC",
-    "callMeButtonTextColor": "#ACACAC",
-    "callMeButtonBackgroundColor": "#1AA8A8",
-    "ratingHeaderTextColor": "#4F4F4F",
-    "ratingLabelTextColor": "#626363",
-    "ratingHintTextColor": "#ACACAC",
-    "ratingButtonTextColor": "#ACACAC",
-    "ratingButtonBackgroundColor": "#1AA8A8",
-    "chatRefidTextColor": "#4f4f4f",
-    "chatNavBarColor": "#f2f2f2",
-    "chatSendButtonEnabledColor": "#626363",
-    "chatSendButtonDisabledColor": "#ACACAC",
-    "chatTimeStampColor": "#ACACAC",
-    "chatActionButtonTextColor": "#838383",
-    "chatActionButtonSelectedTextColor": "#ffffff",
-    "chatActionButtonBorderColor": "#E0E0E0",
-    "chatIconColor": "#838383",
-    "kbFolderNameTextColor": "#303030",
-    "kbFolderL0BackgroundColor": "#F3F8F8",
-    "kbTextColor": "#303030",
-    "menuBorderColor": "#E0E0E0"
-  },
-  "formAppearance":
-  {
-    "cancelButtonText": "Cancel",
-    "saveButtonText": "Save",
-    "label":
-    {
-      "textStyle": "bold",
-      "textSize": "20",
-      "textColor": "#000000",
-      "textColorDark": "#ffffff",
-      "requiredTextColor": "#000000",
-      "requiredTextColorDark": "#ffffff",
-      "requiredIndicatorColor": "#cc0000",
-      "requiredIndicatorColorDark": "#cc0000"
-    },
-    "entry":
-    {
-      "textStyle": "bold",
-      "textSize": "20",
-      "textColor": "#000000",
-      "textColorDark": "#ffffff",
-      "borderColor": "#000000",
-      "borderColorDark": "#ffffff",
-      "borderWidth": "1"
-    }
-  }
-}
-```
-
-If you only want to configure a general color scheme you need only set the following colors:
-
-```
-iconColor
-buttonColor
-lineColor
-textColor
-textColorDark
-```

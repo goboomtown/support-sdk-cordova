@@ -23,16 +23,6 @@ typedef enum MenuStyle : NSInteger {
 } MenuStyle;
 
 
-
-//static NSString * const _Nonnull kSupportSDKNotification         = @"com.goboomtown.support_sdk_notitication";
-//
-//static NSString * const _Nonnull kEventChatStarted               = @"com.goboomtown.event.chat_started";
-//static NSString * const _Nonnull kEventChatEnded                 = @"com.goboomtown.event.chat_ended";
-//
-//static NSString * const _Nonnull kRequestSupportSDKExit          = @"com.goboomtown.request.support_sdk_exit";
-//static NSString * const _Nonnull kRequestChatExit                = @"com.goboomtown.request.chat_exit";
-//static NSString * const _Nonnull kRequestChatExitResolvingIssue  = @"com.goboomtown.event.chat_exit_resolve_issue";
-
 extern NSString  *const _Nonnull SupportSDKErrorDomain;
 
 /**
@@ -219,8 +209,18 @@ IB_DESIGNABLE
  @return    YES if configuration was successfully loaded, NO if not
  */
 
-- (BOOL) loadConfigurationJSON:(NSString * _Nonnull)json customerInfoJSON:(NSString * _Nullable)customerInfoJSON;
+- (BOOL) loadConfigurationJSON:(NSString * _Nonnull)jsonString customerInfoJSON:(NSString * _Nullable)customerInfoJSON;
 
+
+/**
+ Load SDK configuration from a JSON dictionary, and specify customer if information is provided
+
+ @param json                a string containing the configuration JSON
+ @param customerInfo        the dictionary containing key/value informaion identifying the customer
+
+ @return    YES if configuration was valid, NO is not
+ */
+- (BOOL) loadConfiguration:(NSDictionary *)json customerInfo:(NSDictionary *)customerInfo;
 
 /**
 Retrieve and load the desired customer into the Support SDK. This must me done after the settings have been retrieved

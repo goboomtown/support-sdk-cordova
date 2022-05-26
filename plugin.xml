@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="cordova-plugin-supportsdk" version="1.3.9" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<plugin id="cordova-plugin-supportsdk" version="1.3.10" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
     <name>SupportSDK</name>
     <author>Larry Borsato</author>
     <license>Apache 2.0 License</license>
@@ -83,16 +83,16 @@
       <source-file src="src/ios/SupportSDK.h" />
       <source-file src="src/ios/SupportSDK.m" />
 
-      <source-file src="src/ios/frameworks/AFNetworking.xcframework" target-dir="lib" framework="true" />
+      <!-- <source-file src="src/ios/frameworks/AFNetworking.xcframework" target-dir="lib" framework="true" />
       <source-file src="src/ios/frameworks/CocoaAsyncSocket.xcframework" target-dir="lib" framework="true" />
       <source-file src="src/ios/frameworks/CocoaLumberjack.xcframework" target-dir="lib" framework="true" />
       <source-file src="src/ios/frameworks/KissXML.xcframework" target-dir="lib" framework="true" />
       <source-file src="src/ios/frameworks/libidn.xcframework" target-dir="lib" framework="true" />
       <source-file src="src/ios/frameworks/MTBBarcodeScanner.xcframework" target-dir="lib" framework="true" />
       <source-file src="src/ios/frameworks/SupportSDK.xcframework" target-dir="lib" framework="true" />
-      <source-file src="src/ios/frameworks/SVProgressHUD.xcframework" target-dir="lib" framework="true" />
+      <source-file src="src/ios/frameworks/SVProgressHUD.xcframework" target-dir="lib" framework="true" /> -->
       <!-- <source-file src="src/ios/frameworks/TwilioVideo.xcframework" target-dir="lib" framework="true" /> -->
-      <source-file src="src/ios/frameworks/XMPPFramework.xcframework" target-dir="lib" framework="true" />
+      <!-- <source-file src="src/ios/frameworks/XMPPFramework.xcframework" target-dir="lib" framework="true" /> -->
 
       <framework src="src/ios/frameworks/AFNetworking.xcframework" embed="true" custom="true" />
       <framework src="src/ios/frameworks/CocoaAsyncSocket.xcframework" embed="true" custom="true" />

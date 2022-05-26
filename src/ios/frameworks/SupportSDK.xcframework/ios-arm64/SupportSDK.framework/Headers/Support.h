@@ -134,6 +134,9 @@ extern NSString  *const _Nonnull kUserPhone;
 @property (strong, nonatomic, nullable) NSString        *rateableIssueId;
 
 @property (strong, nonatomic, nullable) NSDictionary    *settings;
+@property (strong, nonatomic, nullable) NSString        *partnerTeam;
+@property (strong, nonatomic, nullable) NSString        *sponsorTeam;
+@property (strong, nonatomic, nullable) NSString        *routeTo;
 @property (strong, nonatomic, nullable) NSString        *supportEmailAddress;
 @property (strong, nonatomic, nullable) NSString        *supportPhoneNumber;
 @property (strong, nonatomic, nullable) NSString        *supportWebsite;
@@ -199,7 +202,7 @@ extern NSString  *const _Nonnull kUserPhone;
 - (void) executeGet:(nonnull NSString *)uriString
            endpoint:(nullable NSString *)endpoint
          parameters:(nullable NSDictionary *)parameters
-         completion:(void (^)(NSDictionary *))completion;
+         completion:(void (^_Nullable)(NSDictionary *_Nullable))completion;
 
 - (BTIssue *_Nullable)   loadCurrentIssue;
 - (void)                        saveCurrentIssue:(BTIssue *_Nonnull)issue;
@@ -237,7 +240,7 @@ failure:(void (^_Nullable)(NSDictionary *_Nullable))failure;
 
 - (nullable NSString *) getHost;
 
-- (void) getJourneysWithCompletion:(void (^)(void))completion;
+- (void) getJourneysWithCompletion:(void (^_Nullable)(void))completion;
 
 - (void) getKB:(nullable id<SupportDelegate>)sender;
 - (void) getIssue:(NSString *_Nonnull)issueId
@@ -247,6 +250,9 @@ failure:(void (^_Nullable)(NSDictionary *_Nullable))failure;
 
 
 - (void)            getSettings;
+- (void) getSettingsWithSuccess:(void (^_Nullable)(NSDictionary*_Nonnull))success
+                        failure:(void (^_Nullable)(NSDictionary*_Nonnull))failure;
+
 - (void) getSupportForms;
 
 - (BOOL) hasProviderId;
@@ -261,7 +267,9 @@ failure:(void (^_Nullable)(NSDictionary *_Nullable))failure;
 - (BOOL) isProactiveEnabled;
 - (BOOL) isProduction;
 
++ (nullable NSDictionary *) jsonFromData:(nonnull NSData *)data;
 + (nullable NSDictionary *) jsonFromFile:(nonnull NSString *)filename;
++ (nullable NSDictionary *) jsonFromString:(nonnull NSString *)string;
 
 - (void) postChecks:(NSArray *_Nonnull)checks
             success:(void (^_Nonnull)(NSDictionary*_Nonnull))success
@@ -271,6 +279,7 @@ failure:(void (^_Nullable)(NSDictionary *_Nullable))failure;
                     success:(void (^ _Nonnull)(NSDictionary*_Nonnull))success
                     failure:(void (^ _Nonnull)(NSDictionary*_Nonnull))failure;
 
+- (void) processSettings:(nonnull NSDictionary *)settings;
 
 - (void)            rateIssue:(nonnull NSString *)issueId
                        rating:(NSUInteger)rating
