@@ -34,6 +34,9 @@ static NSString * _Nonnull const    PREPROD             = @"Preprod";
 static NSString * _Nonnull const    INTEG               = @"Integ";
 static NSString * _Nonnull const    UAT                 = @"UAT";
 static NSString * _Nonnull const    SANDBOX             = @"Sandbox";
+static NSString * _Nonnull const    RELEASE             = @"Release";
+static NSString * _Nonnull const    STAGE               = @"Stage";
+static NSString * _Nonnull const    CERT                = @"Cert";
 static NSString * _Nonnull const    LOCAL_ENV           = @"Local Environment";
 
 static NSString * _Nonnull const    SERVER_PRODUCTION   = @"https://api.goboomtown.com";
@@ -41,6 +44,9 @@ static NSString * _Nonnull const    SERVER_PREPROD      = @"https://api.preprod.
 static NSString * _Nonnull const    SERVER_INTEG        = @"https://api.integ.goboomtown.com";
 static NSString * _Nonnull const    SERVER_UAT          = @"https://api.uat.goboomtown.com";
 static NSString * _Nonnull const    SERVER_SANDBOX      = @"https://api.sandbox.goboomtown.com";
+static NSString * _Nonnull const    SERVER_RELEASE      = @"https://api.release.goboomtown.com";
+static NSString * _Nonnull const    SERVER_STAGE        = @"https://api.stage.goboomtown.com";
+static NSString * _Nonnull const    SERVER_CERT         = @"https://api.cert.goboomtown.com";
 static NSString * _Nonnull const    SERVER_LOCAL_ENV    = @"https://api.local-env.goboomtown.com";
 
 static NSString * _Nonnull const    JSON_API_HOST       = @"apiHost";
