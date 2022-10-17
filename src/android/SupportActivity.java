@@ -114,17 +114,9 @@ public class SupportActivity extends AppCompatActivity
         mCustomerJSON = getIntent().getStringExtra("customerJSON");
 
         String json = getIntent().getStringExtra("JSON");
-//        String desiredMenuString = getIntent().getStringExtra("desiredMenuString");
-//        try {
-//          desiredMenuType = menuType(Integer.parseInt(desiredMenuString));
-//        } catch (Exception e) {
-//        }
 
+        Log.d(TAG, "Customer JSON: " + mCustomerJSON);
         mSupportButton.loadConfiguration(json, mCustomerJSON);
-//        mAppearanceJSON = getIntent().getStringExtra("appearanceJSON");
-//        if ( mAppearanceJSON != null ) {
-//            mSupportButton.appearance.configureFromJSON(mAppearanceJSON);
-//        }
 
         Map<String, String> myPubData = new HashMap<>();
         myPubData.put("public", "fooData");
