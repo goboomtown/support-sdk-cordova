@@ -481,12 +481,19 @@
     NSLog(@"mDNS service failed to advertise.");
 }
 
+- (UIColor *) getBackgroundColor
+{
+    if (@available(iOS 13.0, *)) {
+        return UIColor.systemBackgroundColor;
+    }
+    return UIColor.whiteColor;
+}
 
 - (void) supportButton:(SupportButton *)supportButton displayView:(UIView *)view
 {
   self.displayedView = view;
   dispatch_async(dispatch_get_main_queue(), ^{
-    // view.backgroundColor = [UIColor whiteColor];
+    view.backgroundColor = [self getBackgroundColor];
     [self.viewController.view addSubview:view];
   });
 }
@@ -524,7 +531,7 @@
 
 - (void) supportButton:(SupportButton *)supportButton displayViewController:(UIViewController *)viewController
 {
-
+  viewController.view.backgroundColor = [self getBackgroundColor];
   dispatch_async(dispatch_get_main_queue(), ^{
     if ( self.isViewControllerOnly ) {
       UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Back", nil)
